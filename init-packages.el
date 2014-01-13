@@ -5,26 +5,8 @@
 ;; 2014-01-11 / 2014-01-12
 ;; AlbusDrachir
 
-(defvar init-packages-check-list
-  '(json-mode
-    fill-column-indicator
-    jam-mode)
-  "Packages used by `init-packages-check'.
-
-Must be a list, where each element is a package name (a symbol).")
-
-(defun init-packages-check
-  "Install or upgrade each package in `init-packages-check-list'."
-  (package-refresh-contents)
-  (let (to-install)
-    (dolist (pkg init-packages-check-list)
-      (when (not (package-installed-p pkg))
-        (add-to-list 'to-install pkg t)))
-    (dolist (pkg (package-menu--find-upgrades))
-      (add-to-list 'to-install pkg t))
-    (message "The following packages will be installed: %s"
-             (mapconcat 'symbol-name to-install ", "))
-    (mapc 'package-install to-install)))
+;;; Neccessary to actually initialize the package system.
+(require 'package)
 
 ;;;; Archives
 
@@ -38,10 +20,33 @@ Must be a list, where each element is a package name (a symbol).")
 ;;;; Initialize all ELPA packages.
 
 (setq package-user-dir "~/.emacs.d/packages/elpa")
-(init-packages-check)
 (setq package-enable-at-startup nil)
 (setq package-load-list '(all))
 (package-initialize)
+
+(defvar init-packages-check-list
+  '(json-mode
+    fill-column-indicator
+    jam-mode)
+  "Packages used by `init-packages-check'.
+
+Must be a list, where each element is a package name (a symbol).")
+
+(defun init-packages-check ()
+  "Install or upgrade each package in `init-packages-check-list'."
+  (package-refresh-contents)
+  (let (to-install)
+    (dolist (pkg init-packages-check-list)
+      (when (not (package-installed-p pkg))
+        (add-to-list 'to-install pkg t)))
+    (dolist (pkg (package-menu--find-upgrades))
+      (add-to-list 'to-install pkg t))
+    (when to-install
+      (message "The following packages will be installed: %s"
+	       (mapconcat 'symbol-name to-install ", "))
+      (mapc 'package-install to-install))))
+
+(init-packages-check)
 
 ;;;; Initialize manually installed packages.
 
