@@ -1,1 +1,4 @@
-For all files here the source is given in the init file in the section Themes.
+The source for all themes here:
+
+dark-emacs-theme.el
+https://github.com/suvayu/.emacs.d/blob/master/themes/dark-emacs-theme.el
