@@ -9,3 +9,8 @@ manually.
 Each package has its own directory, in the form `packagename-version', where
 packagename is the name of the package, and version is the version (one or more
 numbers separated by dots).
+
+The following packages are placed here:
+
+lua-mode-20130419
+https://github.com/immerrr/lua-mode
