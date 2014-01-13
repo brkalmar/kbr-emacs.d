@@ -1,22 +1,19 @@
 # -*- mode: org -*-
 
-Add .elc files to gitignore. (?)
+* TODO Refactor init files such that OS-specific details go into their own files, whilst OS-independent details go into `init.el'.
 
-Add tab-completion:
-(setq tab-always-indent 'complete)
+* TODO Replace names in file comments
 
-Refactor init files such that OS-specific details go into their own files,
-whilst OS-independent details go into `init.el'.
+* TODO Add .elc files to gitignore. (?)
 
-Customize backup and/or autosave more.
+* TODO Add tab-completion: (setq tab-always-indent 'complete)
 
-Customize frame and icon title.
+* TODO Customize backup and/or autosave more.
 
-Extend README file, mentioning emacs version, author name, etc.
+* TODO Customize frame and icon title.
 
-Autocomplete for some languages.
+* TODO Extend README file, mentioning emacs version, author name, etc.
 
-Add `custom-elisp' or some such directory, which will be sourced and will
-contain helper functions, such as
-  confirm PROMPT ANSWERS
-where ANSWERS is a list of strings that the confirmation prompt PROMPT accepts.
+* TODO Autocomplete for some languages.
+
+* TODO Add `custom-elisp' or some such directory, which will be sourced and will contain helper functions, such as 'confirm PROMPT ANSWERS' where ANSWERS is a list of strings that the confirmation prompt PROMPT accepts.
