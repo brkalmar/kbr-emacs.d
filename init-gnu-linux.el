@@ -4,6 +4,10 @@
 ;; 2013-09-17 / 2014-01-13
 ;; AlbusDrachir
 
+;;;; Packages
+
+(load-file "~/.emacs.d/init-packages.el")
+
 ;;; Functions
 
 (defun toggle-fullscreen ()
