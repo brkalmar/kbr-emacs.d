@@ -1,0 +1,6 @@
+This is my personal .emacs.d directory.
+
+No third-party packages are included.  Most of them are downloaded from online
+ELPA repositories automatically; some must be downloaded manually, as there is
+no recent version of them in said repositories.  For more information, check
+packages/manual/README. 
