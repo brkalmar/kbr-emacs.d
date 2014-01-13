@@ -307,9 +307,7 @@ the three time formats described in 'replace.el'."
 ;;; Themes
 
 (setq custom-theme-directory "~/.emacs.d/themes")
-;; Source:
-;; https://github.com/suvayu/.emacs.d/blob/master/themes/dark-emacs-theme.el
-(load-theme 'dark-emacs)
+(load-theme 'dark-emacs t)
 
 ;;; Enabled commands
 
