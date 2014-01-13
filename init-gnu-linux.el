@@ -169,9 +169,9 @@ not possible."
   )
 
 (defun custom-after-make-frame (new-frame)
-  "Change colors and toggle fullscreen."
+  "Toggle fullscreen, diappear scrollbar."
   (select-frame new-frame)
-  (set-custom-colors)
+  ;; (set-custom-colors)
   (toggle-fullscreen)
   (when (display-graphic-p)
       (scroll-bar-mode -1)
