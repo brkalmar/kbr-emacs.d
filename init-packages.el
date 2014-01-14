@@ -13,6 +13,7 @@
 ;; Contains: json-mode
 ;;           fill-column-indicator
 ;;           jam-mode
+;;           git-commit-mode
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
@@ -26,7 +27,8 @@
 (defvar init-packages-check-list
   '(json-mode
     fill-column-indicator
-    jam-mode)
+    jam-mode
+    git-commit-mode)
   "Packages used by `init-packages-check'.
 
 Must be a list, where each element is a package name (a symbol).")
