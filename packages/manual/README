@@ -1,16 +1,13 @@
-Packages that are manually installed are placed here.
+Manually installed packages should be placed in this directory.
 
-Updating this directory is done manually.  This involves downloading, modifying
+Updating these packages is done manually.  This involves downloading, modifying
 and compiling new files.
 
-Only packages whose newest version is not in any archive should be installed
-manually.
-
 Each package has its own directory, in the form `packagename-version', where
-packagename is the name of the package, and version is the version (one or more
-numbers separated by dots).
+`packagename' is the name of the package, and `version' is the version (one or
+more numbers separated by dots).  This is the same format `package.el' uses.
 
-The following packages are placed here:
+The following packages should be placed here:
 
-lua-mode-20130419
-https://github.com/immerrr/lua-mode
+* lua-mode-20130419
+  source: https://github.com/immerrr/lua-mode

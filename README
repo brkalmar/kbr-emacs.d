@@ -1,6 +1,14 @@
 This is my personal .emacs.d directory.
 
+Emacs version: GNU emacs 24.3
+Author: Bence Kalmar
+
 No third-party packages are included.  Most of them are downloaded from online
-ELPA repositories automatically; some must be downloaded manually, as there is
-no recent version of them in said repositories.  For more information, check
-packages/manual/README. 
+ELPA package archives automatically; some of them MUST BE DOWNLOADED MANUALLY,
+as there is no recent version of them in online package archives.  For more
+information, check `packages/manual/README'.
+
+Some third-party themes are included.  For more information, check
+`themes/README'.
+
+Feel free to use and modify any of the files in this repository as you please.
