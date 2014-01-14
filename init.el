@@ -1,6 +1,6 @@
 ;; Custom startup file for GNU-emacs.
 ;;
-;; 2013-05-03 / 2014-01-13
+;; 2013-05-03 / 2014-01-14
 ;; AlbusDrachir
 
 ;;;; Packages
@@ -234,18 +234,19 @@ the three time formats described in 'replace.el'."
 ;; coding
 (prefer-coding-system 'utf-8-unix)
 
-;; backup
-(setq backup-directory-alist `(("." . "~/.emacs.d/backup/files/gnu-linux"))
+;;; Backup
+(setq backup-directory-alist `(("." . "~/.emacs.d/backup/files/"))
       backup-by-copying t
       version-control t
       kept-new-versions 2
       kept-old-versions 0
       delete-old-versions t)
+
 ;; remove backups older than 30 days
 (rm-old-backups (days-to-time 30))
 
 ;; auto-save
-(setq auto-save-list-file-prefix "~/.emacs.d/backup/auto-save-list/.saves-")
+(setq auto-save-list-file-prefix "~/.emacs.d/backup/auto-saves/saves-")
 
 ;; turn icomplete mode on
 (icomplete-mode 1)
