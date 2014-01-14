@@ -16,7 +16,6 @@
 * TODO Autocomplete for some languages.
 
 * TODO Add `custom-elisp' or some such directory, which will be sourced and will contain helper functions, such as 'confirm PROMPT ANSWERS' where ANSWERS is a list of strings that the confirmation prompt PROMPT accepts.
-* TODO Move confirm-convert into .el file with auxiliary functions
 * TODO Add docstirng to auto-convert-lineending-confirm, info-name
 * TODO Format functions, remove parens on their own line
 * TODO update-modification-date should check only the first 1000 or so chars

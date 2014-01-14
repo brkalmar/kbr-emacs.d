@@ -19,39 +19,27 @@
   (message "Could not find appropriate config file for system type: %s"
            system-type)))
 
-;;;; Functions
+;;;; Functions & variables
 
-(setq auto-convert-lineending-confirm t)
+(defvar auto-convert-lineending-action nil
+  "Decides what `auto-convert-lineending' does.
 
-(defun confirm-convert (prompt)
-  "Ask user for confirmation.  Append answer options to PROMPT."
+If \"confirm\", the function asks the user whether to convert or not.
+If \"always\", the function always converts, without asking the user.
+If \"never\", the function never converts.")
+
+(defun auto-convert-lineending-confirm (prompt)
+  "Called by `auto-convert-lineending'."
   (cond
-   ((equal auto-convert-lineending-confirm "always")
+   ((equal auto-convert-lineending-action "confirm")
+    (y-or-n-p prompt))
+   ((equal auto-convert-lineending-action "always")
     t)
-   ((equal auto-convert-lineending-confirm "never")
+   ((equal auto-convert-lineending-action "never")
     nil)
    (t
-    (let (answer
-          res
-          (found nil))
-      (while (not found)
-        (setq found t)
-        (setq answer (read-from-minibuffer
-                      (concat prompt "(y, n, always or never) ")))
-        (cond 
-         ((equal answer "y")
-          (setq res t))
-         ((equal answer "n")
-          (setq res nil))
-         ((equal answer "always")
-          (setq auto-convert-lineending-confirm "always")
-          (setq res t))
-         ((equal answer "never")
-          (setq auto-convert-lineending-confirm "never")
-          (setq res nil))
-         (t
-          (setq found nil))))
-      res))))
+    (error "Invalid value of `auto-convert-lineending-action': %s"
+           auto-convert-lineending-action))))
 
 (defun update-modification-date ()
   "Update the last modification date of current buffer's file if it contains the

@@ -13,19 +13,16 @@
   )
 
 (defun auto-convert-lineending ()
-  "Check whether buffer's file's lineendings are not LF, and if so, ask the user
-whether to convert it.
+  "If buffer's file's lineendings are not LF, convert them after user
+confirmation.
 
-Confirmation is controlled by `auto-convert-lineending-confirm'.  If it is
-\"always\", always convert without confirmation.  If it is \"never\", never
-convert without confirmation.  If anything else, always ask for confirmation.
-This variable can be changed during confirmation."
+Confirmation is controlled by `auto-convert-lineending-action'."
   (let (coding-new
         (coding-old (symbol-name buffer-file-coding-system)))
     (and 
      (string-match "-\\(?:unix\\|mac\\)$" coding-old)
      (setq coding-new
            (concat (substring coding-old 0 (match-beginning 0)) "-dos"))
-     (confirm-convert
+     (auto-convert-lineending-confirm
       (format "Current coding is %s. Convert to %s? " coding-old coding-new))
      (set-buffer-file-coding-system (intern coding-new)))))
