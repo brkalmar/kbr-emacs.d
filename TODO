@@ -6,7 +6,7 @@
 
 * DONE Add .elc files to gitignore. (?)
 
-* TODO Add tab-completion: (setq tab-always-indent 'complete)
+* DONE Add tab-completion: (setq tab-always-indent 'complete)
 
 * TODO Customize backup and/or autosave more.
 

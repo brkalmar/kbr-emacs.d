@@ -275,3 +275,6 @@ the three time formats described in 'replace.el'."
 
 ;; comments
 (setq comment-multi-line t)
+
+;; tab-completion
+(setq tab-always-indent 'complete)
