@@ -3,7 +3,7 @@
 ;; 2013-09-17 / 2014-01-13
 ;; AlbusDrachir
 
-;;; Functions
+;;;; Functions
 
 (defun toggle-fullscreen ()
   "Toggle fullscreen and return t, or return nil if it cannot be toggled."
@@ -64,75 +64,13 @@ be integrated."
     )
   )
 
-;;; Hooks and similar
-
-;; after a new frame is made
-(add-hook 'after-make-frame-functions 'custom-after-make-frame t)
-
-;; before buffer is saved to file
-(add-hook 'before-save-hook 'update-modification-date t)
-(add-hook 'before-save-hook 'auto-convert-lineending t)
-(setq require-final-newline t)
+;;;; Hooks and similar
 
 ;; after buffer is saved to file
 (add-hook 'after-save-hook 'auto-make-executable t)
 
-;;; Themes
-
-(setq custom-theme-directory "~/.emacs.d/themes")
-(load-theme 'dark-emacs t)
-
-;;; Enabled commands
-
-(put 'downcase-region 'disabled nil)
-
-;;; MISC.
-
-;; coding
-(prefer-coding-system 'utf-8-unix)
-
-;; backup
-(setq backup-directory-alist `(("." . "~/.emacs.d/backup/files/gnu-linux"))
-      backup-by-copying t
-      version-control t
-      kept-new-versions 2
-      kept-old-versions 0
-      delete-old-versions t)
-;; remove backups older than 30 days
-(rm-old-backups (days-to-time 30))
-
-;; auto-save
-(setq auto-save-list-file-prefix "~/.emacs.d/backup/auto-save-list/.saves-")
-
-;; turn icomplete mode on
-(icomplete-mode 1)
-
-;; visual
-(setq inhibit-startup-screen t)
-(tool-bar-mode -1)
-(show-paren-mode 1)
-(blink-cursor-mode -1)
+;;; visual
 (setq visible-bell t)
-
-;; selections
-(transient-mark-mode 1)
-(delete-selection-mode 1)
 
 ;; integrate clipboard
 (integrate-clipboard)
-
-;; visualize size of buffer
-(size-indication-mode 1)
-
-;; numbers of columns to fill
-(setq-default fill-column 80)
-
-;; line and column numbers
-(line-number-mode -1)
-(column-number-mode 1)
-
-;; indentation
-(setq-default indent-tabs-mode nil)
-
-;; comments
-(setq comment-multi-line t)
