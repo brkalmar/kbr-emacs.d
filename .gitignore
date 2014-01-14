@@ -2,3 +2,4 @@ url/
 packages/elpa/**/
 backup/
 packages/manual/**/
+*.elc

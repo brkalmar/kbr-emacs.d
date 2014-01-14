@@ -4,7 +4,7 @@
 
 * DONE Replace names & remove date lines in file comments
 
-* TODO Add .elc files to gitignore. (?)
+* DONE Add .elc files to gitignore. (?)
 
 * TODO Add tab-completion: (setq tab-always-indent 'complete)
 
