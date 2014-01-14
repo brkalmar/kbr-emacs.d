@@ -2,7 +2,7 @@
 
 * DONE Refactor init files such that OS-specific details go into their own files, whilst OS-independent details go into `init.el'.
 
-* TODO Replace names & remove date lines in file comments
+* DONE Replace names & remove date lines in file comments
 
 * TODO Add .elc files to gitignore. (?)
 
