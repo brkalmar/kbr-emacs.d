@@ -14,6 +14,7 @@
 ;;           fill-column-indicator
 ;;           jam-mode
 ;;           git-commit-mode
+;;           markdown-mode
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
@@ -28,7 +29,8 @@
   '(json-mode
     fill-column-indicator
     jam-mode
-    git-commit-mode)
+    git-commit-mode
+    markdown-mode)
   "Packages used by `init-packages-check'.
 
 Must be a list, where each element is a package name (a symbol).")
