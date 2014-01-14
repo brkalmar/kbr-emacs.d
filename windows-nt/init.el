@@ -1,7 +1,6 @@
 ;; Custom startup file for Windows NT.
 ;;
-;; 2013-09-17 / 2014-01-07
-;; AlbusDrachir
+;; Bence Kalmar
 
 ;;;; Functions
 

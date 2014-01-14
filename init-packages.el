@@ -1,9 +1,8 @@
-;; Add neccessary package archives.
+;; Add additional package archives.
 ;; Check if neccessary packages are installed, install them if they aren't.
 ;; Upgrade old packages.
 ;; 
-;; 2014-01-11 / 2014-01-12
-;; AlbusDrachir
+;; Bence Kalmar
 
 ;;; Neccessary to actually initialize the package system.
 (require 'package)

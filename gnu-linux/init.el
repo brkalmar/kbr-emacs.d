@@ -1,7 +1,6 @@
 ;; Custom startup file for GNU/Linux.
 ;; 
-;; 2013-09-17 / 2014-01-13
-;; AlbusDrachir
+;; Bence Kalmar
 
 ;;;; Functions
 

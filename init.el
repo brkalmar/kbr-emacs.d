@@ -1,7 +1,6 @@
 ;; Custom startup file for GNU-emacs.
 ;;
-;; 2013-05-03 / 2014-01-14
-;; AlbusDrachir
+;; Bence Kalmar
 
 ;;;; Packages
 
