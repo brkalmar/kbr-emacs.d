@@ -64,25 +64,6 @@ be integrated."
     )
   )
 
-;;; Keybindings
-;;; `C-c [A-Za-z]' is reserved for users
-
-;; window-resizing
-(global-set-key (kbd "C-<left>") 'shrink-window-horizontally)
-(global-set-key (kbd "C-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "C-<down>") 'shrink-window)
-(global-set-key (kbd "C-<up>") 'enlarge-window)
-
-;; misc
-(global-set-key (kbd "C-c i") 'insert-info-comment)
-(global-set-key (kbd "C-c f") 'fill-region)
-(global-set-key (kbd "C-c c") 'comment-region)
-(global-set-key (kbd "C-c u") 'uncomment-region)
-(global-set-key (kbd "C-c r") 'replace-string)
-(global-set-key (kbd "C-c R") 'replace-regexp)
-(global-set-key (kbd "C-c s") 'hs-show-block)
-(global-set-key (kbd "C-c h") 'hs-hide-block)
-
 ;;; Hooks and similar
 
 ;; after a new frame is made
