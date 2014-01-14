@@ -1,8 +1,8 @@
 # -*- mode: org -*-
 
-* TODO Refactor init files such that OS-specific details go into their own files, whilst OS-independent details go into `init.el'.
+* DONE Refactor init files such that OS-specific details go into their own files, whilst OS-independent details go into `init.el'.
 
-* TODO Replace names in file comments
+* TODO Replace names & remove date lines in file comments
 
 * TODO Add .elc files to gitignore. (?)
 
