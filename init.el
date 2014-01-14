@@ -7,6 +7,19 @@
 
 (load-file "~/.emacs.d/init-packages.el")
 
+;;;; System-specific
+
+(cond
+ ((equal system-type 'gnu/linux)
+  (message "Loading GNU/Linux specific init file...")
+  (load-file "~/.emacs.d/gnu-linux/init.el"))
+ ((equal system-type 'windows-nt)
+  (message "Loading Windows NT specific init file...")
+  (load-file "~/.emacs.d/windows-nt/init.el"))
+ (t
+  (message "Could not find appropriate config file for system type: %s"
+           system-type)))
+
 ;;;; Functions
 
 (setq auto-convert-lineending-confirm t)
@@ -262,16 +275,3 @@ the three time formats described in 'replace.el'."
 
 ;; comments
 (setq comment-multi-line t)
-
-;;;; System-specific
-
-(cond
- ((equal system-type 'gnu/linux)
-  (message "Loading GNU/Linux specific init file...")
-  (load-file "~/.emacs.d/gnu-linux/init.el"))
- ((equal system-type 'windows-nt)
-  (message "Loading Windows NT specific init file...")
-  (load-file "~/.emacs.d/windows-nt/init.el"))
- (t
-  (message "Could not find appropriate config file for system type: %s"
-           system-type)))
