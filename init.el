@@ -55,19 +55,14 @@ string `YEAR-MN-DY / YEAR-MN-DY'."
            (re-search-forward (format "%s / %s" date-regexp date-regexp) nil t)
            (not (equal (match-string-no-properties 2) current-date)) )
           (progn (replace-match (concat "\\1 / " current-date) nil nil)
-                 (message "Updated modification date to %s" current-date))
-        )
-      )
-    )
-  )
+                 (message "Updated modification date to %s" current-date))))))
 
 (defun get-cm-dates ()
   "Return the creation and modification date (today) as a string in format
 'YYYY-MM-DD / YYYY-MM-DD'."
   (let (
         (date (format-time-string "%Y-%m-%d")))
-    (concat date " / " date))
-  )
+    (concat date " / " date)))
 
 (setq info-name "Bence Kalmar")
 
@@ -95,8 +90,7 @@ The name is `info-name' (must be a string)."
     (search-forward "\n")
     (backward-char 2)
     (delete-char 1)
-    (goto-char first-line))
-  )
+    (goto-char first-line)))
 
 (defun set-custom-colors ()
   "Set background and foreground colours if possible and return t. Return nil if
@@ -106,9 +100,7 @@ not possible."
       (progn (set-background-color "#000000")
              (set-foreground-color "#EEEEEE")
              t)
-    nil
-    )
-  )
+    nil))
 
 (defun custom-after-make-frame (new-frame)
   "Toggle fullscreen, disappear scrollbar."
@@ -116,9 +108,7 @@ not possible."
   ;; (set-custom-colors)
   (toggle-fullscreen)
   (when (display-graphic-p)
-      (scroll-bar-mode -1)
-    )
-  )
+      (scroll-bar-mode -1)))
 
 (defun rm-old-backups (age)
   "Remove all backup files whose modification time is older than AGE, in the

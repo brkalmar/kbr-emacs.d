@@ -13,9 +13,7 @@
              (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
                                     '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
              t)
-    nil
-    )
-  )
+    nil))
 
 (defun auto-convert-lineending ()
   "If buffer's file's lineendings are not LF, convert them after user
@@ -44,8 +42,7 @@ Confirmation is controlled by `auto-convert-lineending-action'."
        (not (file-executable-p buffer-file-name))
        (shell-command (concat "chmod u+x "
                               (shell-quote-argument buffer-file-name)))
-       (message "Made executable %s" buffer-file-name))
-  )
+       (message "Made executable %s" buffer-file-name)))
 
 ;; Not needed on windows.
 (defun integrate-clipboard ()
@@ -56,9 +53,7 @@ be integrated."
              (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
              (setq interprogram-cut-function 'x-select-text)
              t)
-    nil
-    )
-  )
+    nil))
 
 ;;;; Hooks and similar
 

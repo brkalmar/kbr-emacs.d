@@ -9,8 +9,7 @@
   (interactive)
   (w32-send-sys-command #xf020)
   (w32-send-sys-command #xf030)
-  t
-  )
+  t)
 
 (defun auto-convert-lineending ()
   "If buffer's file's lineendings are not LF, convert them after user
