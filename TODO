@@ -19,6 +19,6 @@
 * TODO Add docstirng to auto-convert-lineending-confirm, info-name
 * DONE Format functions, remove parens on their own line
 * DONE update-modification-date should check only the first 1000 or so chars
-* TODO Remove set-custom-colors
+* DONE Remove set-custom-colors
 * TODO Fix grey cursor.
 * TODO Add prefix to all functions in init files e.g 'init'.

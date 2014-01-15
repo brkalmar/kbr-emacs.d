@@ -92,20 +92,9 @@ The name is `info-name' (must be a string)."
     (delete-char 1)
     (goto-char first-line)))
 
-(defun set-custom-colors ()
-  "Set background and foreground colours if possible and return t. Return nil if
-not possible."
-  (interactive)
-  (if (display-color-p)
-      (progn (set-background-color "#000000")
-             (set-foreground-color "#EEEEEE")
-             t)
-    nil))
-
 (defun custom-after-make-frame (new-frame)
   "Toggle fullscreen, disappear scrollbar."
   (select-frame new-frame)
-  ;; (set-custom-colors)
   (toggle-fullscreen)
   (when (display-graphic-p)
       (scroll-bar-mode -1)))
