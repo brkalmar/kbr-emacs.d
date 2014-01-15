@@ -64,16 +64,16 @@ string `YEAR-MN-DY / YEAR-MN-DY'."
         (date (format-time-string "%Y-%m-%d")))
     (concat date " / " date)))
 
-(setq info-name "Bence Kalmar")
+(defvar info-comment-name "Bence Kalmar"
+  "The name used by `insert-info-comment'.  Must be a string.")
 
 (defun insert-info-comment ()
-  "Insert an info comment.
+  "Insert an info comment at point.
 
 The comment is muli-line if possible.  It consists of 4 lines: 2 empty ones, one
-inserted by 'insert-cm-dates' and one with a name.  After insertion, point is
-positioned at the beginning of the first line.
-
-The name is `info-name' (must be a string)."
+inserted by 'insert-cm-dates' and one with a name (`info-comment-name').  After
+insertion, point is positioned at the beginning of the first line in the
+comment."
   (interactive)
   (let ((comment-style 'multi-line)
         (start (point))
