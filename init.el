@@ -21,7 +21,7 @@
 
 ;;;; Functions & variables
 
-(defvar auto-convert-lineending-action nil
+(defvar auto-convert-lineending-action "confirm"
   "Decides what `auto-convert-lineending' does.
 
 If \"confirm\", the function asks the user whether to convert or not.
