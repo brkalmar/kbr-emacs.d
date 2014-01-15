@@ -45,17 +45,17 @@ If \"never\", the function never converts.")
   "Update the last modification date of current buffer's file if it contains the
 string `YEAR-MN-DY / YEAR-MN-DY'."
   (interactive)
-  (setq date-regexp "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)")
-  (setq current-date (format-time-string "%Y-%m-%d"))
-  (save-excursion
-    (save-restriction
-      (widen)
-      (goto-char (point-min))
-      (if (and
-           (re-search-forward (format "%s / %s" date-regexp date-regexp) nil t)
-           (not (equal (match-string-no-properties 2) current-date)) )
-          (progn (replace-match (concat "\\1 / " current-date) nil nil)
-                 (message "Updated modification date to %s" current-date))))))
+  (let ((date-regexp "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)")
+        (current-date (format-time-string "%Y-%m-%d")))
+    (save-excursion
+      (save-restriction
+        (widen)
+        (goto-char (point-min))
+        (and
+         (re-search-forward (format "%s / %s" date-regexp date-regexp) 1000 t)
+         (not (equal (match-string-no-properties 2) current-date))
+         (replace-match (concat "\\1 / " current-date) nil nil)
+         (message "Updated modification date to %s" current-date))))))
 
 (defun get-cm-dates ()
   "Return the creation and modification date (today) as a string in format
