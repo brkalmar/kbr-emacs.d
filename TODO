@@ -1,24 +1,14 @@
 # -*- mode: org -*-
 
-* DONE Refactor init files such that OS-specific details go into their own files, whilst OS-independent details go into `init.el'.
+Ordered by importance in descending order.
 
-* DONE Replace names & remove date lines in file comments
-
-* DONE Add .elc files to gitignore. (?)
-
-* DONE Add tab-completion: (setq tab-always-indent 'complete)
+* TODO Fix grey cursor.
+* TODO Automatically open *.md files with markdown-mode.
+* TODO Add prefix to all functions in init files e.g 'init'.
+* TODO Customize frame and icon title.
 
 * TODO Customize backup and/or autosave more.
 
-* TODO Customize frame and icon title.
-
-* DONE Extend README file, mentioning emacs version, author name, etc.
 * TODO Autocomplete for some languages.
 
 * TODO Add `custom-elisp' or some such directory, which will be sourced and will contain helper functions, such as 'confirm PROMPT ANSWERS' where ANSWERS is a list of strings that the confirmation prompt PROMPT accepts.
-* DONE Add docstirng to auto-convert-lineending-confirm, info-name
-* DONE Format functions, remove parens on their own line
-* DONE update-modification-date should check only the first 1000 or so chars
-* DONE Remove set-custom-colors
-* TODO Fix grey cursor.
-* TODO Add prefix to all functions in init files e.g 'init'.
