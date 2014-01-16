@@ -60,8 +60,8 @@ string `YEAR-MN-DY / YEAR-MN-DY'."
 (defun get-cm-dates ()
   "Return the creation and modification date (today) as a string in format
 'YYYY-MM-DD / YYYY-MM-DD'."
-  (let (
-        (date (format-time-string "%Y-%m-%d")))
+  (let
+      ((date (format-time-string "%Y-%m-%d")))
     (concat date " / " date)))
 
 (defvar info-comment-name "Bence Kalmar"
