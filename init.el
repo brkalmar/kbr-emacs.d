@@ -133,6 +133,9 @@ the three time formats described in 'replace.el'."
 ;;; lua-mode
 (setq lua-indent-level 2)
 
+;;; markdown-mode
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode) t)
+
 ;;;; Useful modes for programming mode hooks
 
 ;; Add all modes in 'modes' to all hooks in 'hooks'

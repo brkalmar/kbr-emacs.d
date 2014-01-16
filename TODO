@@ -3,7 +3,7 @@
 Ordered by importance in descending order.
 
 * TODO Fix grey cursor.
-* TODO Automatically open *.md files with markdown-mode.
+* DONE Automatically open *.md files with markdown-mode.
 * TODO Add prefix to all functions in init files e.g 'init'.
 * TODO Customize frame and icon title.
 
