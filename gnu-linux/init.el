@@ -4,7 +4,7 @@
 
 ;;;; Functions
 
-(defun toggle-fullscreen ()
+(defun init-toggle-fullscreen ()
   "Toggle fullscreen and return t, or return nil if it cannot be toggled."
   (interactive)
   (if (equal window-system 'x)
@@ -15,7 +15,7 @@
              t)
     nil))
 
-(defun auto-convert-lineending ()
+(defun init-auto-convert-lineending ()
   "If buffer's file's lineendings are not LF, convert them after user
 confirmation.
 
@@ -26,26 +26,25 @@ Confirmation is controlled by `auto-convert-lineending-action'."
      (string-match "-\\(?:dos\\|mac\\)$" coding-old)
      (setq coding-new
            (concat (substring coding-old 0 (match-beginning 0)) "-unix"))
-     (auto-convert-lineending-confirm
+     (init-auto-convert-lineending-confirm
       (format "Current coding is %s. Convert to %s? " coding-old coding-new))
      (set-buffer-file-coding-system (intern coding-new)))))
 
 ;; This is unnecessary on windows, as files don't have an executable property.
-(defun auto-make-executable ()
+(defun init-auto-make-executable ()
   "Make current buffer's file executable if begins whith a shebang."
   (and (save-excursion
          (save-restriction
            (widen)
            (goto-char (point-min))
-           (save-match-data
-             (looking-at "^#!"))))
+           (save-match-data (looking-at "^#!"))))
        (not (file-executable-p buffer-file-name))
        (shell-command (concat "chmod u+x "
                               (shell-quote-argument buffer-file-name)))
        (message "Made executable %s" buffer-file-name)))
 
 ;; Not needed on windows.
-(defun integrate-clipboard ()
+(defun init-integrate-clipboard ()
   "Integrate the window system's clipboard and return t. Return nil if it cannot
 be integrated."
   (if (and (equal window-system 'x) (display-selections-p))
@@ -58,10 +57,10 @@ be integrated."
 ;;;; Hooks and similar
 
 ;; after buffer is saved to file
-(add-hook 'after-save-hook 'auto-make-executable t)
+(add-hook 'after-save-hook 'init-auto-make-executable t)
 
 ;;; visual
 (setq visible-bell t)
 
 ;; integrate clipboard
-(integrate-clipboard)
+(init-integrate-clipboard)

@@ -4,14 +4,14 @@
 
 ;;;; Functions
 
-(defun toggle-fullscreen ()
+(defun init-toggle-fullscreen ()
   "Toggle fullscreen and return t, or return nil if it cannot be toggled."
   (interactive)
   (w32-send-sys-command #xf020)
   (w32-send-sys-command #xf030)
   t)
 
-(defun auto-convert-lineending ()
+(defun init-auto-convert-lineending ()
   "If buffer's file's lineendings are not LF, convert them after user
 confirmation.
 
@@ -22,6 +22,6 @@ Confirmation is controlled by `auto-convert-lineending-action'."
      (string-match "-\\(?:unix\\|mac\\)$" coding-old)
      (setq coding-new
            (concat (substring coding-old 0 (match-beginning 0)) "-dos"))
-     (auto-convert-lineending-confirm
+     (init-auto-convert-lineending-confirm
       (format "Current coding is %s. Convert to %s? " coding-old coding-new))
      (set-buffer-file-coding-system (intern coding-new)))))

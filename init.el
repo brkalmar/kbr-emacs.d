@@ -21,27 +21,27 @@
 
 ;;;; Functions & variables
 
-(defvar auto-convert-lineending-action "confirm"
-  "Decides what `auto-convert-lineending' does.
+(defvar init-auto-convert-lineending-action "confirm"
+  "Decides what `init-auto-convert-lineending' does.
 
 If \"confirm\", the function asks the user whether to convert or not.
 If \"always\", the function always converts, without asking the user.
 If \"never\", the function never converts.")
 
-(defun auto-convert-lineending-confirm (prompt)
-  "Called by `auto-convert-lineending'."
+(defun init-auto-convert-lineending-confirm (prompt)
+  "Called by `init-auto-convert-lineending'."
   (cond
-   ((equal auto-convert-lineending-action "confirm")
+   ((equal init-auto-convert-lineending-action "confirm")
     (y-or-n-p prompt))
-   ((equal auto-convert-lineending-action "always")
+   ((equal init-auto-convert-lineending-action "always")
     t)
-   ((equal auto-convert-lineending-action "never")
+   ((equal init-auto-convert-lineending-action "never")
     nil)
    (t
-    (error "Invalid value of `auto-convert-lineending-action': %s"
-           auto-convert-lineending-action))))
+    (error "Invalid value of `init-auto-convert-lineending-action': %s"
+           init-auto-convert-lineending-action))))
 
-(defun update-modification-date ()
+(defun init-update-modification-date ()
   "Update the last modification date of current buffer's file if it contains the
 string `YEAR-MN-DY / YEAR-MN-DY'."
   (interactive)
@@ -57,28 +57,28 @@ string `YEAR-MN-DY / YEAR-MN-DY'."
          (replace-match (concat "\\1 / " current-date) nil nil)
          (message "Updated modification date to %s" current-date))))))
 
-(defun get-cm-dates ()
+(defun init-get-cm-dates ()
   "Return the creation and modification date (today) as a string in format
 'YYYY-MM-DD / YYYY-MM-DD'."
   (let
       ((date (format-time-string "%Y-%m-%d")))
     (concat date " / " date)))
 
-(defvar info-comment-name "Bence Kalmar"
-  "The name used by `insert-info-comment'.  Must be a string.")
+(defvar init-info-comment-name "Bence Kalmar"
+  "The name used by `init-insert-info-comment'.  Must be a string.")
 
-(defun insert-info-comment ()
+(defun init-insert-info-comment ()
   "Insert an info comment at point.
 
 The comment is muli-line if possible.  It consists of 4 lines: 2 empty ones, one
-inserted by 'insert-cm-dates' and one with a name (`info-comment-name').  After
-insertion, point is positioned at the beginning of the first line in the
+inserted by 'insert-cm-dates' and one with a name (`init-info-comment-name').
+After insertion, point is positioned at the beginning of the first line in the
 comment."
   (interactive)
   (let ((comment-style 'multi-line)
         (start (point))
         (first-line nil))
-    (insert (format "X\nX\n%s\n%s\n\n" (get-cm-dates) info-name))
+    (insert (format "X\nX\n%s\n%s\n\n" (init-get-cm-dates) info-name))
     (backward-char 2)
     (comment-region start (point))
     (goto-char start)
@@ -92,14 +92,14 @@ comment."
     (delete-char 1)
     (goto-char first-line)))
 
-(defun custom-after-make-frame (new-frame)
+(defun init-after-make-frame (new-frame)
   "Toggle fullscreen, disappear scrollbar."
   (select-frame new-frame)
   (toggle-fullscreen)
   (when (display-graphic-p)
-      (scroll-bar-mode -1)))
+    (scroll-bar-mode -1)))
 
-(defun rm-old-backups (age)
+(defun init-rm-old-backups (age)
   "Remove all backup files whose modification time is older than AGE, in the
 directory associated to \".\" in `backup-directory-alist'.  AGE must be one of
 the three time formats described in 'replace.el'."
@@ -178,7 +178,7 @@ the three time formats described in 'replace.el'."
 (global-set-key (kbd "C-c R") 'replace-regexp)
 (global-set-key (kbd "C-c s") 'hs-show-block)
 (global-set-key (kbd "C-c h") 'hs-hide-block)
-(global-set-key (kbd "C-c t") 'toggle-fullscreen)
+(global-set-key (kbd "C-c t") 'init-toggle-fullscreen)
 (global-set-key (kbd "C-c a") 'auto-fill-mode)
 
 ;;;; Enabled commands
@@ -193,11 +193,11 @@ the three time formats described in 'replace.el'."
 ;;;; Hooks and similar
 
 ;; after a new frame is made
-(add-hook 'after-make-frame-functions 'custom-after-make-frame t)
+(add-hook 'after-make-frame-functions 'init-after-make-frame t)
 
 ;; before buffer is saved to file
-(add-hook 'before-save-hook 'update-modification-date t)
-(add-hook 'before-save-hook 'auto-convert-lineending t)
+(add-hook 'before-save-hook 'init-update-modification-date t)
+(add-hook 'before-save-hook 'init-auto-convert-lineending t)
 (setq require-final-newline t)
 
 ;;;; MISC
@@ -214,7 +214,7 @@ the three time formats described in 'replace.el'."
       delete-old-versions t)
 
 ;; remove backups older than 30 days
-(rm-old-backups (days-to-time 30))
+(init-rm-old-backups (days-to-time 30))
 
 ;; auto-save
 (setq auto-save-list-file-prefix "~/.emacs.d/backup/auto-saves/saves-")
