@@ -175,6 +175,8 @@ the three time formats described in 'replace.el'."
 (global-set-key (kbd "C-c R") 'replace-regexp)
 (global-set-key (kbd "C-c s") 'hs-show-block)
 (global-set-key (kbd "C-c h") 'hs-hide-block)
+(global-set-key (kbd "C-c t") 'toggle-fullscreen)
+(global-set-key (kbd "C-c a") 'auto-fill-mode)
 
 ;;;; Enabled commands
 
