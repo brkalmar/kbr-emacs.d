@@ -4,7 +4,7 @@ Ordered by importance in descending order.
 
 * TODO Fix grey cursor.
 * DONE Automatically open *.md files with markdown-mode.
-* TODO Add prefix to all functions in init files e.g 'init'.
+* DONE Add prefix to all functions in init files e.g 'init'.
 * TODO Customize frame and icon title.
 
 * TODO Customize backup and/or autosave more.
