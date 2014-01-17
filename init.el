@@ -120,6 +120,18 @@ the three time formats described in 'replace.el'."
         (setq count (1+ count))))
      (message "Removed %d old backup files" count))))
 
+(defvar-local init-linum-fmt-str "%01d"
+  "Format string used by `init-linum-format'.")
+
+(defun init-linum-before-numbering ()
+  "Set `init-linum-fmt-str' to zero-padded format string."
+  (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
+    (setq init-linum-fmt-str (concat "%0" (number-to-string w) "d"))))
+
+(defun init-linum-format (line)
+  "Format line using the format string `init-linum-fmt-str'."
+  (propertize (format init-linum-fmt-str line) 'face 'linum))
+
 ;;;; Package customization
 
 ;;; fill-column-indicator
@@ -135,6 +147,10 @@ the three time formats described in 'replace.el'."
 
 ;;; markdown-mode
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode) t)
+
+;;; linum-mode
+(add-hook 'linum-before-numbering-hook 'init-linum-before-numbering t)
+(setq linum-format 'init-linum-format)
 
 ;;;; Useful modes for programming mode hooks
 
