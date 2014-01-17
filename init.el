@@ -95,7 +95,7 @@ comment."
 (defun init-after-make-frame (new-frame)
   "Toggle fullscreen, disappear scrollbar."
   (select-frame new-frame)
-  (toggle-fullscreen)
+  (init-toggle-fullscreen)
   (when (display-graphic-p)
     (scroll-bar-mode -1)))
 
@@ -170,7 +170,7 @@ the three time formats described in 'replace.el'."
 (global-set-key (kbd "C-<up>") 'enlarge-window)
 
 ;; misc
-(global-set-key (kbd "C-c i") 'insert-info-comment)
+(global-set-key (kbd "C-c i") 'init-insert-info-comment)
 (global-set-key (kbd "C-c f") 'fill-region)
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c u") 'uncomment-region)

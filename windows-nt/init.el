@@ -15,7 +15,7 @@
   "If buffer's file's lineendings are not LF, convert them after user
 confirmation.
 
-Confirmation is controlled by `auto-convert-lineending-action'."
+Confirmation is controlled by `init-auto-convert-lineending-action'."
   (let (coding-new
         (coding-old (symbol-name buffer-file-coding-system)))
     (and 
