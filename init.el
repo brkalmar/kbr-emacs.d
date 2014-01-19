@@ -197,6 +197,7 @@ the three time formats described in 'replace.el'."
 (global-set-key (kbd "C-c h") 'hs-hide-block)
 (global-set-key (kbd "C-c t") 'init-toggle-fullscreen)
 (global-set-key (kbd "C-c a") 'auto-fill-mode)
+(global-set-key (kbd "C-c x") 'ucs-insert)
 
 ;;;; Enabled commands
 
