@@ -30,7 +30,8 @@
     fill-column-indicator
     jam-mode
     git-commit-mode
-    markdown-mode)
+    markdown-mode
+    nhexl-mode)
   "Packages used by `init-packages-check'.
 
 Must be a list, where each element is a package name (a symbol).")
