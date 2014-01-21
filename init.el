@@ -208,6 +208,10 @@ the three time formats described in 'replace.el'."
 (setq custom-theme-directory "~/.emacs.d/themes")
 (load-theme 'dark-emacs t)
 
+;; 80 columns should comfortably fit on small screens
+(when (and (display-graphic-p) (< (display-pixel-width) 1400))
+  (set-face-attribute 'default nil :height 90))
+
 ;;;; Hooks and similar
 
 ;; after a new frame is made
