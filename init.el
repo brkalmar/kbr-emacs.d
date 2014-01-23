@@ -157,25 +157,26 @@ the three time formats described in 'replace.el'."
 
 ;; Add all modes in 'modes' to all hooks in 'hooks'
 (let ((modes
-	   '(fci-mode
-		 linum-mode
-		 hs-minor-mode))
-	  (hooks
-	   '(text-mode-hook
-		 c-mode-hook
-		 python-mode-hook
-		 emacs-lisp-mode-hook
-		 java-mode-hook
-		 autoconf-mode-hook
-		 sh-mode-hook
-		 lua-mode-hook
-		 jam-mode-hook
-		 c++-mode-hook
-		 nxml-mode-hook
-		 makefile-mode-hook)))
+       '(fci-mode
+         linum-mode
+         hs-minor-mode))
+      (hooks
+       '(text-mode-hook
+         c-mode-hook
+         python-mode-hook
+         emacs-lisp-mode-hook
+         java-mode-hook
+         autoconf-mode-hook
+         sh-mode-hook
+         lua-mode-hook
+         jam-mode-hook
+         c++-mode-hook
+         nxml-mode-hook
+         makefile-mode-hook
+         sql-mode-hook)))
   (dolist (mode modes)
-	(dolist (hook hooks)
-	  (add-hook hook mode t))))
+    (dolist (hook hooks)
+      (add-hook hook mode t))))
 
 ;;;; Keybindings
 ;;;; `C-c [A-Za-z]' is reserved for users
