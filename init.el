@@ -119,7 +119,8 @@ the three time formats described in 'replace.el'."
         (time-less-p (nth 5 (file-attributes filename)) old-before)
         (not (delete-file filename))
         (setq count (1+ count))))
-     (message "Removed %d old backup files" count))))
+     (message (concat "Removed %d old backup file" (if (eq count 1) "" "s"))
+              count))))
 
 (defvar-local init-linum-fmt-str "%01d"
   "Format string used by `init-linum-format'.")
