@@ -23,6 +23,7 @@ Confirmation is controlled by `init-auto-convert-lineending-action'."
   (let (coding-new
         (coding-old (symbol-name buffer-file-coding-system)))
     (and 
+     (not (init-auto-convert-lineending-skip))
      (string-match "-\\(?:dos\\|mac\\)$" coding-old)
      (setq coding-new
            (concat (substring coding-old 0 (match-beginning 0)) "-unix"))

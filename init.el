@@ -21,6 +21,22 @@
 
 ;;;; Functions & variables
 
+(defvar init-auto-convert-lineending-skip-list
+  '("~/.emacs.d/url/cookies")
+  "A list of filenames for which no conversion is done when
+`init-auto-convert-lineending' is called.")
+
+(defun init-auto-convert-lineending-skip ()
+  "Check all paths in `init-auto-convert-lineending-skip-list' against the
+buffer file name.  Return non-nil if one of them equals the buffer file name,
+nil otherwise."
+  (let ((found nil)
+        (filename (buffer-file-name)))
+    (dolist (path init-auto-convert-lineending-skip-list found)
+      (and
+       (equal filename (expand-file-name path))
+       (setq found t)))))
+
 (defvar init-auto-convert-lineending-action "confirm"
   "Decides what `init-auto-convert-lineending' does.
 
