@@ -2,14 +2,13 @@
 
 Ordered by importance in descending order.
 
-* TODO Fix grey cursor.
+* DONE Fix grey cursor.
 * DONE Automatically open *.md files with markdown-mode.
 * DONE Add prefix to all functions in init files e.g 'init'.
 * TODO Customize frame and icon title.
 
-* TODO Only refresh package archives when the last refresh happend more than X time ago (2 days, a week, or something similar)
+* TODO Only refresh package archives when the last refresh happend more than X
+  time ago (2 days, a week, or something similar)
 * TODO Customize backup and/or autosave more.
 
 * TODO Autocomplete for some languages.
-
-* TODO Add `custom-elisp' or some such directory, which will be sourced and will contain helper functions, such as 'confirm PROMPT ANSWERS' where ANSWERS is a list of strings that the confirmation prompt PROMPT accepts.

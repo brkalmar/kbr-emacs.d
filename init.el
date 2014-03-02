@@ -114,7 +114,9 @@ comment."
   (select-frame new-frame)
   (init-toggle-fullscreen)
   (when (display-graphic-p)
-    (scroll-bar-mode -1)))
+    (scroll-bar-mode -1))
+  ;; temporary fix for cursor color
+  (set-cursor-color "red"))
 
 (defun init-rm-old-backups (age)
   "Remove all backup files whose modification time is older than AGE, in the
