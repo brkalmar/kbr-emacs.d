@@ -1,5 +1,15 @@
-url/
-packages/elpa/**/
+# Backup
 backup/
+
+# Packages
+packages/elpa/**/
 packages/manual/**/
+
+# Used when emacs visits the internet.
+url/
+
+# Compiled .el files.
 *.elc
+
+# Randomly appearing file with 40 hex digits as '*'.  Possibly KDE.
+/session.*
