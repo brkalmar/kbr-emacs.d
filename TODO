@@ -6,8 +6,7 @@ Ordered by importance in descending order.
 * DONE Automatically open *.md files with markdown-mode.
 * DONE Add prefix to all functions in init files e.g 'init'.
 * TODO Customize frame and icon title.
-
-* TODO Only refresh package archives when the last refresh happend more than X
+* DONE Only refresh package archives when the last refresh happend more than X
   time ago (2 days, a week, or something similar)
 * TODO Customize backup and/or autosave more.
 
