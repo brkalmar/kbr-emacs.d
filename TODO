@@ -11,3 +11,9 @@ Ordered by importance in descending order.
 * TODO Customize backup and/or autosave more.
 
 * TODO Autocomplete for some languages.
+
+24.4
+
+* TODO toggle-frame-{fullscreen,maximized} instead of init-toggle-fullscreen.
+* TODO try electric-{indent,pair}-mode
+* TODO coding-system  prefer-utf-8
