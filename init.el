@@ -22,7 +22,11 @@
 ;;;; Functions & variables
 
 (defvar init-auto-convert-lineending-skip-list
-  '("~/.emacs.d/url/cookies")
+  '("~/.emacs.d/url/cookies"
+    "~/.emacs.d/packages/elpa/archives/gnu/archive-contents"
+    "~/.emacs.d/packages/elpa/archives/marmalade/archive-contents"
+    "~/.emacs.d/packages/elpa/archives/melpa/archive-contents"
+    "~/.emacs.d/packages/elpa/.last-refresh")
   "A list of filenames for which no conversion is done when
 `init-auto-convert-lineending' is called.")
 
@@ -109,14 +113,19 @@ comment."
     (delete-char 1)
     (goto-char first-line)))
 
-(defun init-after-make-frame (new-frame)
-  "Toggle fullscreen, disappear scrollbar."
-  (select-frame new-frame)
+(defun init-visuals ()
+  "Toggle fullscreen; disappear scrollbar."
+  (interactive)
   (init-toggle-fullscreen)
   (when (display-graphic-p)
     (scroll-bar-mode -1))
   ;; temporary fix for cursor color
   (set-cursor-color "red"))
+
+(defun init-after-make-frame (new-frame)
+  "Call `init-visuals'."
+  (select-frame new-frame)
+  (init-visuals))
 
 (defun init-rm-old-backups (age)
   "Remove all backup files whose modification time is older than AGE, in the
@@ -270,6 +279,7 @@ the three time formats described in 'replace.el'."
 (tool-bar-mode -1)
 (show-paren-mode 1)
 (blink-cursor-mode -1)
+(init-visuals)
 
 ;; selections
 (transient-mark-mode 1)
