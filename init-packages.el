@@ -22,19 +22,17 @@
 
 ;;; Packages
 (setq package-archive-enable-alist
+      ;; package-filter should be the very first package
       '(("melpa" package-filter json-mode fill-column-indicator git-commit-mode
          markdown-mode web-mode lua-mode)
         ("marmalade" nhexl-mode jam-mode)))
 
 (defun init-packages-refresh-archives (age)
   "Refresh archives & mark in file as refreshed if they haven't been refreshed
-in more than AGE time.
-
-Return t if the archives have been refreshed, nil otherwise."
+in more than AGE time."
   (let ((filename (expand-file-name "~/.emacs.d/packages/elpa/.last-refresh"))
         (old-before (time-subtract (current-time) age))
         (exists t)
-        (modified nil)
         contents)
     (with-temp-buffer
       (if (file-exists-p filename)
@@ -44,30 +42,31 @@ Return t if the archives have been refreshed, nil otherwise."
                   (buffer-substring-no-properties (point-min) (point-max))))
         (setq exists nil))
       (when (or (not exists) (time-less-p (date-to-time contents) old-before))
-        (setq modified t)
         (package-refresh-contents)
         (setq contents (format-time-string "%Y-%m-%dT%H:%M:%S")))
       (delete-region (point-min) (point-max))
       (insert contents)
-      (write-file filename))
-    modified))
+      (write-file filename))))
 
 (defun init-packages-check ()
   "Install or upgrade each package in each cdr in
 `package-archive-enable-alist'."
-  (and
-   (init-packages-refresh-archives (days-to-time 7))
-   (let (to-install)
-     (dolist (x package-archive-enable-alist)
-       (dolist (pkg (cdr x))
-	 (when (not (package-installed-p pkg))
-	   (add-to-list 'to-install pkg t))))
-     (dolist (pkg (package-menu--find-upgrades))
-       (add-to-list 'to-install pkg t))
-     (when to-install
-       (message "The following packages will be installed: %s"
-                (mapconcat 'symbol-name to-install ", "))
-       (mapc 'package-install to-install)))))
+  (init-packages-refresh-archives (days-to-time 7))
+  (let (to-install
+        (wait-time 5))
+    (dolist (elt package-archive-enable-alist)
+      (dolist (pkg (cdr elt))
+        (when (not (package-installed-p pkg))
+          (add-to-list 'to-install pkg t))))
+    (dolist (pkg (package-menu--find-upgrades))
+      (add-to-list 'to-install pkg t))
+    (when (and to-install
+               (y-or-n-p-with-timeout
+                (format (concat "The following packages will be installed "
+                                "or upgraded: %s. Proceed? (y in %d s) ")
+                        (mapconcat 'symbol-name to-install ", ") wait-time)
+                wait-time t))
+      (mapc 'package-install to-install))))
 
 (init-packages-check)
 
