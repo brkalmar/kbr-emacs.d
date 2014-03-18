@@ -1,5 +1,6 @@
 url/
-packages/elpa/**/
 backup/
+packages/elpa/**/
+packages/elpa/.last-refresh*
 packages/manual/**/
 *.elc

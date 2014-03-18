@@ -22,15 +22,9 @@
 
 ;;; Packages
 (setq package-archive-enable-alist
-      '(("melpa" . package-filter)
-        ("melpa" . json-mode)
-        ("melpa" . fill-column-indicator)
-        ("melpa" . git-commit-mode)
-        ("melpa" . markdown-mode)
-        ("melpa" . web-mode)
-        ("melpa" . lua-mode)
-        ("marmalade" . nhexl-mode)
-        ("marmalade" . jam-mode)))
+      '(("melpa" package-filter json-mode fill-column-indicator git-commit-mode
+         markdown-mode web-mode lua-mode)
+        ("marmalade" nhexl-mode jam-mode)))
 
 (defun init-packages-refresh-archives (age)
   "Refresh archives & mark in file as refreshed if they haven't been refreshed
@@ -59,14 +53,15 @@ Return t if the archives have been refreshed, nil otherwise."
     modified))
 
 (defun init-packages-check ()
-  "Install or upgrade each cdr in `package-archive-enable-alist'."
+  "Install or upgrade each package in each cdr in
+`package-archive-enable-alist'."
   (and
    (init-packages-refresh-archives (days-to-time 7))
    (let (to-install)
-     (dolist (pkg package-archive-enable-alist)
-       (setq pkg (cdr pkg))
-       (when (not (package-installed-p pkg))
-         (add-to-list 'to-install pkg t)))
+     (dolist (x package-archive-enable-alist)
+       (dolist (pkg (cdr x))
+	 (when (not (package-installed-p pkg))
+	   (add-to-list 'to-install pkg t))))
      (dolist (pkg (package-menu--find-upgrades))
        (add-to-list 'to-install pkg t))
      (when to-install
@@ -82,12 +77,9 @@ Return t if the archives have been refreshed, nil otherwise."
   "~/.emacs.d/packages/manual"
   "Directory where manually installed packages are.")
 
-;;; Lua mode
-;; Version: 20130419
-;; Updated: 2014-01-11
-;; Source: https://github.com/immerrr/lua-mode
+;;; Package name
+;; Version: YYYYMMDD
+;; Updated: YYYY-MM-DD
+;; Source: http://example.com/
 ;; (add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
-;;                                 "lua-mode-20130419") t)
-;; (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-;; (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode) t)
-;; (add-to-list 'interpreter-mode-alist '("lua" . lua-mode) t)
+;;                                 "package-name-YYYYMMDD") t)
