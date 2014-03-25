@@ -161,6 +161,35 @@ the three time formats described in 'replace.el'."
   "Format line using the format string `init-linum-fmt-str'."
   (propertize (format init-linum-fmt-str line) 'face 'linum))
 
+(defun init-buffer-file-truename-last (n &optional prefix not-abs)
+  "Return string of last N path elements of `buffer-file-truename' or nil if
+`buffer-file-truename' is nil.
+
+If PREFIX is non-nil, prefix the returned string with it.
+
+If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
+  (when buffer-file-truename
+    (let ((elems (split-string buffer-file-truename "/"))
+           elems-last
+           res
+           pre
+           post
+           is-full)
+      ;; starts with a "/"
+      (when (eq (nth 0 elems) "")
+        (setq pre "/")
+        (pop elems))
+      ;; ends with a "/"
+      (when (eq (car (last elems)) "")
+        (setq post "/")
+        (nbutlast elems))
+      (setq elems-last (last elems n))
+      (setq is-full (= (length elems) (length elems-last)))
+      (setq res (concat (if is-full pre) (mapconcat 'identity elems-last "/") post))
+      (if (and not-abs is-full)
+          res
+        (concat prefix res)))))
+
 ;;;; Package customization
 
 ;;; fill-column-indicator
@@ -181,30 +210,63 @@ the three time formats described in 'replace.el'."
 (add-hook 'linum-before-numbering-hook 'init-linum-before-numbering t)
 (setq linum-format 'init-linum-format)
 
+;;; auto-complete-mode
+(global-auto-complete-mode t)
+
 ;;;; Useful modes for programming mode hooks
 
-;; Add all modes in 'modes' to all hooks in 'hooks'
-(let ((modes
-       '(fci-mode
-         linum-mode
-         hs-minor-mode))
-      (hooks
-       '(text-mode-hook
-         c-mode-hook
-         python-mode-hook
-         emacs-lisp-mode-hook
-         java-mode-hook
-         autoconf-mode-hook
-         sh-mode-hook
-         lua-mode-hook
-         jam-mode-hook
-         c++-mode-hook
-         nxml-mode-hook
-         makefile-mode-hook
-         sql-mode-hook)))
-  (dolist (mode modes)
-    (dolist (hook hooks)
-      (add-hook hook mode t))))
+(defvar-local mode-hook-alist
+  '((fci-mode .
+              (text-mode-hook
+               c-mode-hook
+               python-mode-hook
+               emacs-lisp-mode-hook
+               java-mode-hook
+               autoconf-mode-hook
+               sh-mode-hook
+               lua-mode-hook
+               jam-mode-hook
+               c++-mode-hook
+               nxml-mode-hook
+               makefile-mode-hook
+               sql-mode-hook))
+   (linum-mode .
+               (text-mode-hook
+                c-mode-hook
+                python-mode-hook
+                emacs-lisp-mode-hook
+                java-mode-hook
+                autoconf-mode-hook
+                sh-mode-hook
+                lua-mode-hook
+                jam-mode-hook
+                c++-mode-hook
+                nxml-mode-hook
+                makefile-mode-hook
+                sql-mode-hook
+                web-mode-hook))
+   (hs-minor-mode .
+                  (text-mode-hook
+                   c-mode-hook
+                   python-mode-hook
+                   emacs-lisp-mode-hook
+                   java-mode-hook
+                   autoconf-mode-hook
+                   sh-mode-hook
+                   lua-mode-hook
+                   jam-mode-hook
+                   c++-mode-hook
+                   nxml-mode-hook
+                   makefile-mode-hook
+                   sql-mode-hook
+                   web-mode-hook)))
+  "For each cons in this variable, add the car to all hooks contained in the
+cdr.")
+
+(dolist (elem mode-hook-alist)
+  (setq mode (car elem))
+  (dolist (hook (cdr elem))
+    (add-hook hook mode t)))
 
 ;;;; Keybindings
 ;;;; `C-c [A-Za-z]' is reserved for users
@@ -303,3 +365,8 @@ the three time formats described in 'replace.el'."
 
 ;; tab-completion
 (setq tab-always-indent 'complete)
+
+;; frame & icon titles
+(setq frame-title-format
+      '((:eval (or (init-buffer-file-truename-last 3 "•••/" t) "%b")) " (%I)"))
+(setq icon-title-format "%b")

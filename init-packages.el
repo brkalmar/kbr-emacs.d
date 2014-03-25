@@ -24,51 +24,48 @@
 (setq package-archive-enable-alist
       ;; package-filter should be the very first package
       '(("melpa" package-filter json-mode fill-column-indicator git-commit-mode
-         markdown-mode web-mode lua-mode)
+         markdown-mode web-mode lua-mode auto-complete)
         ("marmalade" nhexl-mode jam-mode)))
 
-(defun init-packages-refresh-archives (age)
-  "Refresh archives & mark in file as refreshed if they haven't been refreshed
-in more than AGE time."
-  (let ((filename (expand-file-name "~/.emacs.d/packages/elpa/.last-refresh"))
-        (old-before (time-subtract (current-time) age))
-        (exists t)
-        contents)
+(defun init-packages-check-install ()
+  "Install each package in each cdr in `package-archive-enable-alist' if not
+installed already."
+  (let ((wait-time 10)
+        to-install)
+    (and
+     (dolist (elt package-archive-enable-alist to-install)
+       (dolist (pkg (cdr elt))
+         (when (not (package-installed-p pkg))
+           (add-to-list 'to-install pkg t))))
+     (package-refresh-contents)
+     (y-or-n-p-with-timeout
+      (format (concat "The following packages will be installed or upgraded: "
+                      "%s. Proceed? [y in %d seconds] ")
+              (mapconcat 'symbol-name to-install ", ") wait-time) wait-time t)
+     (mapc 'package-install to-install))))
+
+(defvar-local init-packages-checked-file
+  "~/.emacs.d/packages/elpa/.last-checked"
+  "Used by `init-packages-check-upgrade'.")
+
+(defun init-packages-check-upgrade (age)
+  "Call `package-list-packages' after user confirmation if
+`init-packages-checked-file' contains a time older than AGE."
+  (let ((filename (expand-file-name init-packages-checked-file)))
     (with-temp-buffer
-      (if (file-exists-p filename)
-          (progn
-            (insert-file-contents-literally filename)
-            (setq contents
-                  (buffer-substring-no-properties (point-min) (point-max))))
-        (setq exists nil))
-      (when (or (not exists) (time-less-p (date-to-time contents) old-before))
-        (package-refresh-contents)
-        (setq contents (format-time-string "%Y-%m-%dT%H:%M:%S")))
-      (delete-region (point-min) (point-max))
-      (insert contents)
-      (write-file filename))))
+      (when (or (not (file-exists-p filename))
+                (progn (insert-file-contents-literally filename)
+                       (time-less-p (date-to-time (buffer-string))
+                                    (time-subtract (current-time) age))))
+        (delete-region (point-min) (point-max))
+        (insert (format-time-string "%Y-%m-%dT%H:%M:%S%z"))
+        (write-file filename)
+        (if (y-or-n-p-with-timeout
+             "Check upgradable packages? [n in 10 seconds] " 10 nil)
+            (package-list-packages))))))
 
-(defun init-packages-check ()
-  "Install or upgrade each package in each cdr in
-`package-archive-enable-alist'."
-  (init-packages-refresh-archives (days-to-time 7))
-  (let (to-install
-        (wait-time 5))
-    (dolist (elt package-archive-enable-alist)
-      (dolist (pkg (cdr elt))
-        (when (not (package-installed-p pkg))
-          (add-to-list 'to-install pkg t))))
-    (dolist (pkg (package-menu--find-upgrades))
-      (add-to-list 'to-install pkg t))
-    (when (and to-install
-               (y-or-n-p-with-timeout
-                (format (concat "The following packages will be installed "
-                                "or upgraded: %s. Proceed? (y in %d s) ")
-                        (mapconcat 'symbol-name to-install ", ") wait-time)
-                wait-time t))
-      (mapc 'package-install to-install))))
-
-(init-packages-check)
+(init-packages-check-install)
+(init-packages-check-upgrade (days-to-time 7))
 
 ;;;; Initialize manually installed packages.
 

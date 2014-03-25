@@ -1,6 +1,7 @@
 url/
 backup/
 packages/elpa/**/
-packages/elpa/.last-refresh*
+packages/elpa/.last-checked*
 packages/manual/**/
 *.elc
+ac-comphist.dat
