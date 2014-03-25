@@ -213,6 +213,9 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;;; auto-complete-mode
 (global-auto-complete-mode t)
 
+;;; web-mode
+(add-to-list 'auto-mode-alist '("\\.php$" . web-mode) t)
+
 ;;;; Useful modes for programming mode hooks
 
 (defvar-local mode-hook-alist
