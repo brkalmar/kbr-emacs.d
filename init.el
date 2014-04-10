@@ -4,6 +4,10 @@
 
 ;;;; Packages
 
+;; IMPORTANT: Must place this *before* any CEDET component (including EIEIO)
+;; gets activated by another package (Gnus, auth-source, ...).
+(load-file "~/.emacs.d/packages/manual/cedet-20140410/cedet-devel-load.el")
+
 (load-file "~/.emacs.d/init-packages.el")
 
 ;;;; System-specific
@@ -232,7 +236,6 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (semantic-mode 1)
 
 ;;; srecode
-(require 'srecode)
 (global-srecode-minor-mode 1)
 
 ;;;; Useful modes for programming mode hooks

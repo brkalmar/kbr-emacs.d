@@ -79,3 +79,11 @@ installed already."
 ;; Source: http://example.com/
 ;; (add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
 ;;                                 "package-name-YYYYMMDD") t)
+
+;;; CEDET
+;; Version: 20140410
+;; Updated: 2014-04-10
+;; Source: http://cedet.sourceforge.net/bzr-repo.shtml
+(add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
+                                "cedet-20140410") t)
+;; cedet-devel-load.el is loaded in main init file to avoid problems
