@@ -216,9 +216,28 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;;; web-mode
 (add-to-list 'auto-mode-alist '("\\.php$" . web-mode) t)
 
+;;; semantic mode
+(setq semantic-default-submodes
+      '(global-semanticdb-minor-mode
+        global-semantic-mru-bookmark-mode
+        global-semantic-higlight-func-mode
+        global-semantic-stickyfunc-mode
+        global-semantic-decoration-mode
+        global-semantic-idle-local-symbol-highlight-code
+        global-semantic-idle-scheduler-mode
+        global-semantic-idle-completions-mode
+        global-semantic-idle-summary-mode
+        global-semantic-show-unmatched-syntax-mode))
+
+(semantic-mode 1)
+
+;;; srecode
+(require 'srecode)
+(global-srecode-minor-mode 1)
+
 ;;;; Useful modes for programming mode hooks
 
-(defvar-local mode-hook-alist
+(defvar-local programming-hook-alist
   '((fci-mode .
               (text-mode-hook
                c-mode-hook
@@ -262,14 +281,33 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
                    nxml-mode-hook
                    makefile-mode-hook
                    sql-mode-hook
-                   web-mode-hook)))
+                   web-mode-hook))
+   ((lambda () (setq ac-sources (append ac-sources '(ac-source-semantic)))) .
+    (c-mode-hook
+     c++-mode-hook))
+   ((lambda () (local-set-key (kbd "RET") 'newline-and-indent)) .
+    (text-mode-hook
+     c-mode-hook
+     python-mode-hook
+     emacs-lisp-mode-hook
+     java-mode-hook
+     autoconf-mode-hook
+     sh-mode-hook
+     lua-mode-hook
+     jam-mode-hook
+     c++-mode-hook
+     nxml-mode-hook
+     makefile-mode-hook
+     sql-mode-hook
+     web-mode-hook)))
+   
   "For each cons in this variable, add the car to all hooks contained in the
 cdr.")
 
-(dolist (elem mode-hook-alist)
-  (setq mode (car elem))
+(dolist (elem programming-hook-alist)
+  (setq func (car elem))
   (dolist (hook (cdr elem))
-    (add-hook hook mode t)))
+    (add-hook hook func t)))
 
 ;;;; Keybindings
 ;;;; `C-c [A-Za-z]' is reserved for users
@@ -284,15 +322,22 @@ cdr.")
 (global-set-key (kbd "C-c i") 'init-insert-info-comment)
 (global-set-key (kbd "C-c f") 'fill-region)
 (global-set-key (kbd "C-c c") 'comment-region)
-(global-set-key (kbd "C-c u") 'uncomment-region)
+(global-set-key (kbd "C-c C") 'uncomment-region)
 (global-set-key (kbd "C-c r") 'replace-string)
 (global-set-key (kbd "C-c R") 'replace-regexp)
 (global-set-key (kbd "C-c s") 'hs-show-block)
-(global-set-key (kbd "C-c h") 'hs-hide-block)
-(global-set-key (kbd "C-c t") 'init-toggle-fullscreen)
+(global-set-key (kbd "C-c S") 'hs-hide-block)
+(global-set-key (kbd "C-c f") 'init-toggle-fullscreen)
 (global-set-key (kbd "C-c a") 'auto-fill-mode)
-(global-set-key (kbd "C-c x") 'ucs-insert)
-(global-set-key (kbd "C-c g") 'global-auto-revert-mode)
+; q logically corresponds to C-q `quoted-insert'
+(global-set-key (kbd "C-c q") 'insert-char)
+(global-set-key (kbd "C-c v") 'global-auto-revert-mode)
+
+;; semantic mode
+(global-set-key (kbd "C-c d") 'semantic-ia-show-doc)
+(global-set-key (kbd "C-c j") 'semantic-ia-fast-jump)
+(global-set-key (kbd "C-c o") 'senator-fold-tag)
+(global-set-key (kbd "C-c O") 'senator-unfold-tag)
 
 ;;;; Enabled commands
 
@@ -371,5 +416,8 @@ cdr.")
 
 ;; frame & icon titles
 (setq frame-title-format
-      '((:eval (or (init-buffer-file-truename-last 3 "•••/" t) "%b")) " (%I)"))
+      '((:eval (or (init-buffer-file-truename-last 2 "•••/" t) "%b")) " (%I)"))
 (setq icon-title-format "%b")
+
+;; quoted-insert base 10
+(setq read-quoted-char-radix 10)
