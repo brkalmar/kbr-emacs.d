@@ -77,6 +77,7 @@ installed already."
 ;; Version: YYYYMMDD
 ;; Updated: YYYY-MM-DD
 ;; Source: http://example.com/
+;; Note: Something about build, etc...
 ;; (add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
 ;;                                 "package-name-YYYYMMDD") t)
 
@@ -84,6 +85,8 @@ installed already."
 ;; Version: 20140410
 ;; Updated: 2014-04-10
 ;; Source: http://cedet.sourceforge.net/bzr-repo.shtml
+;; Note: When building, pass the emacs executable that uses this build of CEDET
+;;   to make as the "EMACS" option, e.g. "make EMACS=/usr/local/bin/emacs-24.3".
 (add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
                                 "cedet-20140410") t)
 ;; cedet-devel-load.el is loaded in main init file to avoid problems
