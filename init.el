@@ -4,6 +4,10 @@
 
 ;;;; Packages
 
+;; IMPORTANT: Must place this *before* any CEDET component (including EIEIO)
+;; gets activated by another package (Gnus, auth-source, ...).
+(load-file "~/.emacs.d/packages/manual/cedet-20140410/cedet-devel-load.el")
+
 (load-file "~/.emacs.d/init-packages.el")
 
 ;;;; System-specific
@@ -22,7 +26,11 @@
 ;;;; Functions & variables
 
 (defvar init-auto-convert-lineending-skip-list
-  '("~/.emacs.d/url/cookies")
+  '("~/.emacs.d/url/cookies"
+    "~/.emacs.d/packages/elpa/archives/gnu/archive-contents"
+    "~/.emacs.d/packages/elpa/archives/marmalade/archive-contents"
+    "~/.emacs.d/packages/elpa/archives/melpa/archive-contents"
+    "~/.emacs.d/packages/elpa/.last-refresh")
   "A list of filenames for which no conversion is done when
 `init-auto-convert-lineending' is called.")
 
@@ -109,14 +117,19 @@ comment."
     (delete-char 1)
     (goto-char first-line)))
 
-(defun init-after-make-frame (new-frame)
-  "Toggle fullscreen, disappear scrollbar."
-  (select-frame new-frame)
+(defun init-visuals ()
+  "Toggle fullscreen; disappear scrollbar."
+  (interactive)
   (init-toggle-fullscreen)
   (when (display-graphic-p)
     (scroll-bar-mode -1))
   ;; temporary fix for cursor color
   (set-cursor-color "red"))
+
+(defun init-after-make-frame (new-frame)
+  "Call `init-visuals'."
+  (select-frame new-frame)
+  (init-visuals))
 
 (defun init-rm-old-backups (age)
   "Remove all backup files whose modification time is older than AGE, in the
@@ -152,6 +165,35 @@ the three time formats described in 'replace.el'."
   "Format line using the format string `init-linum-fmt-str'."
   (propertize (format init-linum-fmt-str line) 'face 'linum))
 
+(defun init-buffer-file-truename-last (n &optional prefix not-abs)
+  "Return string of last N path elements of `buffer-file-truename' or nil if
+`buffer-file-truename' is nil.
+
+If PREFIX is non-nil, prefix the returned string with it.
+
+If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
+  (when buffer-file-truename
+    (let ((elems (split-string buffer-file-truename "/"))
+           elems-last
+           res
+           pre
+           post
+           is-full)
+      ;; starts with a "/"
+      (when (eq (nth 0 elems) "")
+        (setq pre "/")
+        (pop elems))
+      ;; ends with a "/"
+      (when (eq (car (last elems)) "")
+        (setq post "/")
+        (nbutlast elems))
+      (setq elems-last (last elems n))
+      (setq is-full (= (length elems) (length elems-last)))
+      (setq res (concat (if is-full pre) (mapconcat 'identity elems-last "/") post))
+      (if (and not-abs is-full)
+          res
+        (concat prefix res)))))
+
 ;;;; Package customization
 
 ;;; fill-column-indicator
@@ -172,30 +214,103 @@ the three time formats described in 'replace.el'."
 (add-hook 'linum-before-numbering-hook 'init-linum-before-numbering t)
 (setq linum-format 'init-linum-format)
 
+;;; auto-complete-mode
+(global-auto-complete-mode t)
+
+;;; web-mode
+(add-to-list 'auto-mode-alist '("\\.php$" . web-mode) t)
+
+;;; semantic mode
+(setq semantic-default-submodes
+      '(global-semanticdb-minor-mode
+        global-semantic-mru-bookmark-mode
+        global-semantic-higlight-func-mode
+        global-semantic-stickyfunc-mode
+        global-semantic-decoration-mode
+        global-semantic-idle-local-symbol-highlight-code
+        global-semantic-idle-scheduler-mode
+        global-semantic-idle-completions-mode
+        global-semantic-idle-summary-mode
+        global-semantic-show-unmatched-syntax-mode))
+
+(semantic-mode 1)
+
+;;; srecode
+(global-srecode-minor-mode 1)
+
 ;;;; Useful modes for programming mode hooks
 
-;; Add all modes in 'modes' to all hooks in 'hooks'
-(let ((modes
-       '(fci-mode
-         linum-mode
-         hs-minor-mode))
-      (hooks
-       '(text-mode-hook
-         c-mode-hook
-         python-mode-hook
-         emacs-lisp-mode-hook
-         java-mode-hook
-         autoconf-mode-hook
-         sh-mode-hook
-         lua-mode-hook
-         jam-mode-hook
-         c++-mode-hook
-         nxml-mode-hook
-         makefile-mode-hook
-         sql-mode-hook)))
-  (dolist (mode modes)
-    (dolist (hook hooks)
-      (add-hook hook mode t))))
+(defvar-local programming-hook-alist
+  '((fci-mode .
+              (text-mode-hook
+               c-mode-hook
+               python-mode-hook
+               emacs-lisp-mode-hook
+               java-mode-hook
+               autoconf-mode-hook
+               sh-mode-hook
+               lua-mode-hook
+               jam-mode-hook
+               c++-mode-hook
+               nxml-mode-hook
+               makefile-mode-hook
+               sql-mode-hook))
+   (linum-mode .
+               (text-mode-hook
+                c-mode-hook
+                python-mode-hook
+                emacs-lisp-mode-hook
+                java-mode-hook
+                autoconf-mode-hook
+                sh-mode-hook
+                lua-mode-hook
+                jam-mode-hook
+                c++-mode-hook
+                nxml-mode-hook
+                makefile-mode-hook
+                sql-mode-hook
+                web-mode-hook))
+   (hs-minor-mode .
+                  (text-mode-hook
+                   c-mode-hook
+                   python-mode-hook
+                   emacs-lisp-mode-hook
+                   java-mode-hook
+                   autoconf-mode-hook
+                   sh-mode-hook
+                   lua-mode-hook
+                   jam-mode-hook
+                   c++-mode-hook
+                   nxml-mode-hook
+                   makefile-mode-hook
+                   sql-mode-hook
+                   web-mode-hook))
+   ((lambda () (setq ac-sources (append ac-sources '(ac-source-semantic)))) .
+    (c-mode-hook
+     c++-mode-hook))
+   ((lambda () (local-set-key (kbd "RET") 'newline-and-indent)) .
+    (text-mode-hook
+     c-mode-hook
+     python-mode-hook
+     emacs-lisp-mode-hook
+     java-mode-hook
+     autoconf-mode-hook
+     sh-mode-hook
+     lua-mode-hook
+     jam-mode-hook
+     c++-mode-hook
+     nxml-mode-hook
+     makefile-mode-hook
+     sql-mode-hook
+     web-mode-hook)))
+   
+  "For each cons in this variable, add the car to all hooks contained in the
+cdr.")
+
+(dolist (elem programming-hook-alist)
+  (setq func (car elem))
+  (dolist (hook (cdr elem))
+    (add-hook hook func t)))
 
 ;;;; Keybindings
 ;;;; `C-c [A-Za-z]' is reserved for users
@@ -210,14 +325,22 @@ the three time formats described in 'replace.el'."
 (global-set-key (kbd "C-c i") 'init-insert-info-comment)
 (global-set-key (kbd "C-c f") 'fill-region)
 (global-set-key (kbd "C-c c") 'comment-region)
-(global-set-key (kbd "C-c u") 'uncomment-region)
+(global-set-key (kbd "C-c C") 'uncomment-region)
 (global-set-key (kbd "C-c r") 'replace-string)
 (global-set-key (kbd "C-c R") 'replace-regexp)
 (global-set-key (kbd "C-c s") 'hs-show-block)
-(global-set-key (kbd "C-c h") 'hs-hide-block)
-(global-set-key (kbd "C-c t") 'init-toggle-fullscreen)
+(global-set-key (kbd "C-c S") 'hs-hide-block)
+(global-set-key (kbd "C-c f") 'init-toggle-fullscreen)
 (global-set-key (kbd "C-c a") 'auto-fill-mode)
-(global-set-key (kbd "C-c x") 'ucs-insert)
+; q logically corresponds to C-q `quoted-insert'
+(global-set-key (kbd "C-c q") 'insert-char)
+(global-set-key (kbd "C-c v") 'global-auto-revert-mode)
+
+;; semantic mode
+(global-set-key (kbd "C-c d") 'semantic-ia-show-doc)
+(global-set-key (kbd "C-c j") 'semantic-ia-fast-jump)
+(global-set-key (kbd "C-c o") 'senator-fold-tag)
+(global-set-key (kbd "C-c O") 'senator-unfold-tag)
 
 ;;;; Enabled commands
 
@@ -269,6 +392,7 @@ the three time formats described in 'replace.el'."
 (tool-bar-mode -1)
 (show-paren-mode 1)
 (blink-cursor-mode -1)
+(init-visuals)
 
 ;; selections
 (transient-mark-mode 1)
@@ -292,3 +416,11 @@ the three time formats described in 'replace.el'."
 
 ;; tab-completion
 (setq tab-always-indent 'complete)
+
+;; frame & icon titles
+(setq frame-title-format
+      '((:eval (or (init-buffer-file-truename-last 2 "•••/" t) "%b")) " (%I)"))
+(setq icon-title-format "%b")
+
+;; quoted-insert base 10
+(setq read-quoted-char-radix 10)

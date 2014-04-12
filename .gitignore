@@ -3,6 +3,7 @@ backup/
 
 # Packages
 packages/elpa/**/
+packages/elpa/.last-checked*
 packages/manual/**/
 
 # Used when emacs visits the internet.
@@ -13,3 +14,9 @@ url/
 
 # Randomly appearing file with 40 hex digits as '*'.  Possibly KDE.
 /session.*
+
+# CEDET
+ac-comphist.dat
+semanticdb/
+srecode-map.el
+

@@ -4,17 +4,12 @@
 ;; 
 ;; Bence Kalmar
 
-;;; Neccessary to actually initialize the package system.
+;;; Necessary to actually initialize the package system.
 (require 'package)
 
-;;;; Archives
-
-;;; Marmalade
-;; Contains: json-mode
-;;           fill-column-indicator
-;;           jam-mode
-;;           git-commit-mode
-;;           markdown-mode
+;;; Archives
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
@@ -25,32 +20,52 @@
 (setq package-load-list '(all))
 (package-initialize)
 
-(defvar init-packages-check-list
-  '(json-mode
-    fill-column-indicator
-    jam-mode
-    git-commit-mode
-    markdown-mode
-    nhexl-mode)
-  "Packages used by `init-packages-check'.
+;;; Packages
+(setq package-archive-enable-alist
+      ;; package-filter should be the very first package
+      '(("melpa" package-filter json-mode fill-column-indicator git-commit-mode
+         markdown-mode web-mode lua-mode auto-complete)
+        ("marmalade" nhexl-mode jam-mode)))
 
-Must be a list, where each element is a package name (a symbol).")
+(defun init-packages-check-install ()
+  "Install each package in each cdr in `package-archive-enable-alist' if not
+installed already."
+  (let ((wait-time 10)
+        to-install)
+    (and
+     (dolist (elt package-archive-enable-alist to-install)
+       (dolist (pkg (cdr elt))
+         (when (not (package-installed-p pkg))
+           (add-to-list 'to-install pkg t))))
+     (package-refresh-contents)
+     (y-or-n-p-with-timeout
+      (format (concat "The following packages will be installed or upgraded: "
+                      "%s. Proceed? [y in %d seconds] ")
+              (mapconcat 'symbol-name to-install ", ") wait-time) wait-time t)
+     (mapc 'package-install to-install))))
 
-(defun init-packages-check ()
-  "Install or upgrade each package in `init-packages-check-list'."
-  (package-refresh-contents)
-  (let (to-install)
-    (dolist (pkg init-packages-check-list)
-      (when (not (package-installed-p pkg))
-        (add-to-list 'to-install pkg t)))
-    (dolist (pkg (package-menu--find-upgrades))
-      (add-to-list 'to-install pkg t))
-    (when to-install
-      (message "The following packages will be installed: %s"
-	       (mapconcat 'symbol-name to-install ", "))
-      (mapc 'package-install to-install))))
+(defvar-local init-packages-checked-file
+  "~/.emacs.d/packages/elpa/.last-checked"
+  "Used by `init-packages-check-upgrade'.")
 
-(init-packages-check)
+(defun init-packages-check-upgrade (age)
+  "Call `package-list-packages' after user confirmation if
+`init-packages-checked-file' contains a time older than AGE."
+  (let ((filename (expand-file-name init-packages-checked-file)))
+    (with-temp-buffer
+      (when (or (not (file-exists-p filename))
+                (progn (insert-file-contents-literally filename)
+                       (time-less-p (date-to-time (buffer-string))
+                                    (time-subtract (current-time) age))))
+        (delete-region (point-min) (point-max))
+        (insert (format-time-string "%Y-%m-%dT%H:%M:%S%z"))
+        (write-file filename)
+        (if (y-or-n-p-with-timeout
+             "Check upgradable packages? [n in 10 seconds] " 10 nil)
+            (package-list-packages))))))
+
+(init-packages-check-install)
+(init-packages-check-upgrade (days-to-time 7))
 
 ;;;; Initialize manually installed packages.
 
@@ -58,12 +73,17 @@ Must be a list, where each element is a package name (a symbol).")
   "~/.emacs.d/packages/manual"
   "Directory where manually installed packages are.")
 
-;;; Lua mode
-;; Version: 20130419
-;; Updated: 2014-01-11
-;; Source: https://github.com/immerrr/lua-mode
+;;; Package name
+;; Version: YYYYMMDD
+;; Updated: YYYY-MM-DD
+;; Source: http://example.com/
+;; (add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
+;;                                 "package-name-YYYYMMDD") t)
+
+;;; CEDET
+;; Version: 20140410
+;; Updated: 2014-04-10
+;; Source: http://cedet.sourceforge.net/bzr-repo.shtml
 (add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
-                                "lua-mode-20130419") t)
-(autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-(add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode) t)
-(add-to-list 'interpreter-mode-alist '("lua" . lua-mode) t)
+                                "cedet-20140410") t)
+;; cedet-devel-load.el is loaded in main init file to avoid problems
