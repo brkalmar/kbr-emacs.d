@@ -238,6 +238,9 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;;; srecode
 (global-srecode-minor-mode 1)
 
+;;; python-mode
+(setq python-fill-docstring-style 'symmetric)
+
 ;;;; Useful modes for programming mode hooks
 
 (defvar-local programming-hook-alist
