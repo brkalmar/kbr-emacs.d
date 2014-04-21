@@ -418,7 +418,7 @@ cdr.")
 (setq comment-multi-line t)
 
 ;; tab-completion
-(setq tab-always-indent 'complete)
+;; (setq tab-always-indent 'complete)
 
 ;; frame & icon titles
 (setq frame-title-format
