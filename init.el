@@ -239,7 +239,21 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (global-srecode-minor-mode 1)
 
 ;;; python-mode
-(setq python-fill-docstring-style 'symmetric)
+;; unload built-in 'python.el'
+(when (featurep 'python) (unload-feature 'python t))
+
+(require 'python-mode)
+
+;; auto-complete
+(require 'auto-complete-config)
+(ac-config-default)
+(setq py-load-pymacs-p t)
+
+;; docstrings & comments
+(setq py-docstring-fill-column nil)
+(setq py-comment-fill-column nil)
+(setq py-docstring-style 'symmetric)
+(setq-default py-fill-paragraph t)
 
 ;;;; Useful modes for programming mode hooks
 

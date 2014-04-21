@@ -1,7 +1,7 @@
 ;; Add additional package archives.
 ;; Check if neccessary packages are installed, install them if they aren't.
 ;; Upgrade old packages.
-;; 
+;;
 ;; Bence Kalmar
 
 ;;; Necessary to actually initialize the package system.
@@ -24,7 +24,7 @@
 (setq package-archive-enable-alist
       ;; package-filter should be the very first package
       '(("melpa" package-filter json-mode fill-column-indicator git-commit-mode
-         markdown-mode web-mode lua-mode auto-complete)
+         markdown-mode web-mode lua-mode auto-complete python-mode)
         ("marmalade" nhexl-mode jam-mode)))
 
 (defun init-packages-check-install ()
@@ -32,17 +32,19 @@
 installed already."
   (let ((wait-time 10)
         to-install)
-    (and
-     (dolist (elt package-archive-enable-alist to-install)
-       (dolist (pkg (cdr elt))
-         (when (not (package-installed-p pkg))
-           (add-to-list 'to-install pkg t))))
-     (package-refresh-contents)
-     (y-or-n-p-with-timeout
-      (format (concat "The following packages will be installed or upgraded: "
-                      "%s. Proceed? [y in %d seconds] ")
-              (mapconcat 'symbol-name to-install ", ") wait-time) wait-time t)
-     (mapc 'package-install to-install))))
+    (when
+        (dolist (elt package-archive-enable-alist to-install)
+          (dolist (pkg (cdr elt))
+            (when (not (package-installed-p pkg))
+              (add-to-list 'to-install pkg t))))
+      (package-refresh-contents)
+      (when
+          (y-or-n-p-with-timeout
+           (format (concat "The following packages will be installed: %s."
+                           " Proceed? [y in %d seconds] ")
+                   (mapconcat 'symbol-name to-install ", ") wait-time)
+           wait-time t)
+        (mapc 'package-install to-install)))))
 
 (defvar-local init-packages-checked-file
   "~/.emacs.d/packages/elpa/.last-checked"
