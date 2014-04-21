@@ -243,7 +243,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 
 ;;;; Useful modes for programming mode hooks
 
-(defvar-local programming-hook-alist
+(defvar programming-hook-alist
   '((fci-mode .
               (text-mode-hook
                c-mode-hook
@@ -290,7 +290,8 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
                    web-mode-hook))
    ((lambda () (setq ac-sources (append ac-sources '(ac-source-semantic)))) .
     (c-mode-hook
-     c++-mode-hook))
+     c++-mode-hook
+     python-mode-hook))
    ((lambda () (local-set-key (kbd "RET") 'newline-and-indent)) .
     (text-mode-hook
      c-mode-hook
@@ -305,8 +306,11 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
      nxml-mode-hook
      makefile-mode-hook
      sql-mode-hook
-     web-mode-hook)))
-   
+     web-mode-hook))
+   ((lambda ()
+     (add-to-list 'write-file-functions 'delete-trailing-whitespace t)) .
+   (python-mode-hook)))
+
   "For each cons in this variable, add the car to all hooks contained in the
 cdr.")
 
