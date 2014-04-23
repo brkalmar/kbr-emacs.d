@@ -239,11 +239,6 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (global-srecode-minor-mode 1)
 
 ;;; python-mode
-;; unload built-in 'python.el'
-(when (featurep 'python) (unload-feature 'python t))
-
-(require 'python-mode)
-
 ;; auto-complete
 (require 'auto-complete-config)
 (ac-config-default)

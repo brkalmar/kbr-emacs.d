@@ -24,7 +24,7 @@
 (setq package-archive-enable-alist
       ;; package-filter should be the very first package
       '(("melpa" package-filter json-mode fill-column-indicator git-commit-mode
-         markdown-mode web-mode lua-mode auto-complete python-mode)
+         markdown-mode web-mode lua-mode auto-complete)
         ("marmalade" nhexl-mode jam-mode)))
 
 (defun init-packages-check-install ()
@@ -92,3 +92,15 @@ installed already."
 (add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
                                 "cedet-20140410") t)
 ;; cedet-devel-load.el is loaded in main init file to avoid problems
+
+;;; python-mode
+;; Version: 20140408
+;; Updated: 2014-04-21
+;; Source: https://code.launchpad.net/~python-mode-devs/python-mode/python-mode
+;; Note: No building required.
+(setq py-install-directory (concat (file-name-as-directory init-packages-manual)
+                                   "python-mode-20140408"))
+(add-to-list 'load-path py-install-directory t)
+;; unload built-in 'python.el'
+(when (featurep 'python) (unload-feature 'python t))
+(require 'python-mode)
