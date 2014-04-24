@@ -38,13 +38,7 @@ installed already."
             (when (not (package-installed-p pkg))
               (add-to-list 'to-install pkg t))))
       (package-refresh-contents)
-      (when
-          (y-or-n-p-with-timeout
-           (format (concat "The following packages will be installed: %s."
-                           " Proceed? [y in %d seconds] ")
-                   (mapconcat 'symbol-name to-install ", ") wait-time)
-           wait-time t)
-        (mapc 'package-install to-install)))))
+      (mapc 'package-install to-install))))
 
 (defvar-local init-packages-checked-file
   "~/.emacs.d/packages/elpa/.last-checked"
@@ -63,7 +57,7 @@ installed already."
         (insert (format-time-string "%Y-%m-%dT%H:%M:%S%z"))
         (write-file filename)
         (if (y-or-n-p-with-timeout
-             "Check upgradable packages? [n in 10 seconds] " 10 nil)
+             "Check for upgradable packages? [n in 10 seconds] " 10 nil)
             (package-list-packages))))))
 
 (init-packages-check-install)
