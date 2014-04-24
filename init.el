@@ -252,81 +252,31 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 
 ;;;; Useful modes for programming mode hooks
 
-(defvar programming-hook-alist
-  '((fci-mode .
-              (text-mode-hook
-               c-mode-hook
-               python-mode-hook
-               emacs-lisp-mode-hook
-               java-mode-hook
-               autoconf-mode-hook
-               sh-mode-hook
-               lua-mode-hook
-               jam-mode-hook
-               c++-mode-hook
-               nxml-mode-hook
-               makefile-mode-hook
-               sql-mode-hook))
-   (linum-mode .
-               (text-mode-hook
-                c-mode-hook
-                python-mode-hook
-                emacs-lisp-mode-hook
-                java-mode-hook
-                autoconf-mode-hook
-                sh-mode-hook
-                lua-mode-hook
-                jam-mode-hook
+;; NOTE: fci-mode temporarily removed because of incompatibility with
+;; auto-complete & web-mode
+(add-hook 'prog-mode-hook 'linum-mode t)
+
+;; (add-hook 'prog-mode-hook 'hs-minor-mode t)
+
+(add-hook 'prog-mode-hook
+          (lambda () (local-set-key (kbd "RET") 'newline-and-indent)) t)
+
+(add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+
+;; custom auto-complete sources
+(dolist (elem '(c-mode-hook
                 c++-mode-hook
-                nxml-mode-hook
-                makefile-mode-hook
-                sql-mode-hook
-                web-mode-hook))
-   (hs-minor-mode .
-                  (text-mode-hook
-                   c-mode-hook
-                   python-mode-hook
-                   emacs-lisp-mode-hook
-                   java-mode-hook
-                   autoconf-mode-hook
-                   sh-mode-hook
-                   lua-mode-hook
-                   jam-mode-hook
-                   c++-mode-hook
-                   nxml-mode-hook
-                   makefile-mode-hook
-                   sql-mode-hook
-                   web-mode-hook))
-   ((lambda () (setq ac-sources (append ac-sources '(ac-source-semantic)))) .
-    (c-mode-hook
-     c++-mode-hook
-     python-mode-hook))
-   ((lambda () (local-set-key (kbd "RET") 'newline-and-indent)) .
-    (text-mode-hook
-     c-mode-hook
-     python-mode-hook
-     emacs-lisp-mode-hook
-     java-mode-hook
-     autoconf-mode-hook
-     sh-mode-hook
-     lua-mode-hook
-     jam-mode-hook
-     c++-mode-hook
-     nxml-mode-hook
-     makefile-mode-hook
-     sql-mode-hook
-     web-mode-hook))
-   ((lambda ()
-     (add-to-list 'write-file-functions 'delete-trailing-whitespace t)) .
-   (python-mode-hook)))
+                python-mode-hook))
+  (add-hook
+   elem
+   (lambda () (setq ac-sources (append ac-sources '(ac-source-semantic))))))
 
-  "For each cons in this variable, add the car to all hooks contained in the
-cdr.")
-
-(dolist (elem programming-hook-alist)
-  (setq func (car elem))
-  (dolist (hook (cdr elem))
-    (add-hook hook func t)))
+;; white-space sensitive languages
+(dolist (elem '(python-mode-hook))
+  (add-hook
+   elem
+   (lambda () (add-to-list
+               'write-contents-functions 'delete-trailing-whitespace t))))
 
 ;;;; Keybindings
 ;;;; `C-c [A-Za-z]' is reserved for users
