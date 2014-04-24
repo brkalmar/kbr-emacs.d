@@ -26,3 +26,9 @@ Confirmation is controlled by `init-auto-convert-lineending-action'."
      (init-auto-convert-lineending-confirm
       (format "Current coding is %s. Convert to %s? " coding-old coding-new))
      (set-buffer-file-coding-system (intern coding-new)))))
+
+;; set diff & ediff commands to specified file if it exists
+(let ((diff-exec-file "C:\\Users\\be02029606\\_\\git-1.8.4\\bin\\diff.exe"))
+  (when (file-readable-p diff-exec-file)
+    (setq diff-command diff-exec-file)
+    (setq ediff-diff-program diff-exec-file)))
