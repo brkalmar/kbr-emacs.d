@@ -24,7 +24,7 @@
 (setq package-archive-enable-alist
       ;; package-filter should be the very first package
       '(("melpa" package-filter json-mode fill-column-indicator git-commit-mode
-         markdown-mode web-mode lua-mode auto-complete)
+         markdown-mode web-mode lua-mode auto-complete rainbow-delimiters)
         ("marmalade" nhexl-mode jam-mode)))
 
 (defun init-packages-check-install ()

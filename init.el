@@ -250,6 +250,19 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (setq py-docstring-style 'symmetric)
 (setq-default py-fill-paragraph t)
 
+;;; rainbow-delimiters
+(custom-set-faces
+ '(rainbow-delimiters-depth-1-face ((t nil)))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "#ff2222"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "#22cc44"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "#cc33cc"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "#ffdd22"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "#5555ff"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "#ff6022"))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "#33ffff"))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "#aaee22"))))
+ '(rainbow-delimiters-unmatched-face ((t (:background "#660000")))))
+
 ;;;; Useful modes for programming mode hooks
 
 ;; NOTE: fci-mode temporarily removed because of incompatibility with
