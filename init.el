@@ -263,6 +263,9 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
  '(rainbow-delimiters-depth-9-face ((t (:foreground "#aaee22"))))
  '(rainbow-delimiters-unmatched-face ((t (:background "#660000")))))
 
+;;; dired
+(setq dired-auto-revert-buffer t)
+
 ;;;; Useful modes for programming mode hooks
 
 ;; NOTE: fci-mode temporarily removed because of incompatibility with
