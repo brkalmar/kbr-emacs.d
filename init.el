@@ -232,6 +232,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 
 ;;; php-mode
 (setq php-mode-coding-style 'drupal)
+(setq php-template-compatibility nil)
 
 ;;; semantic mode
 (setq semantic-default-submodes
