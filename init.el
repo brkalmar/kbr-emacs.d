@@ -194,6 +194,16 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
           res
         (concat prefix res)))))
 
+(defun init-choose-php-or-web-mode ()
+  "Choose & call either `php-mode' or `web-mode' based on buffer contents."
+  (save-excursion
+    (save-restriction
+      (goto-char (point-min))
+      ;; pure-php scripts should not contain closing "?>"
+      (if (search-forward "?>" nil t)
+          (web-mode)
+        (php-mode)))))
+
 ;;;; Package customization
 
 ;;; fill-column-indicator
@@ -217,8 +227,11 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;;; auto-complete-mode
 (global-auto-complete-mode t)
 
-;;; web-mode
-(add-to-list 'auto-mode-alist '("\\.php$" . web-mode) t)
+;;; web-mode & php-mode
+(add-to-list 'auto-mode-alist '("\\.php$" . init-choose-php-or-web-mode) t)
+
+;;; php-mode
+(setq php-mode-coding-style 'drupal)
 
 ;;; semantic mode
 (setq semantic-default-submodes
