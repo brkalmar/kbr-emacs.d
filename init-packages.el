@@ -20,19 +20,19 @@
 
 ;;; Packages
 (defvar-local init-packages-packages
-  '(;; melpa
-    json-mode
+  '(;; gnu
+    nhexl-mode
+    ;; melpa
+    auto-complete
     fill-column-indicator
     git-commit-mode
-    markdown-mode
-    web-mode
+    json-mode
     lua-mode
-    auto-complete
-    rainbow-delimiters
-    php-mode
+    markdown-mode
     palette
-    ;; gnu
-    nhexl-mode)
+    php-mode
+    rainbow-delimiters
+    web-mode)
   "Check if these packages are installed at startup.")
 
 (defun init-packages-check-install ()
