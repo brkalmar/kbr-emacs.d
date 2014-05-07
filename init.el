@@ -331,6 +331,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ; q logically corresponds to C-q `quoted-insert'
 (global-set-key (kbd "C-c q") 'insert-char)
 (global-set-key (kbd "C-c v") 'global-auto-revert-mode)
+(global-set-key (kbd "C-c b") 'ibuffer)
 
 ;; semantic mode
 (global-set-key (kbd "C-c d") 'semantic-ia-show-doc)

@@ -26,7 +26,7 @@
       '(("melpa" package-filter json-mode fill-column-indicator git-commit-mode
          markdown-mode web-mode lua-mode auto-complete rainbow-delimiters
          php-mode)
-        ("marmalade" nhexl-mode jam-mode)))
+        ("marmalade" nhexl-mode)))
 
 (defun init-packages-check-install ()
   "Install each package in each cdr in `package-archive-enable-alist' if not
