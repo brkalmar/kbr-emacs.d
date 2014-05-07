@@ -10,8 +10,6 @@
 ;;; Archives
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/") t)
 
 ;;;; Initialize all ELPA packages.
 
@@ -21,25 +19,33 @@
 (package-initialize)
 
 ;;; Packages
-(setq package-archive-enable-alist
-      ;; package-filter should be the very first package
-      '(("melpa" package-filter json-mode fill-column-indicator git-commit-mode
-         markdown-mode web-mode lua-mode auto-complete rainbow-delimiters
-         php-mode)
-        ("marmalade" nhexl-mode)))
+(defvar-local init-packages-packages
+  '(;; melpa
+    json-mode
+    fill-column-indicator
+    git-commit-mode
+    markdown-mode
+    web-mode
+    lua-mode
+    auto-complete
+    rainbow-delimiters
+    php-mode
+    palette
+    ;; gnu
+    nhexl-mode)
+  "Check if these packages are installed at startup.")
 
 (defun init-packages-check-install ()
-  "Install each package in each cdr in `package-archive-enable-alist' if not
-installed already."
-  (let ((wait-time 10)
-        to-install)
+  "Install each package in `init-packages-packages'."
+  (let (to-install)
     (when
-        (dolist (elt package-archive-enable-alist to-install)
-          (dolist (pkg (cdr elt))
-            (when (not (package-installed-p pkg))
-              (add-to-list 'to-install pkg t))))
+        (dolist (pkg init-packages-packages to-install)
+          (when (not (package-installed-p pkg))
+            (add-to-list 'to-install pkg t)))
       (package-refresh-contents)
-      (mapc 'package-install to-install))))
+      (mapc 'package-install to-install)
+      (message "Installed %d new package%s" (length to-install)
+               (if (eq (length to-install) 1) "" "s")))))
 
 (defvar-local init-packages-checked-file
   "~/.emacs.d/packages/elpa/.last-checked"
