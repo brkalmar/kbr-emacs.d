@@ -64,7 +64,7 @@
         (insert (format-time-string "%Y-%m-%dT%H:%M:%S%z"))
         (write-file filename)
         (if (y-or-n-p-with-timeout
-             "Check for upgradable packages? [n in 10 seconds] " 10 nil)
+             "Check for upgradable packages? [y in 10 seconds] " 10 t)
             (package-list-packages))))))
 
 (init-packages-check-install)
