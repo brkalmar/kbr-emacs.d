@@ -280,6 +280,9 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;;; dired
 (setq dired-auto-revert-buffer t)
 
+;;; palette
+(setq palette-font "-misc-fixed-medium-r-normal--6-*-75-75-c-40-iso8859-1")
+
 ;;;; Useful modes for programming mode hooks
 
 ;; NOTE: fci-mode temporarily removed because of incompatibility with
