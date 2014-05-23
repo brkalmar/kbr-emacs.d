@@ -231,7 +231,6 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (add-to-list 'auto-mode-alist '("\\.php$" . init-choose-php-or-web-mode) t)
 
 ;;; php-mode
-(setq php-mode-coding-style 'pear)
 (setq php-template-compatibility nil)
 
 ;;; semantic mode
@@ -368,7 +367,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;;;; MISC
 
 ;; coding
-(prefer-coding-system 'utf-8-unix)
+(prefer-coding-system 'utf-8)
 
 ;;; Backup
 (setq backup-directory-alist `(("." . "~/.emacs.d/backup/files/"))
