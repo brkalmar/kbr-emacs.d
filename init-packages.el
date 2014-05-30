@@ -29,6 +29,7 @@
     json-mode
     lua-mode
     markdown-mode
+    org
     palette
     php-mode
     rainbow-delimiters
