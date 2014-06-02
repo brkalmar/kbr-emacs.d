@@ -340,35 +340,35 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;;;; Keybindings
 ;;;; `C-c [A-Za-z]' is reserved for users
 
-;; window-resizing
-(global-set-key (kbd "C-<left>") 'shrink-window-horizontally)
-(global-set-key (kbd "C-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "C-<down>") 'shrink-window)
-(global-set-key (kbd "C-<up>") 'enlarge-window)
+;;; overwrite
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
-;; misc
-(global-set-key (kbd "C-c i") 'init-insert-info-comment)
-(global-set-key (kbd "C-c l") 'fill-region)
-(global-set-key (kbd "C-c L") 'fill-region-as-paragraph)
-(global-set-key (kbd "C-c c") 'comment-region)
-(global-set-key (kbd "C-c C") 'uncomment-region)
-(global-set-key (kbd "C-c r") 'replace-string)
-(global-set-key (kbd "C-c R") 'replace-regexp)
-(global-set-key (kbd "C-c s") 'hs-show-block)
-(global-set-key (kbd "C-c S") 'hs-hide-block)
-(global-set-key (kbd "C-c f") 'init-toggle-fullscreen)
-(global-set-key (kbd "C-c a") 'auto-fill-mode)
-; q logically corresponds to C-q `quoted-insert'
-(global-set-key (kbd "C-c q") 'insert-char)
-(global-set-key (kbd "C-c v") 'global-auto-revert-mode)
-(global-set-key (kbd "C-c b") 'ibuffer)
-(global-set-key (kbd "C-c t") 'init-temp-buffer)
-
-;; semantic mode
+;;; semantic mode
 (global-set-key (kbd "C-c d") 'semantic-ia-show-doc)
 (global-set-key (kbd "C-c j") 'semantic-ia-fast-jump)
 (global-set-key (kbd "C-c o") 'senator-fold-tag)
 (global-set-key (kbd "C-c O") 'senator-unfold-tag)
+
+;;; window-resizing
+(global-set-key (kbd "C-<down>") 'shrink-window)
+(global-set-key (kbd "C-<left>") 'shrink-window-horizontally)
+(global-set-key (kbd "C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-<up>") 'enlarge-window)
+
+;;; misc
+(global-set-key (kbd "C-c a") 'auto-fill-mode)
+(global-set-key (kbd "C-c c") 'comment-region)
+(global-set-key (kbd "C-c C") 'uncomment-region)
+(global-set-key (kbd "C-c f") 'init-toggle-fullscreen)
+(global-set-key (kbd "C-c i") 'init-insert-info-comment)
+(global-set-key (kbd "C-c l") 'fill-region)
+(global-set-key (kbd "C-c L") 'fill-region-as-paragraph)
+; q logically corresponds to C-q `quoted-insert'
+(global-set-key (kbd "C-c q") 'insert-char)
+(global-set-key (kbd "C-c r") 'replace-string)
+(global-set-key (kbd "C-c R") 'replace-regexp)
+(global-set-key (kbd "C-c t") 'init-temp-buffer)
+(global-set-key (kbd "C-c v") 'global-auto-revert-mode)
 
 ;;;; Enabled commands
 
