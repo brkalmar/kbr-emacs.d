@@ -81,32 +81,50 @@ string `YEAR-MN-DY / YEAR-MN-DY'."
          (replace-match (concat "\\1 / " current-date) nil nil)
          (message "Updated modification date to %s" current-date))))))
 
-(defun init-get-cm-dates ()
-  "Return the creation and modification date (today) as a string in format
-'YYYY-MM-DD / YYYY-MM-DD'."
-  (let
-      ((date (format-time-string "%Y-%m-%d")))
-    (concat date " / " date)))
-
 (defvar init-info-comment-name "Bence Kalmar"
-  "The name used by `init-insert-info-comment'.  Must be a string.")
+  "The name used by `init-insert-info-comment'.")
 
-(defun init-insert-info-comment ()
+(defvar init-info-comment-mail "bkalmar1996@gmail.com"
+  "The e-mail used by `init-insert-info-comment'.")
+
+(defvar init-info-comment-license '((name . "GNU GPLv3") (short-name . "gpl-3.0"))
+  "The default license name & short-name used by `init-insert-info-comment.'
+
+Assoc list with keys 'name & 'short-name.")
+
+(defun init-insert-info-comment (&optional copyright name short-name)
   "Insert an info comment at point.
 
-The comment is muli-line if possible.  It consists of 4 lines: 2 empty ones, one
-inserted by 'insert-cm-dates' and one with a name (`init-info-comment-name').
-After insertion, point is positioned at the beginning of the first line in the
-comment."
-  (interactive)
+The comment is multi-line if possible.  It contains the current year &
+`init-info-comment-name'. After insertion, point is positioned at the beginning
+of the first line in the comment.
+
+If prefix argument COPYRIGHT is non-nil, also insert `init-info-comment-mail', a
+copyright notice with license NAME & a link to the license's SHORT-NAME at
+'gnu.org' (for defaults see `init-info-comment-license')."
+  (interactive "P")
   (let ((comment-style 'multi-line)
-        (start (point))
-        (first-line nil))
-    (insert (format "X\nX\n%s\n%s\n\n" (init-get-cm-dates)
-                    init-info-comment-name))
-    (backward-char 2)
-    (comment-region start (point))
-    (goto-char start)
+        (beg (point))
+        (year (format-time-string "%Y"))
+        first-line)
+    (if copyright
+        (let* ((name-def (cdr (assq 'name init-info-comment-license)))
+               (short-name-def
+                (cdr (assq 'short-name init-info-comment-license)))
+               (name (read-string (format "License proper name [%s]: " name-def)
+                                  nil nil name-def))
+               (short-name
+                (if (string= name name-def) short-name-def
+                  (read-string "License short name: "))))
+          (insert (format "\
+X\nX\nAuthor: %s <%s>\nCopyright (C) %s  The Author\n%s - LICENSE.txt - \
+http://www.gnu.org/licenses/%s.txt\n"
+                          init-info-comment-name init-info-comment-mail
+                          year name short-name)))
+      (insert (format "X\nX\n%s  %s\n" year init-info-comment-name)))
+    (backward-char 1)
+    (comment-region beg (point))
+    (goto-char beg)
     (search-forward "\n")
     (backward-char 2)
     (delete-char 1)
