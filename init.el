@@ -237,6 +237,10 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;;; c-mode
 (setq-default c-basic-offset 4)
 
+;;; emacs-lisp-mode
+;; use `fill-column's value
+(setq emacs-lisp-docstring-fill-column nil)
+
 ;;; lua-mode
 (setq lua-indent-level 2)
 
@@ -344,7 +348,8 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 
 ;; misc
 (global-set-key (kbd "C-c i") 'init-insert-info-comment)
-(global-set-key (kbd "C-c f") 'fill-region)
+(global-set-key (kbd "C-c l") 'fill-region)
+(global-set-key (kbd "C-c L") 'fill-region-as-paragraph)
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c C") 'uncomment-region)
 (global-set-key (kbd "C-c r") 'replace-string)
