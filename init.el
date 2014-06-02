@@ -222,6 +222,11 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
           (web-mode)
         (php-mode)))))
 
+(defun init-temp-buffer ()
+  "Create & switch to new temporary buffer."
+  (interactive)
+  (switch-to-buffer (generate-new-buffer "%temp%")))
+
 ;;;; Package customization
 
 ;;; fill-column-indicator
@@ -352,6 +357,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (global-set-key (kbd "C-c q") 'insert-char)
 (global-set-key (kbd "C-c v") 'global-auto-revert-mode)
 (global-set-key (kbd "C-c b") 'ibuffer)
+(global-set-key (kbd "C-c t") 'init-temp-buffer)
 
 ;; semantic mode
 (global-set-key (kbd "C-c d") 'semantic-ia-show-doc)
