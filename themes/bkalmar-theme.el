@@ -1,39 +1,16 @@
-(deftheme dark-emacs
-  "Dark Emacs is designed to give the same look and feel as
-  `emacs --no-window-system'. It is based on a theme made by the
-  emacswiki user, ZWZ. The original can be found at
-  http://www.emacswiki.org/emacs/zwz.
+;; `bkalmar` emacs custom theme, based on `dark-emacs` by Suvayu Ali.
+;; 
+;; Authors: Suvayu Ali <https://github.com/suvayu>
+;;          Bence Kalmar <bkalmar1996@gmail.com>
+;; Copyright (C) 2012  Suvayu Ali
+;;               2014  Bence Kalmar
+;; GNU GPLv3 - http://www.gnu.org/licenses/gpl-3.0.txt
 
-  It also tries to not interfere with the faces when emacs is
-  running in a tty (since that is the goal in the first place).
-  There are some `org-mode' related faces defined for TODO
-  keywords and special tags as well.
-
-  Color theme by Suvayu Ali. Created 2012-04-28.")
-
-(custom-theme-set-variables
- 'dark-emacs
- '(org-todo-keyword-faces
-   '(("DBUG" . (:background "gold" :foreground "indianred3" :weight bold))
-     ("LEAK" . (:background "gold" :foreground "indianred3" :weight bold))
-     ("SEGF" . (:background "gold" :foreground "indianred3" :weight bold))
-     ("CNCL" . (:background "snow3" :foreground "black" :weight bold))
-     ))
- '(org-tag-faces
-   '(("PROJ" . (:background "indianred3" :foreground "cornsilk2" :weight bold))
-     ))
- )
-
-
-;; Customise using DISPLAY types if you wish to use both dark and
-;; light backgrounds alternatively.  This also takes values like tty
-;; and nt to describe text terminals and windows machines.  For more
-;; details see:
-;; - (info "(elisp)Defining Faces")
-;; - (describe-function 'custom-theme-set-faces)
+(deftheme bkalmar
+  "bkalmar is a dark-background theme with saturated foreground colors.")
 
 (custom-theme-set-faces
- 'dark-emacs
+ 'bkalmar
  '(bold ((t (:weight bold :inherit (default)))))
  '(bold-italic ((t (:weight bold :inherit (italic)))))
  '(completions-common-part ((t (:foreground "forest green"))))
@@ -104,25 +81,6 @@
  '(mode-line-inactive ((t (:inherit mode-line :background "grey30" :foreground "grey80"))))
  '(notmuch-message-summary-face ((((type graphic)) (:background "#303030"))
 				 (((type tty)) (:background "brightblack"))))
- '(org-agenda-current-time ((t (:background "snow" :foreground "DodgerBlue4" :weight bold :inherit org-time-grid))))
- '(org-code ((default (:inherit shadow))
-	     (((type tty) (class color) (min-colors 256))
-	      (:foreground "color-28" :inherit shadow))
-	     (((type graphic)) (:foreground "ForestGreen" :inherit shadow))))
- '(org-column ((((type graphic)) (:background "grey30"))
-	       (((type tty)) (:background "grey20"))))
- '(org-document-info ((default (:foreground "pale turquoise"))
-		      (((type tty) (class color) (min-colors 256))
-		       (:foreground "#0000ff"))))
- '(org-document-title ((default (:foreground "pale turquoise" :weight bold))
-		       (((type tty) (class color) (min-colors 256))
-			(:weight bold :foreground "#0000ff"))))
- '(org-done ((t (:background "ForestGreen" :foreground "DarkSeaGreen2" :slant oblique :weight bold))))
- '(org-inlinetask ((t (:inherit org-level-8 :slant oblique))))
- '(org-level-3 ((t (:inherit outline-3 :foreground "sandy brown" :weight bold))))
- '(org-table ((default (:foreground "LightSkyBlue"))
-	      (((type tty) (class color) (min-colors 256)) (:foreground "#0000ff"))))
- '(org-todo ((t (:background "royalblue4" :foreground "thistle" :weight bold))))
  '(region ((((type graphic)) (:background "blue3"))
 	   (((type tty) (class color) (min-colors 256)) (:background "#0000af"))))
  '(rst-level-1-face ((t (:background "grey85" :foreground "black"))))
@@ -132,10 +90,6 @@
  '(show-paren-mismatch ((t (:foreground "white" :background "magenta"))))
  '(underline ((((supports :underline t)) (:underline t :foreground "green" :inherit (default)))))
  '(woman-bold ((t (:weight bold :foreground "forest green"))))
- '(woman-italic ((t (:slant italic :foreground "salmon"))))
- ;; custom faces go after this
- ;; '(sa-global-todo-face ((t (:background "royalblue4" :foreground "thistle" :weight bold)))
- ;; 		       t "Face for TODO keywords globally.")
- )
+ '(woman-italic ((t (:slant italic :foreground "salmon")))))
 
-(provide-theme 'dark-emacs)
+(provide-theme 'bkalmar)

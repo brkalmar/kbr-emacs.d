@@ -377,7 +377,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;;;; Themes
 
 (setq custom-theme-directory "~/.emacs.d/themes")
-(load-theme 'dark-emacs t)
+(load-theme 'bkalmar t)
 
 ;; 80 columns should comfortably fit on small screens
 (when (and (display-graphic-p) (< (display-pixel-width) 1400))
