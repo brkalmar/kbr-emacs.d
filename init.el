@@ -398,6 +398,15 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;; coding
 (prefer-coding-system 'utf-8)
 
+;; quoted-insert base 10
+(setq read-quoted-char-radix 10)
+
+;; indentation
+(setq-default indent-tabs-mode nil)
+
+;; comments
+(setq comment-multi-line t)
+
 ;;; Backup
 (setq backup-directory-alist `(("." . "~/.emacs.d/backup/files/"))
       backup-by-copying t
@@ -415,12 +424,16 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;; turn icomplete mode on
 (icomplete-mode 1)
 
-;; visual
+;;; Visual
+
 (setq inhibit-startup-screen t)
 (tool-bar-mode -1)
 (show-paren-mode 1)
 (blink-cursor-mode -1)
 (init-visuals)
+
+;; half-width fringes
+(fringe-mode 4)
 
 ;; selections
 (transient-mark-mode 1)
@@ -436,19 +449,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (line-number-mode -1)
 (column-number-mode 1)
 
-;; indentation
-(setq-default indent-tabs-mode nil)
-
-;; comments
-(setq comment-multi-line t)
-
-;; tab-completion
-;; (setq tab-always-indent 'complete)
-
 ;; frame & icon titles
 (setq frame-title-format
       '((:eval (or (init-buffer-file-truename-last 2 "•••/" t) "%b")) " (%I)"))
 (setq icon-title-format "%b")
-
-;; quoted-insert base 10
-(setq read-quoted-char-radix 10)
