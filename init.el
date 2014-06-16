@@ -1,6 +1,6 @@
 ;; Custom startup file for GNU-emacs.
 ;;
-;; Bence Kalmar
+;; 2014  Bence Kalmar
 
 ;;;; Packages
 
@@ -24,6 +24,11 @@
            system-type)))
 
 ;;;; Functions & variables
+
+(defvar init-userdir nil
+  "Real user directory, \"~\" in GNU/Linux, not necessarily \"~\" in Windows.
+
+Should be set in OS-specific files.")
 
 (defvar init-auto-convert-lineending-skip-list
   '("~/.emacs.d/url/cookies"

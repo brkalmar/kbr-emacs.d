@@ -1,8 +1,12 @@
 ;; Custom startup file for Windows NT.
 ;;
-;; Bence Kalmar
+;; 2014  Bence Kalmar
 
 ;;;; Functions
+
+(setq init-userdir
+      (mapconcat 'identity
+                 (subseq (split-string (expand-file-name "~") "/") 0 3) "/"))
 
 (defun init-toggle-fullscreen ()
   "Toggle fullscreen and return t, or return nil if it cannot be toggled."

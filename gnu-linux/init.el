@@ -1,8 +1,10 @@
 ;; Custom startup file for GNU/Linux.
 ;; 
-;; Bence Kalmar
+;; 2014  Bence Kalmar
 
-;;;; Functions
+;;;; Functions & variables
+
+(setq init-userdir (expand-file-name "~"))
 
 (defun init-toggle-fullscreen ()
   "Toggle fullscreen and return t, or return nil if it cannot be toggled."
