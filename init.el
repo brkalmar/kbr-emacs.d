@@ -234,6 +234,9 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 
 ;;;; Package customization
 
+;;; diary
+(require 'diary-lib)
+
 ;;; fill-column-indicator
 (setq fci-rule-column 80)
 (setq fci-rule-width 1)
@@ -314,6 +317,59 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;;; palette
 (setq palette-font "-misc-fixed-medium-r-normal--6-*-75-75-c-40-iso8859-1")
 
+;;; org
+(require 'org)
+(setq org-startup-folded 'content)
+(setq org-startup-indented t)
+
+;; invisible edits
+(setq org-catch-invisible-edits 'show)
+
+;; link abbreviations
+(add-to-list 'org-link-abbrev-alist '("github" . "https://github.com/%s/"))
+(add-to-list 'org-link-abbrev-alist
+             '("bitbucket" . "https://bitbucket.org/%s/"))
+(add-to-list 'org-link-abbrev-alist
+             '("melpa" . "http://melpa.milkbox.net/#/%s"))
+
+;; logging
+(setq org-log-repeat 'time)
+; no "- State XYZ from ABC" line
+(setcdr (assq 'state org-log-note-headings) "")
+
+;; todo states
+(setq org-todo-keywords '((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d)")
+                          (sequence "|" "CANCELED(c)")))
+(setq org-enforce-todo-dependencies t)
+
+;; tags
+(setq org-tags-column -80)
+
+;; properties
+(setq org-use-property-inheritance t)
+
+;; date / time
+(setq org-time-stamp-custom-formats
+      '("<%Y-%m-%d %V|%a>" . "<%Y-%m-%d %V|%a %H:%M>"))
+(setq-default org-display-custom-times t)
+
+;; capture
+(setq org-directory (concat init-userdir "/sync/documents"))
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+
+;; archive
+(setq org-archive-location "%s.archive.org::")
+
+;; agenda
+(add-to-list 'org-agenda-files org-default-notes-file)
+(setq org-agenda-span 14
+      org-agenda-start-on-weekday nil
+      org-agenda-start-day "-1d"
+      org-agenda-use-time-grid nil)
+
+;; refile
+(add-to-list 'org-refile-targets '(org-agenda-files . (:maxlevel . 30)))
+
 ;;;; Useful modes for programming mode hooks
 
 ;; NOTE: fci-mode temporarily removed because of incompatibility with
@@ -359,6 +415,12 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (global-set-key (kbd "C-<left>") 'shrink-window-horizontally)
 (global-set-key (kbd "C-<right>") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-<up>") 'enlarge-window)
+
+;;; org
+(global-set-key (kbd "C-c u") 'org-capture)
+(global-set-key (kbd "C-c g") 'org-agenda)
+;; `C-c ,` as described in the manual doesn't work
+(global-set-key (kbd "C-c p") 'org-priority)
 
 ;;; misc
 (global-set-key (kbd "C-c a") 'auto-fill-mode)
@@ -412,6 +474,9 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;; comments
 (setq comment-multi-line t)
 
+;; ido
+(ido-mode 1)
+
 ;;; Backup
 (setq backup-directory-alist `(("." . "~/.emacs.d/backup/files/"))
       backup-by-copying t
@@ -458,3 +523,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (setq frame-title-format
       '((:eval (or (init-buffer-file-truename-last 2 "•••/" t) "%b")) " (%I)"))
 (setq icon-title-format "%b")
+
+;;; Locale
+
+(setq system-time-locale "C")
