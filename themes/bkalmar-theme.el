@@ -19,7 +19,21 @@
 (deftheme bkalmar
   "bkalmar is a dark-background theme with saturated foreground colors.
 
-It is meant for graphic displays.")
+It is meant for graphic displays.  It customizes some package's faces, notably
+`org`.")
+
+(custom-theme-set-variables
+ 'bkalmar
+ ;;; org
+ '(org-todo-keyword-faces
+   '(("TODO" . (:background "#C01414" :weight bold :slant italic))
+     ("STARTED" . (:background "#1643B2" :weight bold :slant italic))
+     ("DONE" . (:background "#0e9d07" :weight bold))
+     ("CANCELED" . (:background "#789d07"))))
+ '(org-priority-faces
+   '((?A . (:foreground "#fffc00" :weight bold))
+     (?B . (:foreground "#0cff00" :weight bold))
+     (?C . (:foreground "#00d8ff")))))
 
 (custom-theme-set-faces
  'bkalmar
@@ -34,7 +48,7 @@ It is meant for graphic displays.")
  '(variable-pitch ((t . (:family "Sans Serif" :foreground "#ffbebe"))))
  ;;; standard highlight
  '(cursor ((t . (:background "#ffcc00"))))
- '(escape-glyph ((t . (:foreground "#ccd7e5" :slant 'italic))))
+ '(escape-glyph ((t . (:foreground "#ccd7e5" :slant italic))))
  '(fringe ((t . (:background "#0a0a0a"))))
  '(header-line ((t . (:inherit mode-line :box nil))))
  '(highlight
@@ -44,7 +58,8 @@ It is meant for graphic displays.")
  '(lazy-highlight ((t . (:foreground "#000000" :background "#96cdcd"))))
  '(minibuffer-prompt ((t . (:foreground "#963bdc" :weight bold))))
  '(mode-line
-   ((t . (:background "#1a1a1a" :box (:line-width -1 :color "#bbbbbb")))))
+   ((t . (:foreground "#eeeeee" :background "#1a1a1a"
+                      :box (:line-width -1 :color "#bbbbbb")))))
  '(mode-line-buffer-id ((t . (:foreground "#fa3535" :weight bold))))
  '(mode-line-emphasis ((t . (:slant italic))))
  '(mode-line-highlight ((t . (:weight bold))))
@@ -98,6 +113,16 @@ It is meant for graphic displays.")
  ;; '(font-lock-warning-face ((t . (:inherit bold :foreground "Red1"))))
  ;;; linum
  ;; linum
-)
+ ;;; rainbow-delimiters
+ '(rainbow-delimiters-depth-1-face ((t . (:inherit default))))
+ '(rainbow-delimiters-depth-2-face ((t . (:foreground "#ff2222"))))
+ '(rainbow-delimiters-depth-3-face ((t . (:foreground "#22cc44"))))
+ '(rainbow-delimiters-depth-4-face ((t . (:foreground "#cc33cc"))))
+ '(rainbow-delimiters-depth-5-face ((t . (:foreground "#ffdd22"))))
+ '(rainbow-delimiters-depth-6-face ((t . (:foreground "#5555ff"))))
+ '(rainbow-delimiters-depth-7-face ((t . (:foreground "#ff6022"))))
+ '(rainbow-delimiters-depth-8-face ((t . (:foreground "#33ffff"))))
+ '(rainbow-delimiters-depth-9-face ((t . (:foreground "#aaee22"))))
+ '(rainbow-delimiters-unmatched-face ((t . (:background "#660000")))))
 
 (provide-theme 'bkalmar)

@@ -145,9 +145,7 @@ http://www.gnu.org/licenses/%s.txt\n"
   (interactive)
   (init-toggle-fullscreen)
   (when (display-graphic-p)
-    (scroll-bar-mode -1))
-  ;; temporary fix for cursor color
-  (set-cursor-color "red"))
+    (scroll-bar-mode -1)))
 
 (defun init-after-make-frame (new-frame)
   "Call `init-visuals'."
@@ -297,19 +295,6 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (setq py-comment-fill-column nil)
 (setq py-docstring-style 'symmetric)
 (setq-default py-fill-paragraph t)
-
-;;; rainbow-delimiters
-(custom-set-faces
- '(rainbow-delimiters-depth-1-face ((t nil)))
- '(rainbow-delimiters-depth-2-face ((t (:foreground "#ff2222"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "#22cc44"))))
- '(rainbow-delimiters-depth-4-face ((t (:foreground "#cc33cc"))))
- '(rainbow-delimiters-depth-5-face ((t (:foreground "#ffdd22"))))
- '(rainbow-delimiters-depth-6-face ((t (:foreground "#5555ff"))))
- '(rainbow-delimiters-depth-7-face ((t (:foreground "#ff6022"))))
- '(rainbow-delimiters-depth-8-face ((t (:foreground "#33ffff"))))
- '(rainbow-delimiters-depth-9-face ((t (:foreground "#aaee22"))))
- '(rainbow-delimiters-unmatched-face ((t (:background "#660000")))))
 
 ;;; dired
 (setq dired-auto-revert-buffer t)
