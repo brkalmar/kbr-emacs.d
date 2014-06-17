@@ -30,6 +30,27 @@
 
 Should be set in OS-specific files.")
 
+(defun init-random-bytes (n)
+  "Get a string of N random bytes from `random'."
+  (random t)
+  (let ((res (make-string n 0)))
+    (dotimes (i n res)
+      (aset res i (random 256)))))
+
+(defun init-random-string (n &optional chars)
+  "Get a string of N random characters from `random'.
+
+If CHARS is non-nil, it must be a string containing characters to choose from.
+Otherwise choose from all characters in the allowable range."
+  (random t)
+  (let ((res (make-string n 0)))
+    (dotimes (i n res)
+      (aset
+       res i
+       (if (null chars)
+           (random (1+ (max-char)))
+         (aref chars (random (length chars))))))))
+
 (defvar init-auto-convert-lineending-skip-list
   '("~/.emacs.d/url/cookies"
     "~/.emacs.d/packages/elpa/archives/gnu/archive-contents"
@@ -70,75 +91,103 @@ If \"never\", the function never converts.")
     (error "Invalid value of `init-auto-convert-lineending-action': %s"
            init-auto-convert-lineending-action))))
 
-(defun init-update-modification-date ()
-  "Update the last modification date of current buffer's file if it contains the
-string `YEAR-MN-DY / YEAR-MN-DY'."
-  (interactive)
-  (let ((date-regexp "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)")
-        (current-date (format-time-string "%Y-%m-%d")))
-    (save-excursion
-      (save-restriction
-        (widen)
-        (goto-char (point-min))
-        (and
-         (re-search-forward (format "%s / %s" date-regexp date-regexp) 1000 t)
-         (not (equal (match-string-no-properties 2) current-date))
-         (replace-match (concat "\\1 / " current-date) nil nil)
-         (message "Updated modification date to %s" current-date))))))
+(defvar init-copyright-comment-license-alist
+  '(("gpl" . "\
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-(defvar init-info-comment-name "Bence Kalmar"
-  "The name used by `init-insert-info-comment'.")
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-(defvar init-info-comment-mail "bkalmar1996@gmail.com"
-  "The e-mail used by `init-insert-info-comment'.")
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.")
+    ("lgpl" . "\
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Lesser General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-(defvar init-info-comment-license '((name . "GNU GPLv3") (short-name . "gpl-3.0"))
-  "The default license name & short-name used by `init-insert-info-comment.'
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Lesser General Public License for more details.
 
-Assoc list with keys 'name & 'short-name.")
+You should have received a copy of the GNU Lesser General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.")
+   ("agpl" . "\
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-(defun init-insert-info-comment (&optional copyright name short-name)
-  "Insert an info comment at point.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
 
-The comment is multi-line if possible.  It contains the current year &
-`init-info-comment-name'. After insertion, point is positioned at the beginning
-of the first line in the comment.
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>."))
+  "GNU license names and their associated copyright text used by
+`init-insert-copyright-comment'.")
 
-If prefix argument COPYRIGHT is non-nil, also insert `init-info-comment-mail', a
-copyright notice with license NAME & a link to the license's SHORT-NAME at
-'gnu.org' (for defaults see `init-info-comment-license')."
-  (interactive "P")
-  (let ((comment-style 'multi-line)
+; " <-- this double quote fixes a font-lock bug with the above strings
+
+(defvar init-copyright-comment-name "Bence Kalmar"
+  "The name used by `init-insert-copyright'.")
+
+(defvar init-copyright-comment-mail "bkalmar1996@gmail.com"
+  "The e-mail used by `init-insert-copyright'.")
+
+(defvar init-copyright-comment-fmt "\
+
+
+Copyright %s  %s <%s>
+
+%s"
+  "Format string to be used by `init-insert-copyright-comment'.
+
+It must have 4 unescaped \"%s\" format specifiers, as follows: year, name,
+e-mail, copyright text.")
+
+(defun init-insert-copyright-comment (license)
+  "Insert a copyright notice comment at point.
+
+LICENSE must be a key in `init-copyright-comment-license-alist', the name of the
+license description to insert.  Interactively, the user is asked to choose.
+
+The comment adheres to <http://www.gnu.org/licenses/gpl-howto.html>.  Its style
+is extra-line.  After insertion, point is positioned at the end of the first
+line.
+
+See also `init-copyright-comment-name', `init-copyright-comment-mail',
+`init-copyright-comment-fmt'."
+  (interactive
+   (list
+    (completing-read "License type: " init-copyright-comment-license-alist nil t)))
+  (let ((comment-style 'extra-line)
         (beg (point))
-        (year (format-time-string "%Y"))
-        first-line)
-    (if copyright
-        (let* ((name-def (cdr (assq 'name init-info-comment-license)))
-               (short-name-def
-                (cdr (assq 'short-name init-info-comment-license)))
-               (name (read-string (format "License proper name [%s]: " name-def)
-                                  nil nil name-def))
-               (short-name
-                (if (string= name name-def) short-name-def
-                  (read-string "License short name: "))))
-          (insert (format "\
-X\nX\nAuthor: %s <%s>\nCopyright (C) %s  The Author\n%s - LICENSE.txt - \
-http://www.gnu.org/licenses/%s.txt\n"
-                          init-info-comment-name init-info-comment-mail
-                          year name short-name)))
-      (insert (format "X\nX\n%s  %s\n" year init-info-comment-name)))
-    (backward-char 1)
+        (license-text (cdr (assoc license init-copyright-comment-license-alist)))
+        (empty-pattern (init-random-string 50 "abcdefghijklmnopqrstuvwxyz"))
+        end)
+    (when (null license-text)
+      (error "%S is not a key in `init-copyright-comment-license-alist'" license))
+    (insert
+     (replace-regexp-in-string
+      "^$" empty-pattern
+      (format init-copyright-comment-fmt
+              (format-time-string "%Y") init-copyright-comment-name
+              init-copyright-comment-mail license-text)))
     (comment-region beg (point))
+    (setq end (point))
     (goto-char beg)
-    (search-forward "\n")
-    (backward-char 2)
-    (delete-char 1)
-    (setq first-line (point))
-    (forward-char)
-    (search-forward "\n")
-    (backward-char 2)
-    (delete-char 1)
-    (goto-char first-line)))
+    (while (re-search-forward (regexp-quote empty-pattern) end t)
+      (replace-match "" t))
+    (goto-char beg)
+    (move-end-of-line nil)))
 
 (defun init-visuals ()
   "Toggle fullscreen; disappear scrollbar."
@@ -276,8 +325,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
         global-semantic-idle-local-symbol-highlight-code
         global-semantic-idle-scheduler-mode
         global-semantic-idle-completions-mode
-        global-semantic-idle-summary-mode
-        global-semantic-show-unmatched-syntax-mode))
+        global-semantic-idle-summary-mode))
 
 (semantic-mode 1)
 
@@ -412,7 +460,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c C") 'uncomment-region)
 (global-set-key (kbd "C-c f") 'init-toggle-fullscreen)
-(global-set-key (kbd "C-c i") 'init-insert-info-comment)
+(global-set-key (kbd "C-c i") 'init-insert-copyright-comment)
 (global-set-key (kbd "C-c l") 'fill-region)
 (global-set-key (kbd "C-c L") 'fill-region-as-paragraph)
 ; q logically corresponds to C-q `quoted-insert'
@@ -441,7 +489,6 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (add-hook 'after-make-frame-functions 'init-after-make-frame t)
 
 ;; before buffer is saved to file
-(add-hook 'before-save-hook 'init-update-modification-date t)
 (add-hook 'before-save-hook 'init-auto-convert-lineending t)
 (setq require-final-newline t)
 
