@@ -279,6 +279,11 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
   (interactive)
   (switch-to-buffer (generate-new-buffer "%temp%")))
 
+(defun init-find-org-default-notes-file ()
+  "Call `find-file' on `org-default-notes-file'."
+  (interactive)
+  (find-file org-default-notes-file))
+
 ;;;; Package customization
 
 ;;; diary
@@ -450,10 +455,11 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (global-set-key (kbd "C-<up>") 'enlarge-window)
 
 ;;; org
-(global-set-key (kbd "C-c u") 'org-capture)
 (global-set-key (kbd "C-c g") 'org-agenda)
+(global-set-key (kbd "C-c n") 'init-find-org-default-notes-file)
 ;; `C-c ,` as described in the manual doesn't work
 (global-set-key (kbd "C-c p") 'org-priority)
+(global-set-key (kbd "C-c u") 'org-capture)
 
 ;;; misc
 (global-set-key (kbd "C-c a") 'auto-fill-mode)
@@ -463,7 +469,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (global-set-key (kbd "C-c i") 'init-insert-copyright-comment)
 (global-set-key (kbd "C-c l") 'fill-region)
 (global-set-key (kbd "C-c L") 'fill-region-as-paragraph)
-; q logically corresponds to C-q `quoted-insert'
+;; q logically corresponds to C-q `quoted-insert'
 (global-set-key (kbd "C-c q") 'insert-char)
 (global-set-key (kbd "C-c r") 'replace-string)
 (global-set-key (kbd "C-c R") 'replace-regexp)
