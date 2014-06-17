@@ -1,14 +1,14 @@
 # Backup
-backup/
+/backup/
 
 # Packages
-packages/elpa/**/
-packages/elpa/sphinx-doc-readme.txt
-packages/elpa/.last-checked*
-packages/manual/**/
+/packages/elpa/**/
+/packages/elpa/sphinx-doc-readme.txt
+/packages/elpa/.last-checked*
+/packages/manual/**/
 
 # Used when emacs visits the internet.
-url/
+/url/
 
 # Compiled .el files.
 *.elc
@@ -17,9 +17,9 @@ url/
 /session.*
 
 # CEDET
-ac-comphist.dat
-semanticdb/
-srecode-map.el
+/ac-comphist.dat
+/semanticdb/
+/srecode-map.el
 
 # org
 /.org-id-locations
