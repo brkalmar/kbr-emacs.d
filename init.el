@@ -194,7 +194,9 @@ See also `init-copyright-comment-name', `init-copyright-comment-mail',
   (interactive)
   (init-toggle-fullscreen)
   (when (display-graphic-p)
-    (scroll-bar-mode -1)))
+    (scroll-bar-mode -1))
+  ;; temporary fix for Debian
+  (set-cursor-color "#ffcc00"))
 
 (defun init-after-make-frame (new-frame)
   "Call `init-visuals'."
