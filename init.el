@@ -378,8 +378,9 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (setcdr (assq 'state org-log-note-headings) "")
 
 ;; todo states
-(setq org-todo-keywords '((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d)")
-                          (sequence "|" "CANCELED(c)")))
+(setq org-todo-keywords
+      '((sequence "CONSIDER(k)" "TODO(t)" "STARTED(s)" "|" "DONE(d)")
+        (sequence "|" "CANCELED(c)")))
 (setq org-enforce-todo-dependencies t)
 
 ;; tags
