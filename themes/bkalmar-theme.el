@@ -26,9 +26,10 @@ It is meant for graphic displays.  It customizes some package's faces, notably
  'bkalmar
  ;;; org
  '(org-todo-keyword-faces
-   '(("TODO" . (:background "#C01414" :weight bold :slant italic))
+   '(("CONSIDER" . (:background "#d34c09" :weight bold :slant italic))
+     ("TODO" . (:background "#C01414" :weight bold :slant italic))
      ("STARTED" . (:background "#1643B2" :weight bold :slant italic))
-     ("DONE" . (:background "#0e9d07" :weight bold))
+     ("DONE" . (:background "#0e9d07"))
      ("CANCELED" . (:background "#789d07"))))
  '(org-priority-faces
    '((?A . (:foreground "#fffc00" :weight bold))
