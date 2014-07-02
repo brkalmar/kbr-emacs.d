@@ -4,6 +4,7 @@
 # Packages
 /packages/elpa/**/
 /packages/elpa/sphinx-doc-readme.txt
+/packages/elpa/yaml-mode-readme.txt
 /packages/elpa/.last-checked*
 /packages/manual/**/
 

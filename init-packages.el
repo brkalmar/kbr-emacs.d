@@ -33,7 +33,8 @@
     palette
     php-mode
     rainbow-delimiters
-    web-mode)
+    web-mode
+    yaml-mode)
   "Check if these packages are installed at startup.")
 
 (defun init-packages-check-install ()
