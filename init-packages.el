@@ -26,6 +26,7 @@
     auto-complete
     fill-column-indicator
     git-commit-mode
+    haskell-mode
     json-mode
     lua-mode
     markdown-mode

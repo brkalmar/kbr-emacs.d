@@ -412,6 +412,9 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;; refile
 (add-to-list 'org-refile-targets '(org-agenda-files . (:maxlevel . 30)))
 
+;;; haskell-mode
+(add-hook 'haskell-mode-hook 'haskell-indentation-mode)
+
 ;;;; Useful modes for programming mode hooks
 
 ;; NOTE: fci-mode temporarily removed because of incompatibility with
