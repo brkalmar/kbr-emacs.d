@@ -398,6 +398,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;; capture
 (setq org-directory (concat init-userdir "/sync/documents"))
 (setq org-default-notes-file (concat org-directory "/notes.org"))
+(add-to-list 'init-auto-convert-lineending-skip-list org-default-notes-file)
 
 ;; archive
 (setq org-archive-location "%s.archive.org::")
