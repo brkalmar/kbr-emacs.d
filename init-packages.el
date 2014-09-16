@@ -21,9 +21,11 @@
 ;;; Packages
 (defvar-local init-packages-packages
   '(;; gnu
+    auctex
     nhexl-mode
     ;; melpa
     auto-complete
+    auto-complete-auctex
     fill-column-indicator
     git-commit-mode
     haskell-mode
