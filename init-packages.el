@@ -34,6 +34,7 @@
     palette
     php-mode
     rainbow-delimiters
+    tt-mode
     web-mode
     yaml-mode)
   "Check if these packages are installed at startup.")
