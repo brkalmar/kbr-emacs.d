@@ -17,22 +17,6 @@
              t)
     nil))
 
-(defun init-auto-convert-lineending ()
-  "If buffer's file's lineendings are not LF, convert them after user
-confirmation.
-
-Confirmation is controlled by `init-auto-convert-lineending-action'."
-  (let (coding-new
-        (coding-old (symbol-name buffer-file-coding-system)))
-    (and 
-     (not (init-auto-convert-lineending-skip))
-     (string-match "-\\(?:dos\\|mac\\)$" coding-old)
-     (setq coding-new
-           (concat (substring coding-old 0 (match-beginning 0)) "-unix"))
-     (init-auto-convert-lineending-confirm
-      (format "Current coding is %s. Convert to %s? " coding-old coding-new))
-     (set-buffer-file-coding-system (intern coding-new)))))
-
 ;; This is unnecessary on windows, as files don't have an executable property.
 (defun init-auto-make-executable ()
   "Make current buffer's file executable if begins whith a shebang."

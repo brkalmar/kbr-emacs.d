@@ -51,46 +51,6 @@ Otherwise choose from all characters in the allowable range."
            (random (1+ (max-char)))
          (aref chars (random (length chars))))))))
 
-(defvar init-auto-convert-lineending-skip-list
-  '("~/.emacs.d/url/cookies"
-    "~/.emacs.d/packages/elpa/archives/gnu/archive-contents"
-    "~/.emacs.d/packages/elpa/archives/marmalade/archive-contents"
-    "~/.emacs.d/packages/elpa/archives/melpa/archive-contents"
-    "~/.emacs.d/packages/elpa/.last-refresh")
-  "A list of filenames for which no conversion is done when
-`init-auto-convert-lineending' is called.")
-
-(defun init-auto-convert-lineending-skip ()
-  "Check all paths in `init-auto-convert-lineending-skip-list' against the
-buffer file name.  Return non-nil if one of them equals the buffer file name,
-nil otherwise."
-  (let ((found nil)
-        (filename (buffer-file-name)))
-    (dolist (path init-auto-convert-lineending-skip-list found)
-      (and
-       (equal filename (expand-file-name path))
-       (setq found t)))))
-
-(defvar init-auto-convert-lineending-action "confirm"
-  "Decides what `init-auto-convert-lineending' does.
-
-If \"confirm\", the function asks the user whether to convert or not.
-If \"always\", the function always converts, without asking the user.
-If \"never\", the function never converts.")
-
-(defun init-auto-convert-lineending-confirm (prompt)
-  "Called by `init-auto-convert-lineending'."
-  (cond
-   ((equal init-auto-convert-lineending-action "confirm")
-    (y-or-n-p prompt))
-   ((equal init-auto-convert-lineending-action "always")
-    t)
-   ((equal init-auto-convert-lineending-action "never")
-    nil)
-   (t
-    (error "Invalid value of `init-auto-convert-lineending-action': %s"
-           init-auto-convert-lineending-action))))
-
 (defvar init-copyright-comment-license-alist
   '(("gpl" . "\
 This program is free software: you can redistribute it and/or modify
@@ -398,7 +358,6 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 ;; capture
 (setq org-directory (concat init-userdir "/sync/documents"))
 (setq org-default-notes-file (concat org-directory "/notes.org"))
-(add-to-list 'init-auto-convert-lineending-skip-list org-default-notes-file)
 
 ;; archive
 (setq org-archive-location "%s.archive.org::")
@@ -521,7 +480,6 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (add-hook 'after-make-frame-functions 'init-after-make-frame t)
 
 ;; before buffer is saved to file
-(add-hook 'before-save-hook 'init-auto-convert-lineending t)
 (setq require-final-newline t)
 
 ;;;; MISC
