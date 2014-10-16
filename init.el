@@ -4,10 +4,6 @@
 
 ;;;; Packages
 
-;; IMPORTANT: Must place this *before* any CEDET component (including EIEIO)
-;; gets activated by another package (Gnus, auth-source, ...).
-(load-file "~/.emacs.d/packages/manual/cedet-20140410/cedet-devel-load.el")
-
 (load-file "~/.emacs.d/init-packages.el")
 
 ;;;; System-specific
@@ -281,23 +277,6 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 
 ;;; php-mode
 (setq php-template-compatibility nil)
-
-;;; semantic mode
-(setq semantic-default-submodes
-      '(global-semanticdb-minor-mode
-        global-semantic-mru-bookmark-mode
-        global-semantic-higlight-func-mode
-        global-semantic-stickyfunc-mode
-        global-semantic-decoration-mode
-        global-semantic-idle-local-symbol-highlight-code
-        global-semantic-idle-scheduler-mode
-        global-semantic-idle-completions-mode
-        global-semantic-idle-summary-mode))
-
-(semantic-mode 1)
-
-;;; srecode
-(global-srecode-minor-mode 1)
 
 ;;; python-mode
 ;; auto-complete

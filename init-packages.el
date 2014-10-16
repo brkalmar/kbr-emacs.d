@@ -89,25 +89,3 @@
 ;; Note: Something about build, etc...
 ;; (add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
 ;;                                 "package-name-YYYYMMDD") t)
-
-;;; CEDET
-;; Version: 20140410
-;; Updated: 2014-04-10
-;; Source: http://cedet.sourceforge.net/bzr-repo.shtml
-;; Note: When building, pass the emacs executable that uses this build of CEDET
-;;   to make as the "EMACS" option, e.g. "make EMACS=/usr/local/bin/emacs-24.3".
-(add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
-                                "cedet-20140410") t)
-;; cedet-devel-load.el is loaded in main init file to avoid problems
-
-;;; python-mode
-;; Version: 20140408
-;; Updated: 2014-04-21
-;; Source: https://code.launchpad.net/~python-mode-devs/python-mode/python-mode
-;; Note: No building required.
-(setq py-install-directory (concat (file-name-as-directory init-packages-manual)
-                                   "python-mode-20140408"))
-(add-to-list 'load-path py-install-directory t)
-;; unload built-in 'python.el'
-(when (featurep 'python) (unload-feature 'python t))
-(require 'python-mode)
