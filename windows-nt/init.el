@@ -2,6 +2,8 @@
 ;;
 ;; 2014  Bence Kalmar
 
+(require 'cl)
+
 ;;;; Functions
 
 (setq init-userdir
