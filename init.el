@@ -312,15 +312,14 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
              '("melpa" . "http://melpa.milkbox.net/#/%s"))
 
 ;; logging
-(setq org-log-repeat 'time)
-; no "- State XYZ from ABC" line
-(setcdr (assq 'state org-log-note-headings) "")
+(setq org-log-repeat nil)
+(setq org-log-into-drawer "LOGBOOK")
 
 ;; todo states
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d)")
+      '((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!)")
         (sequence "CONSIDER(k)" "|")
-        (sequence "|" "CANCELED(c)")))
+        (sequence "|" "CANCELED(c!)")))
 (setq org-enforce-todo-dependencies t)
 
 ;; tags
