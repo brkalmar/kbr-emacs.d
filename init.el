@@ -317,9 +317,9 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 
 ;; todo states
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!)")
-        (sequence "CONSIDER(k)" "|")
-        (sequence "|" "CANCELED(c!)")))
+      '((sequence "TODO(t)" "STAR(s)" "|" "DONE(d!)")
+        (sequence "CONS(k)" "|")
+        (sequence "|" "CANC(c!)")))
 (setq org-enforce-todo-dependencies t)
 
 ;; deadlines / scheduling
