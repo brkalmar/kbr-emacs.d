@@ -322,6 +322,10 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
         (sequence "|" "CANCELED(c!)")))
 (setq org-enforce-todo-dependencies t)
 
+;; deadlines / scheduling
+; no warning
+(setq org-deadline-warning-days 0)
+
 ;; tags
 (setq org-tags-column -80)
 
