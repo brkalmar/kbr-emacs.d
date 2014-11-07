@@ -457,6 +457,7 @@ If no themes have been disabled, do nothing."
 (global-set-key (kbd "C-c H") 'init-disable-themes)
 (global-set-key (kbd "C-c i") 'init-insert-copyright-comment)
 (global-set-key (kbd "C-c l") 'fill-region)
+(global-set-key (kbd "C-c m") 'normal-mode)
 (global-set-key (kbd "C-c L") 'fill-region-as-paragraph)
 ;; q logically corresponds to C-q `quoted-insert'
 (global-set-key (kbd "C-c q") 'insert-char)
