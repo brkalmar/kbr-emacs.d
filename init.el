@@ -394,6 +394,13 @@ If no themes have been disabled, do nothing."
                             (list month day year)))))
         'font-lock-face 'init-calendar-iso-week))
 
+;;;; Useful modes for prose-like mode hooks
+
+(add-hook 'help-mode-hook 'variable-pitch-mode t)
+(add-hook 'Info-mode-hook 'variable-pitch-mode t)
+(add-hook 'LaTeX-mode-hook 'variable-pitch-mode t)
+(add-hook 'markdown-mode-hook 'variable-pitch-mode t)
+
 ;;;; Useful modes for programming mode hooks
 
 ;; NOTE: fci-mode temporarily removed because of incompatibility with
