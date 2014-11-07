@@ -242,6 +242,25 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
   (interactive)
   (find-file org-default-notes-file))
 
+(defvar init-disable-themes-list ()
+  "The themes that have been last disabled by `init-disable-themes', if any.")
+
+(defun init-disable-themes ()
+  "Disable all themes."
+  (interactive)
+  (message "Disabling all themes...")
+  (setq init-disable-themes-list (mapc 'disable-theme custom-enabled-themes)))
+
+(defun init-enable-themes ()
+  "Enable all themes that have been disabled.
+If no themes have been disabled, do nothing."
+  (interactive)
+  (if init-disable-themes-list
+      (progn
+        (message "Enabling disabled themes...")
+        (mapc 'enable-theme init-disable-themes-list))
+    (message "No disabled themes to enable.")))
+
 ;;;; Package customization
 
 ;;; diary
@@ -433,6 +452,8 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c C") 'uncomment-region)
 (global-set-key (kbd "C-c f") 'init-toggle-fullscreen)
+(global-set-key (kbd "C-c h") 'init-enable-themes)
+(global-set-key (kbd "C-c H") 'init-disable-themes)
 (global-set-key (kbd "C-c i") 'init-insert-copyright-comment)
 (global-set-key (kbd "C-c l") 'fill-region)
 (global-set-key (kbd "C-c L") 'fill-region-as-paragraph)
