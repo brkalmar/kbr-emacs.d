@@ -38,7 +38,8 @@
     rainbow-delimiters
     tt-mode
     web-mode
-    yaml-mode)
+    yaml-mode
+    zenburn-theme)
   "Check if these packages are installed at startup.")
 
 (defun init-packages-check-install ()
