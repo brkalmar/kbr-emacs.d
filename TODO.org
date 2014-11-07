@@ -1,0 +1,21 @@
+* DONE Fix grey cursor.
+* DONE Automatically open *.md files with markdown-mode.
+* DONE Add prefix to all functions in init files e.g 'init'.
+* DONE Customize frame and icon title.
+* DONE Only refresh package archives when the last refresh happend more than X time ago (2 days, a week, or something similar)
+* CANC Customize backup and/or autosave more.
+:LOGBOOK:  
+- State "CANC"       from "TODO"       [2014-11-07 Fri 21:09]
+:END:      
+* DONE Autocomplete for some languages.
+:LOGBOOK:  
+- State "DONE"       from "TODO"       [2014-11-07 Fri 21:09]
+:END:
+* TODO prefx `bkalmar-` or similar instead of `init-`
+* TODO check out other modes like `auto-complete`
+* TODO version 24.4
+** TODO toggle-frame-{fullscreen,maximized} instead of init-toggle-fullscreen.
+** TODO try electric-{indent,pair}-mode
+** TODO coding-system  prefer-utf-8
+* TODO `palette`
+** TODO do not maximize the palette frame when it's opened
