@@ -396,6 +396,7 @@ If no themes have been disabled, do nothing."
 
 ;;;; Useful modes for prose-like mode hooks
 
+(add-hook 'bibtex-mode-hook 'variable-pitch-mode t)
 (add-hook 'help-mode-hook 'variable-pitch-mode t)
 (add-hook 'Info-mode-hook 'variable-pitch-mode t)
 (add-hook 'LaTeX-mode-hook 'variable-pitch-mode t)
