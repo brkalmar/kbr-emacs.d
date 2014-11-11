@@ -476,6 +476,7 @@ If no themes have been disabled, do nothing."
 ;;;; Enabled commands
 
 (put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
 ;;;; Themes
 
