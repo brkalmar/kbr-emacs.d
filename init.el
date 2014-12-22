@@ -454,8 +454,9 @@ default theme and some margins on both sides."
 
 ;; (add-hook 'prog-mode-hook 'hs-minor-mode t)
 
-(add-hook 'prog-mode-hook
-          (lambda () (local-set-key (kbd "RET") 'newline-and-indent)) t)
+(add-hook 'prog-mode-hook 'electric-pair-mode)
+
+(add-hook 'prog-mode-hook 'electric-indent-mode)
 
 (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
 
