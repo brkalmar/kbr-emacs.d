@@ -148,7 +148,7 @@ See also `init-copyright-comment-name', `init-copyright-comment-mail',
 (defun init-visuals ()
   "Toggle fullscreen; disappear scrollbar."
   (interactive)
-  (init-toggle-fullscreen)
+  (toggle-frame-maximized)
   (when (display-graphic-p)
     (scroll-bar-mode -1))
   ;; temporary fix for Debian
@@ -459,7 +459,7 @@ If no themes have been disabled, do nothing."
 (global-set-key (kbd "C-c a") 'auto-fill-mode)
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c C") 'uncomment-region)
-(global-set-key (kbd "C-c f") 'init-toggle-fullscreen)
+(global-set-key (kbd "C-c f") 'toggle-frame-maximized)
 (global-set-key (kbd "C-c h") 'init-enable-themes)
 (global-set-key (kbd "C-c H") 'init-disable-themes)
 (global-set-key (kbd "C-c i") 'init-insert-copyright-comment)
@@ -559,6 +559,9 @@ If no themes have been disabled, do nothing."
 (setq frame-title-format
       '((:eval (or (init-buffer-file-truename-last 2 "•••/" t) "%b")) " (%I)"))
 (setq icon-title-format "%b")
+
+;; frame resize
+(setq frame-resize-pixelwise t)
 
 ;;; Locale
 
