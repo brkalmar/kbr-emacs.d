@@ -9,9 +9,9 @@
 ** DONE less saturated colors for TODO-keywords
 * TODO prefix `bkalmar-` or similar instead of `init-`
 * TODO check out other modes like `auto-complete`
-* STAR version 24.4
+* DONE version 24.4
 ** DONE toggle-frame-{fullscreen,maximized} instead of init-toggle-fullscreen.
-** TODO try electric-{indent,pair}-mode
-** TODO coding-system  prefer-utf-8
+** DONE try electric-{indent,pair}-mode
+** DONE coding-system  prefer-utf-8
 * `palette`
 ** TODO do not maximize the palette frame when it's opened
