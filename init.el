@@ -261,6 +261,49 @@ If no themes have been disabled, do nothing."
         (mapc 'enable-theme init-disable-themes-list))
     (message "No disabled themes to enable.")))
 
+(defvar-local init-wordprocessor-fringe-bg nil
+  "Original background for face `fringe', modified by `init-wordprocessor-mode',
+if any.")
+
+(define-minor-mode init-wordprocessor-mode
+  "Minor mode for a \"word processor look\" in the current window.  Uses the
+default theme and some margins on both sides."
+  nil " WP" nil
+  (if init-wordprocessor-mode
+      (progn
+        ;; disable linum mode
+        (linum-mode -1)
+        ;; wordwrap
+        (visual-line-mode +1)
+        ;; adjust font size
+        (text-scale-adjust +1.5)
+        ;; disable themes
+        (init-disable-themes)
+        ;; margins
+        (setq left-margin-width 20)
+        (setq right-margin-width 20)
+        ;; invisible fringes
+        (setq init-wordprocessor-fringe-bg (face-attribute 'fringe :background))
+        (set-face-attribute 'fringe nil :background
+                            (face-attribute 'default :background))
+        ;; update window
+        (set-window-buffer nil (current-buffer)))
+    ;; enable linum mode
+    (linum-mode +1)
+    ;; no wordwrap
+    (visual-line-mode -1)
+    ;; reset font size
+    (text-scale-adjust -1.5)
+    ;; visible fringes
+    (set-face-attribute 'fringe nil :background init-wordprocessor-fringe-bg)
+    ;; enable themes
+    (init-enable-themes)
+    ;; margins
+    (setq left-margin-width 0)
+    (setq right-margin-width 0)
+    ;; update window
+    (set-window-buffer nil (current-buffer))))
+
 ;;;; Package customization
 
 ;;; diary
@@ -396,6 +439,7 @@ If no themes have been disabled, do nothing."
 
 ;;;; Useful modes for prose-like mode hooks
 
+(add-hook 'bibtex-mode-hook 'variable-pitch-mode t)
 (add-hook 'help-mode-hook 'variable-pitch-mode t)
 (add-hook 'Info-mode-hook 'variable-pitch-mode t)
 (add-hook 'LaTeX-mode-hook 'variable-pitch-mode t)
@@ -472,6 +516,7 @@ If no themes have been disabled, do nothing."
 (global-set-key (kbd "C-c R") 'replace-regexp)
 (global-set-key (kbd "C-c t") 'init-temp-buffer)
 (global-set-key (kbd "C-c v") 'global-auto-revert-mode)
+(global-set-key (kbd "C-c w") 'init-wordprocessor-mode)
 
 ;;;; Enabled commands
 

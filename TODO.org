@@ -6,7 +6,7 @@
 * CANC Customize backup and/or autosave more.
 * DONE Autocomplete for some languages.
 * `org`
-** TODO less saturated colors for TODO-keywords
+** DONE less saturated colors for TODO-keywords
 * TODO prefix `bkalmar-` or similar instead of `init-`
 * TODO check out other modes like `auto-complete`
 * STAR version 24.4

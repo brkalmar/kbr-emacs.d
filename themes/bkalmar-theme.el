@@ -24,14 +24,14 @@ notably `org`.")
  'bkalmar
  ;;; org
  '(org-todo-keyword-faces
-   '(("CONS" . (:background "#d34c09" :weight bold :slant italic))
-     ("TODO" . (:background "#C01414" :weight bold :slant italic))
-     ("STAR" . (:background "#1643B2" :weight bold :slant italic))
-     ("DONE" . (:background "#0e9d07"))
-     ("CANC" . (:background "#789d07"))))
+   `(("CONS" . (:background "#a58259"))
+     ("TODO" . (:background "#9c6363" :weight bold))
+     ("STAR" . (:background "#9a9453" :weight bold))
+     ("DONE" . (:background "#437f43"))
+     ("CANC" . (:background "#328373"))))
  '(org-priority-faces
-   '((?A . (:foreground "#fffc00" :weight bold))
-     (?B . (:foreground "#0cff00" :weight bold))
-     (?C . (:foreground "#00d8ff")))))
+   `((?A . (:foreground "#f0dfaf" :weight bold))
+     (?B . (:foreground "#dc8cc3" :weight bold))
+     (?C . (:foreground "#8cd0d3")))))
 
 (provide-theme 'bkalmar)
