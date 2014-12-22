@@ -36,6 +36,7 @@
     palette
     php-mode
     rainbow-delimiters
+    scala-mode2
     tt-mode
     web-mode
     yaml-mode
