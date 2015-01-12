@@ -6,17 +6,6 @@
 
 (setq init-userdir (expand-file-name "~"))
 
-(defun init-toggle-fullscreen ()
-  "Toggle fullscreen and return t, or return nil if it cannot be toggled."
-  (interactive)
-  (if (equal window-system 'x)
-      (progn (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                                    '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-             (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                                    '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-             t)
-    nil))
-
 ;; This is unnecessary on windows, as files don't have an executable property.
 (defun init-auto-make-executable ()
   "Make current buffer's file executable if begins whith a shebang."

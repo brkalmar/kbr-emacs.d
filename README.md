@@ -2,7 +2,7 @@
 
 This is my personal .emacs.d directory.
 
-Emacs version: GNU emacs 24.3
+Emacs version: GNU emacs 24.4
 
 Emacs using this repository is most often run by the command:
     emacsclient -c -a ""
