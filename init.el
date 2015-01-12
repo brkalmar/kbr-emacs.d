@@ -304,6 +304,17 @@ default theme and some margins on both sides."
     ;; update window
     (set-window-buffer nil (current-buffer))))
 
+(defun init-sort-lines-random (beg end)
+  "Sort lines in region randomly, using `random' as a source of randomness."
+  (interactive "r\n")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (let ((inhibit-field-text-motion t))
+        (sort-subr nil 'forward-line 'end-of-line nil nil
+                   (lambda (a b) (eq (random 2) 1)))))))
+
 ;;;; Package customization
 
 ;;; diary
