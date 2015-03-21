@@ -17,7 +17,7 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 (deftheme bkalmar
-  "bkalmar is a theme which customizes little, except some package's faces, most
+  "bkalmar is a theme which customizes little, except some packages' faces, most
 notably `org`.")
 
 (custom-theme-set-variables
@@ -33,5 +33,11 @@ notably `org`.")
    `((?A . (:foreground "#f0dfaf" :weight bold))
      (?B . (:foreground "#dc8cc3" :weight bold))
      (?C . (:foreground "#8cd0d3")))))
+
+(custom-theme-set-faces
+ 'bkalmar
+ ;;; markdown
+ '(markdown-pre-face ((t . (:inherit (fixed-pitch font-lock-constant-face)))))
+ '(markdown-inline-code-face ((t . (:inherit markdown-pre-face)))))
 
 (provide-theme 'bkalmar)
