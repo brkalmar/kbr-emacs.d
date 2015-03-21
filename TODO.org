@@ -7,7 +7,9 @@
 * DONE Autocomplete for some languages.
 * `org`
 ** DONE less saturated colors for TODO-keywords
-* TODO prefix `bkalmar-` or similar instead of `init-`
+* TODO prefix `bkalmar/` or similar instead of `init-`
+* TODO use `names` for namespace
+https://github.com/Bruce-Connor/names
 * TODO check out other modes like `auto-complete`
 * DONE version 24.4
 ** DONE toggle-frame-{fullscreen,maximized} instead of init-toggle-fullscreen.
