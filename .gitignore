@@ -3,12 +3,8 @@
 
 # Packages
 /packages/elpa/**/
-/packages/elpa/hexrgb-readme.txt
-/packages/elpa/org-*.signed
-/packages/elpa/popup-readme.txt
-/packages/elpa/sphinx-doc-readme.txt
-/packages/elpa/yaml-mode-readme.txt
-/packages/elpa/yasnippet-readme.txt
+/packages/elpa/*.signed
+/packages/elpa/*.txt
 /packages/elpa/.last-checked*
 /packages/manual/**/
 
