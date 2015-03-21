@@ -26,6 +26,16 @@
 
 Should be set in OS-specific files.")
 
+(defvar init-preferred-fonts-monospace nil
+  "List of preferred monospace fonts, in descending order of preference.
+
+Should be set in OS-specific files.")
+
+(defvar init-preferred-fonts-proportional nil
+  "List of preferred proportional fonts, in descending order of preference.
+
+Should be set in OS-specific files.")
+
 (defun init-random-bytes (n)
   "Get a string of N random bytes from `random'."
   (random t)
@@ -540,6 +550,21 @@ default theme and some margins on both sides."
 (setq custom-theme-directory "~/.emacs.d/themes")
 (load-theme 'zenburn t)
 (load-theme 'bkalmar t)
+
+;; default & fixed-pitch font
+(catch 'break
+  (dolist (font-family init-preferred-fonts-monospace)
+    (when (member font-family (font-family-list))
+      (set-face-attribute 'default nil :family font-family)
+      (set-face-attribute 'fixed-pitch nil :family font-family)
+      (throw 'break t))))
+
+;; variable-pitch font
+(catch 'break
+  (dolist (font-family init-preferred-fonts-proportional nil)
+    (when (member font-family (font-family-list))
+      (set-face-attribute 'variable-pitch nil :family font-family)
+      (throw 'break t))))
 
 ;; 80 columns should comfortably fit on small screens
 (when (and (display-graphic-p) (< (display-pixel-width) 1400))

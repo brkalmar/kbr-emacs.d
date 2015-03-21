@@ -15,3 +15,13 @@
   (when (file-readable-p diff-exec-file)
     (setq diff-command diff-exec-file)
     (setq ediff-diff-program diff-exec-file)))
+
+;;;; Themes
+
+(setq init-preferred-fonts-monospace
+      '("DejaVu Sans Mono" "Unifont" "Consolas" "Bitstream Vera Sans Mono"
+        "Courier New" "Lucida Sans Typewriter" "Letter Gothic Std"))
+
+(setq init-preferred-fonts-proportional
+      '("DejaVu Sans" "Meiryo" "Cambria" "Arial" "Candara" "Calibri" "Segoe UI"
+        "Trebuchet MS" "Corbel"))
