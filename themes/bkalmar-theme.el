@@ -38,6 +38,11 @@ notably `org`.")
  'bkalmar
  ;;; markdown
  '(markdown-pre-face ((t . (:inherit (fixed-pitch font-lock-constant-face)))))
- '(markdown-inline-code-face ((t . (:inherit markdown-pre-face)))))
+ '(markdown-inline-code-face ((t . (:inherit markdown-pre-face))))
+  ;;; linum
+ '(linum
+   ((t . (:box nil :height 0.95 :inherit fixed-pitch :inverse-video nil
+               :overline nil :slant normal :strike-through nil :underline nil
+               :weight normal)))))
 
 (provide-theme 'bkalmar)
