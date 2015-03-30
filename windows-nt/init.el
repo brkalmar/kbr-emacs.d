@@ -23,5 +23,5 @@
         "Courier New" "Lucida Sans Typewriter" "Letter Gothic Std"))
 
 (setq init-preferred-fonts-proportional
-      '("DejaVu Sans" "Meiryo" "Cambria" "Arial" "Candara" "Calibri" "Segoe UI"
-        "Trebuchet MS" "Corbel"))
+      '("DejaVu Sans" "Arial" "Candara" "Calibri" "Segoe UI" "Trebuchet MS"
+        "Corbel"))
