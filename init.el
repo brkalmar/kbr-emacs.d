@@ -444,6 +444,44 @@ display only regular text."
     (goto-char (point-min))
     (insert (format "%d fonts\n\n" count))))
 
+(defun init-insert-header-guard ()
+  "Insert a C/C++ ifndef/endif header guard at the beginning and end of the
+  current buffer.  Use a preprocessor identifier based on the buffer's filename,
+  making sure it is unique by appending random letters."
+  (interactive)
+  (save-excursion
+    (save-restriction
+      (widen)
+      (let ((preprocessor-id
+             (concat
+              (if (buffer-file-name)
+                  ;; convert to all-uppercase
+                  (upcase
+                   ;; remove more than 1 consecutive underscores
+                   (replace-regexp-in-string
+                    "\\(_\\)\\(_+\\)" ""
+                    ;; strip preceding & trailing underscores
+                    (replace-regexp-in-string
+                     "\\(^_+\\|_+$\\)" ""
+                     ;; remove non-letter or -undescore characters
+                     (replace-regexp-in-string
+                      "[^a-zA-Z_]" ""
+                      ;; replace dots and hyphens by underscores
+                      (replace-regexp-in-string
+                       "[.-]+" "_"
+                       ;; take the filename
+                       (file-name-nondirectory (buffer-file-name))
+                       t t) t t) t t) t t 1))
+                (error "this buffer has no filename"))
+              "_" (init-random-string 10 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))))
+        (goto-char (point-min))
+        (insert (format "#ifndef %s\n#define %s\n\n"
+                        preprocessor-id preprocessor-id))
+        (goto-char (point-max))
+        (when (not (= (char-before) ?\n))
+          (insert ?\n))
+        (insert (format "\n#endif /* %s */\n" preprocessor-id))))))
+
 ;;;; Package customization
 
 ;;; diary
