@@ -615,6 +615,9 @@ display only regular text."
                             (list month day year)))))
         'font-lock-face 'init-calendar-iso-week))
 
+;;; Subtitles
+(require 'subtitles)
+
 ;;;; Useful modes for prose-like mode hooks
 
 (add-hook 'bibtex-mode-hook 'variable-pitch-mode t)

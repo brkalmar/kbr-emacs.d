@@ -91,3 +91,11 @@
 ;; Note: Something about build, etc...
 ;; (add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
 ;;                                 "package-name-YYYYMMDD") t)
+
+;;; Subtitles
+;; Version: 1.100
+;; Updated: 2015-05-04
+;; Source: http://lists.gnu.org/archive/html/gnu-emacs-sources/2009-05/msg00007.html
+;; Note: NONE
+(add-to-list 'load-path (concat (file-name-as-directory init-packages-manual)
+                                "subtitles-1.100") t)
