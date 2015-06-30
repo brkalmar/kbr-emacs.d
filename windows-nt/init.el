@@ -6,7 +6,7 @@
 
 ;;;; Functions
 
-(setq init-userdir
+(setq bkalmar/userdir
       (mapconcat 'identity
                  (subseq (split-string (expand-file-name "~") "/") 0 3) "/"))
 
@@ -18,10 +18,10 @@
 
 ;;;; Themes
 
-(setq init-preferred-fonts-monospace
+(setq bkalmar/preferred-fonts-monospace
       '("DejaVu Sans Mono" "Unifont" "Consolas" "Bitstream Vera Sans Mono"
         "Courier New" "Lucida Sans Typewriter" "Letter Gothic Std"))
 
-(setq init-preferred-fonts-proportional
+(setq bkalmar/preferred-fonts-proportional
       '("DejaVu Sans" "Arial" "Candara" "Calibri" "Segoe UI" "Trebuchet MS"
         "Corbel"))

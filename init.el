@@ -10,40 +10,38 @@
 
 (cond
  ((equal system-type 'gnu/linux)
-  (message "Loading GNU/Linux specific init file...")
   (load-file "~/.emacs.d/gnu-linux/init.el"))
  ((equal system-type 'windows-nt)
-  (message "Loading Windows NT specific init file...")
   (load-file "~/.emacs.d/windows-nt/init.el"))
  (t
-  (message "Could not find appropriate config file for system type: %s"
+  (message "Could not find appropriate config file for system type: ‘%s’"
            system-type)))
 
 ;;;; Functions & variables
 
-(defvar init-userdir nil
+(defvar bkalmar/userdir nil
   "Real user directory, \"~\" in GNU/Linux, not necessarily \"~\" in Windows.
 
 Should be set in OS-specific files.")
 
-(defvar init-preferred-fonts-monospace nil
+(defvar bkalmar/preferred-fonts-monospace nil
   "List of preferred monospace fonts, in descending order of preference.
 
 Should be set in OS-specific files.")
 
-(defvar init-preferred-fonts-proportional nil
+(defvar bkalmar/preferred-fonts-proportional nil
   "List of preferred proportional fonts, in descending order of preference.
 
 Should be set in OS-specific files.")
 
-(defun init-random-bytes (n)
+(defun bkalmar/random-bytes (n)
   "Get a string of N random bytes from `random'."
   (random t)
   (let ((res (make-string n 0)))
     (dotimes (i n res)
       (aset res i (random 256)))))
 
-(defun init-random-string (n &optional chars)
+(defun bkalmar/random-string (n &optional chars)
   "Get a string of N random characters from `random'.
 
 If CHARS is non-nil, it must be a string containing characters to choose from.
@@ -57,7 +55,7 @@ Otherwise choose from all characters in the allowable range."
            (random (1+ (max-char)))
          (aref chars (random (length chars))))))))
 
-(defvar init-copyright-comment-license-alist
+(defvar bkalmar/copyright-comment-license-alist
   '(("gpl" . "\
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -98,55 +96,58 @@ GNU Affero General Public License for more details.
 You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>."))
   "GNU license names and their associated copyright text used by
-`init-insert-copyright-comment'.")
+`bkalmar/insert-copyright-comment'.")
 
 ; " <-- this double quote fixes a font-lock bug with the above strings
 
-(defvar init-copyright-comment-name "Bence Kalmar"
-  "The name used by `init-insert-copyright'.")
+(defvar bkalmar/copyright-comment-name "Bence Kalmar"
+  "The name used by `bkalmar/insert-copyright-comment'.")
 
-(defvar init-copyright-comment-mail "bkalmar1996@gmail.com"
-  "The e-mail used by `init-insert-copyright'.")
+(defvar bkalmar/copyright-comment-mail "bkalmar1996@gmail.com"
+  "The e-mail used by `bkalmar/insert-copyright-comment'.")
 
-(defvar init-copyright-comment-fmt "\
+(defvar bkalmar/copyright-comment-fmt "\
 
 
 Copyright %s  %s <%s>
 
 %s"
-  "Format string to be used by `init-insert-copyright-comment'.
+  "Format string to be used by `bkalmar/insert-copyright-comment'.
 
 It must have 4 unescaped \"%s\" format specifiers, as follows: year, name,
 e-mail, copyright text.")
 
-(defun init-insert-copyright-comment (license)
+(defun bkalmar/insert-copyright-comment (license)
   "Insert a copyright notice comment at point.
 
-LICENSE must be a key in `init-copyright-comment-license-alist', the name of the
+LICENSE must be a key in `bkalmar/copyright-comment-license-alist', the name of the
 license description to insert.  Interactively, the user is asked to choose.
 
 The comment adheres to <http://www.gnu.org/licenses/gpl-howto.html>.  Its style
 is extra-line.  After insertion, point is positioned at the end of the first
 line.
 
-See also `init-copyright-comment-name', `init-copyright-comment-mail',
-`init-copyright-comment-fmt'."
+See also `bkalmar/copyright-comment-name', `bkalmar/copyright-comment-mail',
+`bkalmar/copyright-comment-fmt'."
   (interactive
    (list
-    (completing-read "License type: " init-copyright-comment-license-alist nil t)))
+    (completing-read "License type: " bkalmar/copyright-comment-license-alist
+                     nil t)))
   (let ((comment-style 'extra-line)
         (beg (point))
-        (license-text (cdr (assoc license init-copyright-comment-license-alist)))
-        (empty-pattern (init-random-string 50 "abcdefghijklmnopqrstuvwxyz"))
+        (license-text
+         (cdr (assoc license bkalmar/copyright-comment-license-alist)))
+        (empty-pattern (bkalmar/random-string 50 "abcdefghijklmnopqrstuvwxyz"))
         end)
     (when (null license-text)
-      (error "%S is not a key in `init-copyright-comment-license-alist'" license))
+      (error "%S is not a key in `bkalmar/copyright-comment-license-alist'"
+             license))
     (insert
      (replace-regexp-in-string
       "^$" empty-pattern
-      (format init-copyright-comment-fmt
-              (format-time-string "%Y") init-copyright-comment-name
-              init-copyright-comment-mail license-text)))
+      (format bkalmar/copyright-comment-fmt
+              (format-time-string "%Y") bkalmar/copyright-comment-name
+              bkalmar/copyright-comment-mail license-text)))
     (comment-region beg (point))
     (setq end (point))
     (goto-char beg)
@@ -155,7 +156,7 @@ See also `init-copyright-comment-name', `init-copyright-comment-mail',
     (goto-char beg)
     (move-end-of-line nil)))
 
-(defun init-visuals ()
+(defun bkalmar/visuals ()
   "Toggle fullscreen; disappear scrollbar."
   (interactive)
   (toggle-frame-maximized)
@@ -164,12 +165,12 @@ See also `init-copyright-comment-name', `init-copyright-comment-mail',
   ;; temporary fix for Debian
   (set-cursor-color "#ffcc00"))
 
-(defun init-after-make-frame (new-frame)
-  "Call `init-visuals'."
+(defun bkalmar/after-make-frame (new-frame)
+  "Call `bkalmar/visuals'."
   (select-frame new-frame)
-  (init-visuals))
+  (bkalmar/visuals))
 
-(defun init-rm-old-backups (age)
+(defun bkalmar/rm-old-backups (age)
   "Remove all backup files whose modification time is older than AGE, in the
 directory associated to \".\" in `backup-directory-alist'.  AGE must be one of
 the three time formats described in 'replace.el'."
@@ -191,19 +192,19 @@ the three time formats described in 'replace.el'."
      (message (concat "Removed %d old backup file" (if (eq count 1) "" "s"))
               count))))
 
-(defvar-local init-linum-fmt-str "%01d"
-  "Format string used by `init-linum-format'.")
+(defvar bkalmar/linum-fmt-str "%01d"
+  "Format string used by `bkalmar/linum-format'.")
 
-(defun init-linum-before-numbering ()
-  "Set `init-linum-fmt-str' to zero-padded format string."
+(defun bkalmar/linum-before-numbering ()
+  "Set `bkalmar/linum-fmt-str' to zero-padded format string."
   (let ((w (length (number-to-string (count-lines (point-min) (point-max))))))
-    (setq init-linum-fmt-str (concat "%0" (number-to-string w) "d"))))
+    (setq bkalmar/linum-fmt-str (concat "%0" (number-to-string w) "d"))))
 
-(defun init-linum-format (line)
-  "Format line using the format string `init-linum-fmt-str'."
-  (propertize (format init-linum-fmt-str line) 'face 'linum))
+(defun bkalmar/linum-format (line)
+  "Format line using the format string `bkalmar/linum-fmt-str'."
+  (propertize (format bkalmar/linum-fmt-str line) 'face 'linum))
 
-(defun init-buffer-file-truename-last (n &optional prefix not-abs)
+(defun bkalmar/buffer-file-truename-last (n &optional prefix not-abs)
   "Return string of last N path elements of `buffer-file-truename' or nil if
 `buffer-file-truename' is nil.
 
@@ -232,7 +233,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
           res
         (concat prefix res)))))
 
-(defun init-choose-php-or-web-mode ()
+(defun bkalmar/choose-php-or-web-mode ()
   "Choose & call either `php-mode' or `web-mode' based on buffer contents."
   (save-excursion
     (save-restriction
@@ -242,44 +243,44 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
           (web-mode)
         (php-mode)))))
 
-(defun init-temp-buffer ()
+(defun bkalmar/temp-buffer ()
   "Create & switch to new temporary buffer."
   (interactive)
   (switch-to-buffer (generate-new-buffer "%temp%")))
 
-(defun init-find-org-default-notes-file ()
+(defun bkalmar/find-org-default-notes-file ()
   "Call `find-file' on `org-default-notes-file'."
   (interactive)
   (find-file org-default-notes-file))
 
-(defvar init-disable-themes-list ()
-  "The themes that have been last disabled by `init-disable-themes', if any.")
+(defvar bkalmar/disable-themes-list ()
+  "The themes that have been last disabled by `bkalmar/disable-themes', if any.")
 
-(defun init-disable-themes ()
+(defun bkalmar/disable-themes ()
   "Disable all themes."
   (interactive)
   (message "Disabling all themes...")
-  (setq init-disable-themes-list (mapc 'disable-theme custom-enabled-themes)))
+  (setq bkalmar/disable-themes-list (mapc 'disable-theme custom-enabled-themes)))
 
-(defun init-enable-themes ()
+(defun bkalmar/enable-themes ()
   "Enable all themes that have been disabled.
 If no themes have been disabled, do nothing."
   (interactive)
-  (if init-disable-themes-list
+  (if bkalmar/disable-themes-list
       (progn
         (message "Enabling disabled themes...")
-        (mapc 'enable-theme init-disable-themes-list))
+        (mapc 'enable-theme bkalmar/disable-themes-list))
     (message "No disabled themes to enable.")))
 
-(defvar-local init-wordprocessor-fringe-bg nil
-  "Original background for face `fringe', modified by `init-wordprocessor-mode',
+(defvar-local bkalmar/wordprocessor-fringe-bg nil
+  "Original background for face `fringe', modified by `bkalmar/wordprocessor-mode',
 if any.")
 
-(define-minor-mode init-wordprocessor-mode
+(define-minor-mode bkalmar/wordprocessor-mode
   "Minor mode for a \"word processor look\" in the current window.  Uses the
 default theme and some margins on both sides."
   nil " WP" nil
-  (if init-wordprocessor-mode
+  (if bkalmar/wordprocessor-mode
       (progn
         ;; disable linum mode
         (linum-mode -1)
@@ -288,12 +289,12 @@ default theme and some margins on both sides."
         ;; adjust font size
         (text-scale-adjust +1.5)
         ;; disable themes
-        (init-disable-themes)
+        (bkalmar/disable-themes)
         ;; margins
         (setq left-margin-width 20)
         (setq right-margin-width 20)
         ;; invisible fringes
-        (setq init-wordprocessor-fringe-bg (face-attribute 'fringe :background))
+        (setq bkalmar/wordprocessor-fringe-bg (face-attribute 'fringe :background))
         (set-face-attribute 'fringe nil :background
                             (face-attribute 'default :background))
         ;; update window
@@ -305,16 +306,16 @@ default theme and some margins on both sides."
     ;; reset font size
     (text-scale-adjust -1.5)
     ;; visible fringes
-    (set-face-attribute 'fringe nil :background init-wordprocessor-fringe-bg)
+    (set-face-attribute 'fringe nil :background bkalmar/wordprocessor-fringe-bg)
     ;; enable themes
-    (init-enable-themes)
+    (bkalmar/enable-themes)
     ;; margins
     (setq left-margin-width 0)
     (setq right-margin-width 0)
     ;; update window
     (set-window-buffer nil (current-buffer))))
 
-(defun init-sort-lines-random (beg end)
+(defun bkalmar/sort-lines-random (beg end)
   "Sort lines in region randomly, using `random' as a source of randomness."
   (interactive "r\n")
   (save-excursion
@@ -326,7 +327,7 @@ default theme and some margins on both sides."
                    (lambda (a b) (eq (random 2) 1)))))))
 
 ;; source: https://gist.github.com/haxney/3055728
-(defun init-font-is-mono-p (font-family)
+(defun bkalmar/font-is-mono-p (font-family)
   "Return `t' if `font-family' appears to be a monospace font's family, `nil'
 otherwise."
   (let (width)
@@ -341,26 +342,26 @@ otherwise."
       (goto-char (line-end-position))
       (eq width (car (posn-x-y (posn-at-point)))))))
 
-(defvar init-compare-fonts-history '()
-  "History list for `init-compare-fonts'.")
+(defvar bkalmar/compare-fonts-history '()
+  "History list for `bkalmar/compare-fonts'.")
 
-(defvar init-compare-fonts-invalid-char ?�
+(defvar bkalmar/compare-fonts-invalid-char ?�
   "Used to replace those characters in the test string — after insertion — which
 have no font / are displayed in an overloaded font.")
 
-(defvar init-compare-fonts-test-text
+(defvar bkalmar/compare-fonts-test-text
   ;; source: http://www.columbia.edu/~fdc/utf8/index.html#glass
   "The quick brown fox jumps over the lazy dog. 1 l I i 0 O o.  Tudok üveget enni anélkül hogy bajom lenne tőle.  Aš galiu valgyti stiklą ir jis manęs nežeidžia.  Μπορώ να φάω σπασμένα γυαλιά χωρίς να πάθω τίποτα.  Можам да јадам стакло, а не ме штета.  我能吞下玻璃而不傷身體。  나는 유리를 먹을 수 있어요. 그래도 아프지 않아요.  ∀∁∅∋∉ℕ∑∜∞∧∩∪∟∠∭∰∴≅≈≣≤≫≹⊃⊭⋅⋘ ℃Ω ⏚⏦  .من می توانم بدونِ احساس درد شيشه بخورم  ﻿काचं शक्नोम्यत्तुम् । नोपहिनस्ति माम् ॥  .איך קען עסן גלאָז און עס טוט מיר נישט װײ  ฉันกินกระจกได้ แต่มันไม่ทำให้ฉันเจ็บ"
-  "Default test text for `init-compare-fonts'.  Normally should not have a
+  "Default test text for `bkalmar/compare-fonts'.  Normally should not have a
   closing newline.")
 
 ;; source: https://gist.github.com/haxney/3055728
-(defun init-compare-fonts (&optional test-text font-type only-regular-text)
+(defun bkalmar/compare-fonts (&optional test-text font-type only-regular-text)
   "Display a list of font faces with some test text for each.
 
-If `test-text' is `nil', use `init-compare-fonts-test-text'.  Interactively,
+If `test-text' is `nil', use `bkalmar/compare-fonts-test-text'.  Interactively,
 with a single C-u prefix argument ask for a custom test string, use
-`init-compare-fonts-test-text' otherwise.
+`bkalmar/compare-fonts-test-text' otherwise.
 
 If `font-type' is `nil', display all fonts; otherwise it must be one of
 `:monospace' or `:proportional' to display only those type of fonts.
@@ -374,13 +375,13 @@ display only regular text."
      (when (equal current-prefix-arg '(4))
        (setq test-text
              (read-string "Test text for each font: " nil
-                          'init-compare-fonts-history
-                          init-compare-fonts-test-text)))
+                          'bkalmar/compare-fonts-history
+                          bkalmar/compare-fonts-test-text)))
      (setq font-type
            (cdr (assoc
                  (completing-read "Type of fonts to display (default all): "
                                   '("monospace" "proportional" "all") nil t nil
-                                  'init-compare-fonts-history "all")
+                                  'bkalmar/compare-fonts-history "all")
                  '(("all" . :all)
                    ("monospace" . :monospace)
                    ("proportional" . :proportional)))))
@@ -388,16 +389,16 @@ display only regular text."
            (not (y-or-n-p "Show bold and italic test text? ")))
      (list test-text font-type only-regular-text)))
   (when (null test-text)
-    (setq test-text init-compare-fonts-test-text))
+    (setq test-text bkalmar/compare-fonts-test-text))
   (when (null font-type)
     (setq font-type :all))
   (let ((count 0)
         ;; predicate for whether to display a font family; based on `font-type'
         (display-font-p
          (cond ((eq font-type :all) (lambda (x) t))
-               ((eq font-type :monospace) 'init-font-is-mono-p)
+               ((eq font-type :monospace) 'bkalmar/font-is-mono-p)
                ((eq font-type :proportional)
-                (lambda (x) (not (init-font-is-mono-p x))))
+                (lambda (x) (not (bkalmar/font-is-mono-p x))))
                (t (error "Unrecognized `font-type' argument"))))
         pos-text-beg
         pos-text-end)
@@ -438,13 +439,13 @@ display only regular text."
                          (intern font-family)))))
               (progn
                 (delete-char 1)
-                (insert init-compare-fonts-invalid-char))
+                (insert bkalmar/compare-fonts-invalid-char))
             (forward-char)))))
     ;; insert number of fonts displayed
     (goto-char (point-min))
     (insert (format "%d fonts\n\n" count))))
 
-(defun init-insert-header-guard ()
+(defun bkalmar/insert-header-guard ()
   "Insert a C/C++ ifndef/endif header guard at the beginning and end of the
   current buffer.  Use a preprocessor identifier based on the buffer's filename,
   making sure it is unique by appending random letters."
@@ -473,7 +474,7 @@ display only regular text."
                        (file-name-nondirectory (buffer-file-name))
                        t t) t t) t t) t t 1))
                 (error "this buffer has no filename"))
-              "_" (init-random-string 10 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))))
+              "_" (bkalmar/random-string 10 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))))
         (goto-char (point-min))
         (insert (format "#ifndef %s\n#define %s\n\n"
                         preprocessor-id preprocessor-id))
@@ -506,14 +507,14 @@ display only regular text."
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode) t)
 
 ;;; linum-mode
-(add-hook 'linum-before-numbering-hook 'init-linum-before-numbering t)
-(setq linum-format 'init-linum-format)
+(add-hook 'linum-before-numbering-hook 'bkalmar/linum-before-numbering t)
+(setq linum-format 'bkalmar/linum-format)
 
 ;;; auto-complete-mode
 (global-auto-complete-mode t)
 
 ;;; web-mode & php-mode
-(add-to-list 'auto-mode-alist '("\\.php$" . init-choose-php-or-web-mode) t)
+(add-to-list 'auto-mode-alist '("\\.php$" . bkalmar/choose-php-or-web-mode) t)
 
 ;;; php-mode
 (setq php-template-compatibility nil)
@@ -578,7 +579,7 @@ display only regular text."
 (setq-default org-display-custom-times t)
 
 ;; capture
-(setq org-directory (concat init-userdir "/documents"))
+(setq org-directory (concat bkalmar/userdir "/documents"))
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
 ;; archive
@@ -604,7 +605,7 @@ display only regular text."
 (setq calendar-week-start-day 1)
 
 ;; ISO week numbers
-(defface init-calendar-iso-week
+(defface bkalmar/calendar-iso-week
   '((t . (:height 0.9 :inherit font-lock-builtin-face)))
   "Face used to highlight ISO week numbers in calendar.")
 
@@ -613,7 +614,7 @@ display only regular text."
         (format "%2d" (car (calendar-iso-from-absolute
                            (calendar-absolute-from-gregorian
                             (list month day year)))))
-        'font-lock-face 'init-calendar-iso-week))
+        'font-lock-face 'bkalmar/calendar-iso-week))
 
 ;;; Subtitles
 (require 'subtitles)
@@ -679,7 +680,7 @@ display only regular text."
 
 ;;; org
 (global-set-key (kbd "C-c g") 'org-agenda)
-(global-set-key (kbd "C-c n") 'init-find-org-default-notes-file)
+(global-set-key (kbd "C-c n") 'bkalmar/find-org-default-notes-file)
 ;; `C-c ,` as described in the manual doesn't work
 (global-set-key (kbd "C-c p") 'org-priority)
 (global-set-key (kbd "C-c u") 'org-capture)
@@ -689,9 +690,9 @@ display only regular text."
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c C") 'uncomment-region)
 (global-set-key (kbd "C-c f") 'toggle-frame-maximized)
-(global-set-key (kbd "C-c h") 'init-enable-themes)
-(global-set-key (kbd "C-c H") 'init-disable-themes)
-(global-set-key (kbd "C-c i") 'init-insert-copyright-comment)
+(global-set-key (kbd "C-c h") 'bkalmar/enable-themes)
+(global-set-key (kbd "C-c H") 'bkalmar/disable-themes)
+(global-set-key (kbd "C-c i") 'bkalmar/insert-copyright-comment)
 (global-set-key (kbd "C-c l") 'fill-region)
 (global-set-key (kbd "C-c m") 'normal-mode)
 (global-set-key (kbd "C-c L") 'fill-region-as-paragraph)
@@ -699,9 +700,9 @@ display only regular text."
 (global-set-key (kbd "C-c q") 'insert-char)
 (global-set-key (kbd "C-c r") 'replace-string)
 (global-set-key (kbd "C-c R") 'replace-regexp)
-(global-set-key (kbd "C-c t") 'init-temp-buffer)
+(global-set-key (kbd "C-c t") 'bkalmar/temp-buffer)
 (global-set-key (kbd "C-c v") 'global-auto-revert-mode)
-(global-set-key (kbd "C-c w") 'init-wordprocessor-mode)
+(global-set-key (kbd "C-c w") 'bkalmar/wordprocessor-mode)
 
 ;;;; Enabled commands
 
@@ -716,7 +717,7 @@ display only regular text."
 
 ;; default & fixed-pitch font
 (catch 'break
-  (dolist (font-family init-preferred-fonts-monospace)
+  (dolist (font-family bkalmar/preferred-fonts-monospace)
     (when (member font-family (font-family-list))
       (set-face-attribute 'default nil :family font-family)
       (set-face-attribute 'fixed-pitch nil :family font-family)
@@ -724,7 +725,7 @@ display only regular text."
 
 ;; variable-pitch font
 (catch 'break
-  (dolist (font-family init-preferred-fonts-proportional nil)
+  (dolist (font-family bkalmar/preferred-fonts-proportional nil)
     (when (member font-family (font-family-list))
       (set-face-attribute 'variable-pitch nil :family font-family)
       (throw 'break t))))
@@ -736,7 +737,7 @@ display only regular text."
 ;;;; Hooks and similar
 
 ;; after a new frame is made
-(add-hook 'after-make-frame-functions 'init-after-make-frame t)
+(add-hook 'after-make-frame-functions 'bkalmar/after-make-frame t)
 
 ;; before buffer is saved to file
 (setq require-final-newline t)
@@ -767,7 +768,7 @@ display only regular text."
       delete-old-versions t)
 
 ;; remove backups older than 30 days
-(init-rm-old-backups (days-to-time 30))
+(bkalmar/rm-old-backups (days-to-time 30))
 
 ;; auto-save
 (setq auto-save-list-file-prefix "~/.emacs.d/backup/auto-saves/saves-")
@@ -781,7 +782,7 @@ display only regular text."
 (tool-bar-mode -1)
 (show-paren-mode 1)
 (blink-cursor-mode -1)
-(init-visuals)
+(bkalmar/visuals)
 
 ;; half-width fringes
 (fringe-mode 4)
@@ -802,7 +803,7 @@ display only regular text."
 
 ;; frame & icon titles
 (setq frame-title-format
-      '((:eval (or (init-buffer-file-truename-last 2 "•••/" t) "%b")) " (%I)"))
+      '((:eval (or (bkalmar/buffer-file-truename-last 2 "•••/" t) "%b")) " (%I)"))
 (setq icon-title-format "%b")
 
 ;; frame resize

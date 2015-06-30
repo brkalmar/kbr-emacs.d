@@ -4,10 +4,10 @@
 
 ;;;; Functions & variables
 
-(setq init-userdir (expand-file-name "~"))
+(setq bkalmar/userdir (expand-file-name "~"))
 
 ;; This is unnecessary on windows, as files don't have an executable property.
-(defun init-auto-make-executable ()
+(defun bkalmar/auto-make-executable ()
   "Make current buffer's file executable if begins whith a shebang."
   (and (save-excursion
          (save-restriction
@@ -20,7 +20,7 @@
        (message "Made executable %s" buffer-file-name)))
 
 ;; Not needed on windows.
-(defun init-integrate-clipboard ()
+(defun bkalmar/integrate-clipboard ()
   "Integrate the window system's clipboard and return t. Return nil if it cannot
 be integrated."
   (if (and (equal window-system 'x) (display-selections-p))
@@ -33,20 +33,20 @@ be integrated."
 ;;;; Hooks and similar
 
 ;; after buffer is saved to file
-(add-hook 'after-save-hook 'init-auto-make-executable t)
+(add-hook 'after-save-hook 'bkalmar/auto-make-executable t)
 
 ;;; visual
 (setq visible-bell t)
 
 ;; integrate clipboard
-(init-integrate-clipboard)
+(bkalmar/integrate-clipboard)
 
 ;;;; Themes
 
-(setq init-preferred-fonts-monospace
+(setq bkalmar/preferred-fonts-monospace
       '("DejaVu Sans Mono" "Unifont" "VL Gothic" "Liberation Mono" "FreeMono"
         "Andale Mono" "Droid Sans Mono"))
 
-(setq init-preferred-fonts-proportional
+(setq bkalmar/preferred-fonts-proportional
       '("DejaVu Sans" "Arial" "VL PGothic" "Linux Biolinum O" "Droid Sans"
         "FreeSans" "Trebuchet MS" "Lato" "Liberation Sans" "Carlito"))
