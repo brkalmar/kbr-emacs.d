@@ -618,6 +618,9 @@ display only regular text."
 ;;; Subtitles
 (require 'subtitles)
 
+;;; Ido
+(setq ido-save-directory-list-file (expand-file-name "~/.emacs.d/.ido.last"))
+
 ;;;; Useful modes for prose-like mode hooks
 
 (add-hook 'bibtex-mode-hook 'variable-pitch-mode t)

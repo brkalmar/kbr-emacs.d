@@ -25,3 +25,6 @@
 # org
 /.org-id-locations
 /bookmarks
+
+# Ido
+/.ido.last
