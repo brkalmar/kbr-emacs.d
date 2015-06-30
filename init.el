@@ -578,7 +578,7 @@ display only regular text."
 (setq-default org-display-custom-times t)
 
 ;; capture
-(setq org-directory (concat init-userdir "/sync/documents"))
+(setq org-directory (concat init-userdir "/documents"))
 (setq org-default-notes-file (concat org-directory "/notes.org"))
 
 ;; archive
