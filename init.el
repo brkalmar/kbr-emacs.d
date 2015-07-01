@@ -4,15 +4,15 @@
 
 ;;;; Packages
 
-(load-file "~/.emacs.d/init-packages.el")
+(load-file (concat user-emacs-directory "init-packages.el"))
 
 ;;;; System-specific
 
 (cond
  ((equal system-type 'gnu/linux)
-  (load-file "~/.emacs.d/gnu-linux/init.el"))
+  (load-file (concat user-emacs-directory "gnu-linux/init.el")))
  ((equal system-type 'windows-nt)
-  (load-file "~/.emacs.d/windows-nt/init.el"))
+  (load-file (concat user-emacs-directory "windows-nt/init.el")))
  (t
   (message "Could not find appropriate config file for system type: ‘%s’"
            system-type)))
@@ -620,7 +620,7 @@ display only regular text."
 (require 'subtitles)
 
 ;;; Ido
-(setq ido-save-directory-list-file (expand-file-name "~/.emacs.d/.ido.last"))
+(setq ido-save-directory-list-file (concat user-emacs-directory ".ido.last"))
 
 ;;;; Useful modes for prose-like mode hooks
 
@@ -711,7 +711,7 @@ display only regular text."
 
 ;;;; Themes
 
-(setq custom-theme-directory "~/.emacs.d/themes")
+(setq custom-theme-directory (concat user-emacs-directory "themes"))
 (load-theme 'zenburn t)
 (load-theme 'bkalmar t)
 
@@ -760,7 +760,8 @@ display only regular text."
 (ido-mode 1)
 
 ;;; Backup
-(setq backup-directory-alist `(("." . "~/.emacs.d/backup/files/"))
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "backup/files/")))
       backup-by-copying t
       version-control t
       kept-new-versions 2
@@ -771,7 +772,7 @@ display only regular text."
 (bkalmar/rm-old-backups (days-to-time 30))
 
 ;; auto-save
-(setq auto-save-list-file-prefix "~/.emacs.d/backup/auto-saves/saves-")
+(setq auto-save-list-file-prefix (concat user-emacs-directory "backup/auto-saves/saves-"))
 
 ;; turn icomplete mode on
 (icomplete-mode 1)
