@@ -2,8 +2,6 @@
 ;; 
 ;; 2014  Bence Kalmar
 
-;;;; Functions & variables
-
 (setq bkalmar/userdir (expand-file-name "~"))
 
 ;; This is unnecessary on windows, as files don't have an executable property.
@@ -19,7 +17,11 @@
                               (shell-quote-argument buffer-file-name)))
        (message "Made executable %s" buffer-file-name)))
 
-;; Not needed on windows.
+;; after buffer is saved to file
+(add-hook 'after-save-hook 'bkalmar/auto-make-executable t)
+
+;; integrate the clipboard
+;; not needed on windows.
 (defun bkalmar/integrate-clipboard ()
   "Integrate the window system's clipboard and return t. Return nil if it cannot
 be integrated."
@@ -30,23 +32,10 @@ be integrated."
              t)
     nil))
 
-;;;; Hooks and similar
-
-;; after buffer is saved to file
-(add-hook 'after-save-hook 'bkalmar/auto-make-executable t)
+;; integrate clipboard
+(bkalmar/integrate-clipboard)
 
 ;;; visual
 (setq visible-bell t)
 
-;; integrate clipboard
-(bkalmar/integrate-clipboard)
-
-;;;; Themes
-
-(setq bkalmar/preferred-fonts-monospace
-      '("DejaVu Sans Mono" "Unifont" "VL Gothic" "Liberation Mono" "FreeMono"
-        "Andale Mono" "Droid Sans Mono"))
-
-(setq bkalmar/preferred-fonts-proportional
-      '("DejaVu Sans" "Arial" "VL PGothic" "Linux Biolinum O" "Droid Sans"
-        "FreeSans" "Trebuchet MS" "Lato" "Liberation Sans" "Carlito"))
+(load-file (concat bkalmar/emacs-elisp-directory "gnu-linux/themes.el"))

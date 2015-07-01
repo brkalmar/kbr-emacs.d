@@ -26,6 +26,7 @@
     ;; melpa
     auto-complete
     auto-complete-auctex
+    f
     fill-column-indicator
     form-feed
     git-commit-mode
