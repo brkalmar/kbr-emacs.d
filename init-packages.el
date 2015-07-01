@@ -27,6 +27,7 @@
     auto-complete
     auto-complete-auctex
     fill-column-indicator
+    form-feed
     git-commit-mode
     haskell-mode
     json-mode
