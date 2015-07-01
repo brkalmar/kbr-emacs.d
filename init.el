@@ -2,23 +2,6 @@
 ;;
 ;; 2014  Bence Kalmar
 
-;;;; Packages
-
-(load-file (concat user-emacs-directory "init-packages.el"))
-
-;;;; System-specific
-
-(cond
- ((equal system-type 'gnu/linux)
-  (load-file (concat user-emacs-directory "gnu-linux/init.el")))
- ((equal system-type 'windows-nt)
-  (load-file (concat user-emacs-directory "windows-nt/init.el")))
- (t
-  (message "Could not find appropriate config file for system type: ‘%s’"
-           system-type)))
-
-;;;; Functions & variables
-
 (defvar bkalmar/userdir nil
   "Real user directory, \"~\" in GNU/Linux, not necessarily \"~\" in Windows.
 
@@ -26,6 +9,22 @@ Should be set in OS-specific files.")
 
 (defvar bkalmar/emacs-config-directory (concat user-emacs-directory ".config/")
   "Directory for all packages' config/history/etc. files.")
+
+(defvar bkalmar/emacs-elisp-directory (concat user-emacs-directory "elisp/")
+  "Directory for elisp files to include in `init.el`.")
+
+(load-file (concat bkalmar/emacs-elisp-directory "packages.el"))
+
+(cond
+ ((equal system-type 'gnu/linux)
+  (load-file (concat bkalmar/emacs-elisp-directory "gnu-linux/init.el")))
+ ((equal system-type 'windows-nt)
+  (load-file (concat bkalmar/emacs-elisp-directory "windows-nt/init.el")))
+ (t
+  (message "Could not find appropriate config file for system type: ‘%s’"
+           system-type)))
+
+;;;; Functions & variables
 
 (defvar bkalmar/preferred-fonts-monospace nil
   "List of preferred monospace fonts, in descending order of preference.
