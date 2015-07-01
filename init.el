@@ -24,6 +24,9 @@
 
 Should be set in OS-specific files.")
 
+(defvar bkalmar/emacs-config-directory (concat user-emacs-directory ".config/")
+  "Directory for all packages' config/history/etc. files.")
+
 (defvar bkalmar/preferred-fonts-monospace nil
   "List of preferred monospace fonts, in descending order of preference.
 
@@ -483,7 +486,7 @@ display only regular text."
           (insert ?\n))
         (insert (format "\n#endif /* %s */\n" preprocessor-id))))))
 
-;;;; Package customization
+;;;; Packages & modes customization
 
 ;;; diary
 (require 'diary-lib)
@@ -512,6 +515,11 @@ display only regular text."
 
 ;;; auto-complete-mode
 (global-auto-complete-mode t)
+(customize-set-variable
+ 'ac-comphist-file
+ (expand-file-name
+  (concat bkalmar/emacs-config-directory "auto-complete/ac-comphist.dat")))
+(mkdir (file-name-directory ac-comphist-file) t)
 
 ;;; web-mode & php-mode
 (add-to-list 'auto-mode-alist '("\\.php$" . bkalmar/choose-php-or-web-mode) t)
@@ -620,7 +628,31 @@ display only regular text."
 (require 'subtitles)
 
 ;;; Ido
-(setq ido-save-directory-list-file (concat user-emacs-directory ".ido.last"))
+(customize-set-variable 'ido-save-directory-list-file
+                        (concat bkalmar/emacs-config-directory "ido/ido.last"))
+(mkdir (file-name-directory ido-save-directory-list-file) t)
+
+;;; bookmark
+(customize-set-variable
+ 'bookmark-default-file
+ (concat bkalmar/emacs-config-directory "bookmark/bookmarks"))
+(mkdir (file-name-directory bookmark-default-file) t)
+
+;;; idlwave
+(customize-set-variable 'idlwave-config-directory
+                        (concat bkalmar/emacs-config-directory "idlwave/"))
+
+;;; url
+(require 'url)
+(customize-set-variable 'url-configuration-directory
+                        (concat bkalmar/emacs-config-directory "url/"))
+
+;;; x-win
+(require 'x-win)
+(defun emacs-session-filename (session-id)
+  (let ((dir (concat bkalmar/emacs-config-directory "x-win/")))
+    (mkdir dir t)   
+    (expand-file-name (concat dir "session." session-id))))
 
 ;;;; Useful modes for prose-like mode hooks
 

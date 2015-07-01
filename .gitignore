@@ -1,30 +1,12 @@
 # Backup
 /backup/
 
-# Packages
-/packages/elpa/**/
-/packages/elpa/*.signed
-/packages/elpa/*.txt
-/packages/elpa/.last-checked*
-/packages/manual/**/
+# Config/history/etc. files
+/.config/
 
-# Used when emacs visits the internet.
-/url/
+# Packages
+/packages/elpa/
+/packages/manual/**/
 
 # Compiled .el files.
 *.elc
-
-# Randomly appearing file with 40 hex digits as '*'.  Possibly KDE.
-/session.*
-
-# CEDET
-/ac-comphist.dat
-/semanticdb/
-/srecode-map.el
-
-# org
-/.org-id-locations
-/bookmarks
-
-# Ido
-/.ido.last
