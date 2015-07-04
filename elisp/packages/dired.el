@@ -1,3 +1,3 @@
 (require 'dired)
 
-(setq dired-auto-revert-buffer t)
+(customize-set-variable 'dired-auto-revert-buffer t)

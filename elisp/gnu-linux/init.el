@@ -26,7 +26,7 @@
   "Integrate the window system's clipboard and return t. Return nil if it cannot
 be integrated."
   (if (and (equal window-system 'x) (display-selections-p))
-      (progn (setq x-select-enable-clipboard t)
+      (progn (customize-set-variable 'x-select-enable-clipboard t)
              (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
              (setq interprogram-cut-function 'x-select-text)
              t)
@@ -36,6 +36,6 @@ be integrated."
 (bkalmar/integrate-clipboard)
 
 ;;; visual
-(setq visible-bell t)
+(customize-set-variable 'visible-bell t)
 
 (load-file (concat bkalmar/emacs-elisp-directory "gnu-linux/themes.el"))

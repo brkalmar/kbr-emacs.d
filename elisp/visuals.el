@@ -20,14 +20,14 @@
 
 (add-hook 'after-make-frame-functions 'bkalmar/after-make-frame t)
 
-(setq inhibit-startup-screen t)
+(customize-set-variable 'inhibit-startup-screen t)
 (tool-bar-mode -1)
 (show-paren-mode 1)
 (blink-cursor-mode -1)
 (size-indication-mode 1)
 
 ;; frame resize
-(setq frame-resize-pixelwise t)
+(customize-set-variable 'frame-resize-pixelwise t)
 
 ;; half-width fringes
 (fringe-mode 4)
@@ -37,7 +37,7 @@
 (delete-selection-mode 1)
 
 ;; numbers of columns to fill
-(setq-default fill-column 80)
+(customize-set-variable 'fill-column 80)
 
 ;; line and column numbers
 (line-number-mode -1)
@@ -75,6 +75,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
         (concat prefix res)))))
 
 (setq frame-title-format
-      '((:eval (or (bkalmar/buffer-file-truename-last 2 "•••/" t) "%b")) " (%I)"))
+      '((:eval (or (bkalmar/buffer-file-truename-last 2 "•••/" t) "%b"))
+        " (%I)"))
 
 (setq icon-title-format "%b")

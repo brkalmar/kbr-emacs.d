@@ -1,3 +1,3 @@
 (require 'cc-mode)
 
-(setq-default c-basic-offset 4)
+(customize-set-variable 'c-basic-offset 4)

@@ -1,5 +1,5 @@
 (require 'fill-column-indicator)
 
-(setq fci-rule-column 80)
-(setq fci-rule-width 1)
-(setq fci-rule-color "#253035")
+(customize-set-variable 'fci-rule-column 80)
+(customize-set-variable 'fci-rule-width 1)
+(customize-set-variable 'fci-rule-color "#253035")

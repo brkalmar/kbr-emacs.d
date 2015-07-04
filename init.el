@@ -50,19 +50,19 @@ Should be set in OS-specific files.")
 (load-file (concat bkalmar/emacs-elisp-directory "keybindings.el"))
 
 ;; before buffer is saved to file
-(setq require-final-newline t)
+(customize-set-variable 'require-final-newline t)
 
 ;; coding
 (prefer-coding-system 'utf-8)
 
 ;; quoted-insert base 10
-(setq read-quoted-char-radix 10)
+(customize-set-variable 'read-quoted-char-radix 10)
 
 ;; indentation
-(setq-default indent-tabs-mode nil)
+(customize-set-variable 'indent-tabs-mode nil)
 
 ;; comments
-(setq comment-multi-line t)
+(customize-set-variable 'comment-multi-line t)
 
 ;; locale
 (setq system-time-locale "C")

@@ -13,9 +13,10 @@
 
 ;;;; Initialize all ELPA packages.
 
-(setq package-user-dir "~/.emacs.d/packages/elpa")
-(setq package-enable-at-startup nil)
-(setq package-load-list '(all))
+(customize-set-variable 'package-user-dir
+                        (concat user-emacs-directory "packages/elpa/"))
+(customize-set-variable 'package-enable-at-startup nil)
+(customize-set-variable 'package-load-list '(all))
 (package-initialize)
 
 ;;; Packages

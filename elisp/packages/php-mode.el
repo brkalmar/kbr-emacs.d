@@ -1,3 +1,3 @@
 (require 'php-mode)
 
-(setq php-template-compatibility nil)
+(customize-set-variable 'php-template-compatibility nil)

@@ -1,3 +1,3 @@
 (require 'lua-mode)
 
-(setq lua-indent-level 2)
+(customize-set-variable 'lua-indent-level 2)

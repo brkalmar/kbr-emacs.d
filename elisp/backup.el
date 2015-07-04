@@ -2,16 +2,18 @@
 ;;
 ;; 2015  Bence Kalmar
 
-(setq backup-directory-alist
-      `(("." . ,(concat user-emacs-directory "backup/files/")))
-      backup-by-copying t
-      version-control t
-      kept-new-versions 2
-      kept-old-versions 0
-      delete-old-versions t)
+(customize-set-variable
+ 'backup-directory-alist
+ `(("." . ,(concat user-emacs-directory "backup/files/"))))
+(customize-set-variable 'backup-by-copying t)
+(customize-set-variable 'version-control t)
+(customize-set-variable 'kept-new-versions 2)
+(customize-set-variable 'kept-old-versions 0)
+(customize-set-variable 'delete-old-versions t)
 
-(setq auto-save-list-file-prefix
-      (concat user-emacs-directory "backup/auto-saves/saves-"))
+(customize-set-variable
+ 'auto-save-list-file-prefix
+ (concat user-emacs-directory "backup/auto-saves/saves-"))
 
 (defun bkalmar/rm-old-backups (age)
   "Remove all backup files whose modification time is older than AGE, in the

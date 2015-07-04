@@ -1,3 +1,3 @@
 (require 'lisp-mode)
 
-(setq emacs-lisp-docstring-fill-column nil)
+(customize-set-variable 'emacs-lisp-docstring-fill-column nil)

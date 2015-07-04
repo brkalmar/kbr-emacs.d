@@ -13,4 +13,4 @@
   (propertize (format bkalmar/linum-fmt-str line) 'face 'linum))
 
 (add-hook 'linum-before-numbering-hook 'bkalmar/linum-before-numbering t)
-(setq linum-format 'bkalmar/linum-format)
+(customize-set-variable 'linum-format 'bkalmar/linum-format)

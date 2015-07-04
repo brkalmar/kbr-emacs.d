@@ -1,10 +1,10 @@
 (require 'org)
 
-(setq org-startup-folded 'content)
-(setq org-startup-indented t)
+(customize-set-variable 'org-startup-folded 'content)
+(customize-set-variable 'org-startup-indented t)
 
 ;; invisible edits
-(setq org-catch-invisible-edits 'show)
+(customize-set-variable 'org-catch-invisible-edits 'show)
 
 ;; link abbreviations
 (add-to-list 'org-link-abbrev-alist '("github" . "https://github.com/%s/"))
@@ -14,34 +14,35 @@
              '("melpa" . "http://melpa.milkbox.net/#/%s"))
 
 ;; logging
-(setq org-log-repeat nil)
-(setq org-log-into-drawer "LOGBOOK")
+(customize-set-variable 'org-log-repeat nil)
+(customize-set-variable ' org-log-into-drawer "LOGBOOK")
 
 ;; todo states
-(setq org-todo-keywords
-      '((sequence "TODO(t)" "STAR(s)" "|" "DONE(d!)")
-        (sequence "CONS(k)" "|")
-        (sequence "|" "CANC(c!)")))
-(setq org-enforce-todo-dependencies t)
+(customize-set-variable 'org-todo-keywords
+                        '((sequence "TODO(t)" "STAR(s)" "|" "DONE(d!)")
+                          (sequence "CONS(k)" "|")
+                          (sequence "|" "CANC(c!)")))
+(customize-set-variable 'org-enforce-todo-dependencies t)
 
 ;; deadlines / scheduling
 ; no warning
-(setq org-deadline-warning-days 0)
+(customize-set-variable 'org-deadline-warning-days 0)
 
 ;; tags
-(setq org-tags-column -80)
+(customize-set-variable 'org-tags-column -80)
 
 ;; properties
-(setq org-use-property-inheritance t)
+(customize-set-variable 'org-use-property-inheritance t)
 
 ;; date / time
-(setq org-time-stamp-custom-formats
-      '("<%Y-%m-%d %V|%a>" . "<%Y-%m-%d %V|%a %H:%M>"))
-(setq-default org-display-custom-times t)
+(customize-set-variable 'org-time-stamp-custom-formats
+                        '("<%Y-%m-%d %V|%a>" . "<%Y-%m-%d %V|%a %H:%M>"))
+(customize-set-variable 'org-display-custom-times t)
 
 ;; capture
-(setq org-directory (concat bkalmar/userdir "/documents"))
-(setq org-default-notes-file (concat org-directory "/notes.org"))
+(customize-set-variable 'org-directory (concat bkalmar/userdir "/documents"))
+(customize-set-variable 'org-default-notes-file
+                        (concat org-directory "/notes.org"))
 
 (defun bkalmar/find-org-default-notes-file ()
   "Call `find-file' on `org-default-notes-file'."
@@ -49,14 +50,15 @@
   (find-file org-default-notes-file))
 
 ;; archive
-(setq org-archive-location "%s.archive.org::")
+(customize-set-variable 'org-archive-location "%s.archive.org::")
 
 ;; agenda
+(require 'org-agenda)
 (add-to-list 'org-agenda-files org-default-notes-file)
-(setq org-agenda-span 14
-      org-agenda-start-on-weekday nil
-      org-agenda-start-day "-1d"
-      org-agenda-use-time-grid nil)
+(customize-set-variable 'org-agenda-span 14)
+(customize-set-variable 'org-agenda-start-on-weekday nil)
+(setq org-agenda-start-day "-1d")
+(customize-set-variable 'org-agenda-use-time-grid nil)
 
 ;; refile
 (add-to-list 'org-refile-targets '(org-agenda-files . (:maxlevel . 30)))

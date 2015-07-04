@@ -2,7 +2,8 @@
 ;;
 ;; 2015  Bence Kalmar
 
-(setq custom-theme-directory (concat user-emacs-directory "themes"))
+(customize-set-variable 'custom-theme-directory
+                        (concat user-emacs-directory "themes/"))
 (load-theme 'zenburn t)
 (load-theme 'bkalmar t)
 
