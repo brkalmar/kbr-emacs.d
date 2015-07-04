@@ -1,19 +1,4 @@
-* DONE Fix grey cursor.
-* DONE Automatically open *.md files with markdown-mode.
-* DONE Add prefix to all functions in init files e.g 'init'.
-* DONE Customize frame and icon title.
-* DONE Only refresh package archives when the last refresh happend more than X time ago (2 days, a week, or something similar)
-* CANC Customize backup and/or autosave more.
-* DONE Autocomplete for some languages.
-* `org`
-** DONE less saturated colors for TODO-keywords
-* DONE prefix `bkalmar/` or similar instead of `init-`
-* CANC use `names` for namespace
-https://github.com/Bruce-Connor/names
+* TODO Use emacs as primary terminal emulator with term-mode
 * TODO check out other modes like `auto-complete`
-* DONE version 24.4
-** DONE toggle-frame-{fullscreen,maximized} instead of init-toggle-fullscreen.
-** DONE try electric-{indent,pair}-mode
-** DONE coding-system  prefer-utf-8
 * `palette`
 ** TODO do not maximize the palette frame when it's opened
