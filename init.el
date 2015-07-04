@@ -32,6 +32,8 @@ Should be set in OS-specific files.")
 
 (load-file (concat bkalmar/emacs-elisp-directory "font-info.el"))
 
+(load-file (concat bkalmar/emacs-elisp-directory "terminal.el"))
+
 ;; Packages & modes
 (require 'f)
 (dolist (file (f-entries (concat bkalmar/emacs-elisp-directory "packages/")))
