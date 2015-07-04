@@ -1,22 +1,20 @@
 # emacs.d
 
-This is my personal .emacs.d directory.
+My personal `.emacs.d` directory, for GNU emacs >= 24.4.
 
-Emacs version: GNU emacs 24.4
+This repository is configured to run emacs the following way:
 
-Emacs using this repository is most often run by the command:
-    emacsclient -c -a ""
-which starts an emacs server if not running already, and connects to it on a new
-frame.  It is of course possible to use it running regular emacs instead of
-a client, but it is customized to work best with the above command.
+    emacsclient -c -a "" [FILE]...
 
-This repository is customized for GNU/Linux and Windows, but it could, with some
-customization, be used on other operating systems (e.g. Mac OS X) .
+This starts an emacs server if not running already, and connects to it on a new frame.  It is of course possible to use it running regular `emacs` instead of `emacsclient`, but it is customized to work best with the above command.
 
-No third-party packages are included.  Most of them are downloaded from online
-ELPA package archives automatically; some of them *must be downloaded manually*,
-as there is no recent version of them in online package archives.  For more
-information, see [packages/manual/README.md](packages/manual/README.md).
+## Operating system
+
+This repository is preconfigured for GNU/Linux and Windows, but it could, with some customization, be used on other operating systems such as Mac OS X.
+
+## Third-party packages
+
+No third-party packages are included.  Most of them are downloaded from online ELPA package archives automatically; some of them *must be downloaded manually*, as there is no recent version of them in online package archives.  For more information, see [packages/manual/README.md](packages/manual/README.md).
 
 ## License
 
