@@ -20,7 +20,7 @@
 (package-initialize)
 
 ;;; Packages
-(defvar-local bkalmar/packages/packages
+(defvar bkalmar/packages/packages
   '(;; gnu
     auctex
     nhexl-mode
@@ -58,8 +58,8 @@
       (message "Installed %d new package%s" (length to-install)
                (if (eq (length to-install) 1) "" "s")))))
 
-(defvar-local bkalmar/packages/checked-file
-  "~/.emacs.d/packages/elpa/.last-checked"
+(defvar bkalmar/packages/checked-file
+  (concat bkalmar/emacs-config-directory "elpa/last-checked")
   "Used by `bkalmar/packages/check-upgrade'.")
 
 (defun bkalmar/packages/check-upgrade (age)
@@ -84,7 +84,7 @@
 ;;;; Initialize manually installed packages.
 
 (defvar bkalmar/packages/manual
-  "~/.emacs.d/packages/manual"
+  (concat user-emacs-directory "packages/manual/")
   "Directory where manually installed packages are.")
 
 ;;; Package name
