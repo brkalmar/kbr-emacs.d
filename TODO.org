@@ -1,4 +1,3 @@
-* TODO Use emacs as primary terminal emulator with term-mode
 * TODO check out other modes like `auto-complete`
 * `palette`
 ** TODO do not maximize the palette frame when it's opened
