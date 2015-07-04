@@ -2,7 +2,7 @@
 /backup/
 
 # Config/history/etc. files
-/.config/
+/config/
 
 # Packages
 /packages/elpa/

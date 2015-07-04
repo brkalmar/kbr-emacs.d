@@ -7,7 +7,7 @@
 
 Should be set in OS-specific files.")
 
-(defvar bkalmar/emacs-config-directory (concat user-emacs-directory ".config/")
+(defvar bkalmar/emacs-config-directory (concat user-emacs-directory "config/")
   "Directory for all packages' config/history/etc. files.")
 
 (defvar bkalmar/emacs-elisp-directory (concat user-emacs-directory "elisp/")
