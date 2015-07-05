@@ -25,6 +25,7 @@
 (show-paren-mode 1)
 (blink-cursor-mode -1)
 (size-indication-mode 1)
+(menu-bar-mode -1)
 
 ;; frame resize
 (customize-set-variable 'frame-resize-pixelwise t)
