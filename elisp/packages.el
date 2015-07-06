@@ -29,6 +29,7 @@
     auto-complete-auctex
     f
     fill-column-indicator
+    fish-mode
     form-feed
     git-commit-mode
     haskell-mode

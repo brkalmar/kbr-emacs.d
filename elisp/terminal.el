@@ -2,7 +2,7 @@
 ;;
 ;; 2015  Bence Kalmar
 
-(defvar bkalmar/terminal-interpreter "bash"
+(defvar bkalmar/terminal-interpreter "fish"
   "The interpreter `bkalmar/terminal' uses.")
 
 (defvar bkalmar/terminal-name-fmt "*terminal∙%02d*"
