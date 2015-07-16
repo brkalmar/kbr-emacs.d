@@ -72,6 +72,7 @@
 (defun bkalmar/packages/check-upgrade (age)
   "Call `package-list-packages' for upgrading, after user confirmation, if
 `bkalmar/packages/checked-file' contains a time older than AGE."
+  (interactive)
   (let ((filename (expand-file-name bkalmar/packages/checked-file)))
     (with-temp-buffer
       (when (or (not (file-exists-p filename))
