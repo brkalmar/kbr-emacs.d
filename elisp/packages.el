@@ -25,8 +25,10 @@
 (customize-set-variable
  'package-pinned-packages
  '((auctex                . "gnu")
-   (auto-complete         . "melpa")
-   (auto-complete-auctex  . "melpa")
+   (company               . "melpa")
+   (company-auctex        . "melpa")
+   (company-c-headers     . "melpa")
+   (company-web           . "melpa")
    (f                     . "melpa")
    (fill-column-indicator . "melpa")
    (fish-mode             . "melpa")

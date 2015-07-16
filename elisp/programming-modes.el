@@ -2,8 +2,7 @@
 ;;
 ;; 2015  Bence Kalmar
 
-;; NOTE: fci-mode temporarily removed because of incompatibility with
-;; auto-complete & web-mode
+;; NOTE: fci-mode temporarily removed because of incompatibility with web-mode
 
 (add-hook 'prog-mode-hook 'linum-mode t)
 (add-hook 'text-mode-hook 'linum-mode t)
