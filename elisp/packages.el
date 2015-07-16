@@ -40,6 +40,7 @@
    (org                   . "melpa")
    (palette               . "melpa")
    (php-mode              . "melpa")
+   (pretty-lambdada       . "melpa")
    (rainbow-delimiters    . "melpa")
    (scala-mode2           . "melpa")
    (tt-mode               . "melpa")
