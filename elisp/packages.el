@@ -4,67 +4,70 @@
 ;;
 ;; Bence Kalmar
 
-;;; Necessary to actually initialize the package system.
 (require 'package)
 
-;;; Archives
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
-
-;;;; Initialize all ELPA packages.
+;;; config
 
 (customize-set-variable 'package-user-dir
                         (concat user-emacs-directory "packages/elpa/"))
 (customize-set-variable 'package-enable-at-startup nil)
 (customize-set-variable 'package-load-list '(all))
+
+;; initialize already installed packages
 (package-initialize)
 
-;;; Packages
-(defvar bkalmar/packages/packages
-  '(;; gnu
-    auctex
-    nhexl-mode
-    ;; melpa
-    auto-complete
-    auto-complete-auctex
-    f
-    fill-column-indicator
-    fish-mode
-    form-feed
-    git-commit-mode
-    haskell-mode
-    json-mode
-    lua-mode
-    markdown-mode
-    org
-    palette
-    php-mode
-    rainbow-delimiters
-    scala-mode2
-    tt-mode
-    web-mode
-    yaml-mode
-    zenburn-theme)
-  "Check if these packages are installed at startup.")
+;;; ELPA packages
+
+;; archives
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+
+(customize-set-variable
+ 'package-pinned-packages
+ '((auctex                . "gnu")
+   (auto-complete         . "melpa")
+   (auto-complete-auctex  . "melpa")
+   (f                     . "melpa")
+   (fill-column-indicator . "melpa")
+   (fish-mode             . "melpa")
+   (form-feed             . "melpa")
+   (git-commit-mode       . "melpa")
+   (haskell-mode          . "melpa")
+   (json-mode             . "melpa")
+   (lua-mode              . "melpa")
+   (markdown-mode         . "melpa")
+   (nhexl-mode            . "gnu")
+   (org                   . "melpa")
+   (palette               . "melpa")
+   (php-mode              . "melpa")
+   (rainbow-delimiters    . "melpa")
+   (scala-mode2           . "melpa")
+   (tt-mode               . "melpa")
+   (web-mode              . "melpa")
+   (yaml-mode             . "melpa")
+   (zenburn-theme         . "melpa")))
 
 (defun bkalmar/packages/check-install ()
-  "Install each package in `bkalmar/packages/packages'."
+  "Install each package in `package-pinned-packages' not already installed."
+  (interactive)
   (let (to-install)
     (when
-        (dolist (pkg bkalmar/packages/packages to-install)
+        (dolist (pkg (mapcar 'car package-pinned-packages) to-install)
           (when (not (package-installed-p pkg))
-            (add-to-list 'to-install pkg t)))
+            (push pkg to-install)))
       (package-refresh-contents)
       (mapc 'package-install to-install)
       (message "Installed %d new package%s" (length to-install)
-               (if (eq (length to-install) 1) "" "s")))))
+               (if (= (length to-install) 1) "" "s")))))
+
+(bkalmar/packages/check-install)
 
 (defvar bkalmar/packages/checked-file
   (concat bkalmar/emacs-config-directory "elpa/last-checked")
   "Used by `bkalmar/packages/check-upgrade'.")
 
 (defun bkalmar/packages/check-upgrade (age)
-  "Call `package-list-packages' after user confirmation if
+  "Call `package-list-packages' for upgrading, after user confirmation, if
 `bkalmar/packages/checked-file' contains a time older than AGE."
   (let ((filename (expand-file-name bkalmar/packages/checked-file)))
     (with-temp-buffer
@@ -79,10 +82,9 @@
              "Check for upgradable packages? [y in 10 seconds] " 10 t)
             (package-list-packages))))))
 
-(bkalmar/packages/check-install)
 (bkalmar/packages/check-upgrade (days-to-time 7))
 
-;;;; Initialize manually installed packages.
+;;; manually installed packages
 
 (defvar bkalmar/packages/manual
   (concat user-emacs-directory "packages/manual/")
