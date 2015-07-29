@@ -34,6 +34,8 @@ Should be set in OS-specific files.")
 
 (load-file (concat bkalmar/emacs-elisp-directory "terminal.el"))
 
+(load-file (concat bkalmar/emacs-elisp-directory "wordprocessor-mode.el"))
+
 ;; Packages & modes
 (require 'f)
 (dolist (file (f-entries (concat bkalmar/emacs-elisp-directory "packages/")))
