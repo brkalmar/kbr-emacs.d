@@ -80,3 +80,6 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
         " (%I)"))
 
 (setq icon-title-format "%b")
+
+;; scratch
+(customize-set-variable 'initial-scratch-message nil)
