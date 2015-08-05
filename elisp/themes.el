@@ -33,7 +33,3 @@ Should be set in OS-specific files.")
     (when (member font-family (font-family-list))
       (set-face-attribute 'variable-pitch nil :family font-family)
       (throw 'break t))))
-
-;; 80 columns should comfortably fit on small screens
-(when (and (display-graphic-p) (< (display-pixel-width) 1400))
-  (set-face-attribute 'default nil :height 90))

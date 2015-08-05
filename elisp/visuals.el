@@ -7,7 +7,10 @@
   (interactive)
   (toggle-frame-maximized)
   (when (display-graphic-p)
-    (scroll-bar-mode -1))
+    (scroll-bar-mode -1)
+    ;; 80 columns should comfortably fit on small screens
+    (when (< (display-pixel-width) 1400)
+      (set-face-attribute 'default nil :height 90)))
   ;; temporary fix for Debian
   (set-cursor-color "#ffcc00"))
 
