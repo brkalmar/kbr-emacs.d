@@ -24,6 +24,9 @@ Should be set in OS-specific files.")
   (message "Could not find appropriate config file for system type: ‘%s’"
            system-type)))
 
+(when (string-prefix-p "/uio/" (getenv "HOME"))
+  (load-file (concat bkalmar/emacs-elisp-directory "uio/init.el")))
+
 (load-file (concat bkalmar/emacs-elisp-directory "backup.el"))
 
 (load-file (concat bkalmar/emacs-elisp-directory "copyright-comment.el"))
