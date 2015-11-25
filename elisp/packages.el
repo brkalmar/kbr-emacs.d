@@ -36,7 +36,7 @@
    (fill-column-indicator . "melpa")
    (fish-mode             . "melpa")
    (form-feed             . "melpa")
-   (git-commit-mode       . "melpa")
+   (git-commit            . "melpa")
    (haskell-mode          . "melpa")
    (json-mode             . "melpa")
    (lua-mode              . "melpa")
