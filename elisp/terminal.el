@@ -30,7 +30,7 @@ Must have one \"%s\" format specifier for the CWD.")
 `bkalmar/terminal-name-cwd-fmt' if it is accessible, otherwise to
 `bkalmar/terminal-name-no-cwd'."
   (let ((cwd (bkalmar/filename-last
-              1 (abbreviate-file-name (bkalmar/current-cwd)) "⋮/" t)))
+              1 (abbreviate-file-name (bkalmar/current-cwd)) "⋮")))
     (rename-buffer
      (if (null cwd)
          bkalmar/terminal-name-no-cwd
