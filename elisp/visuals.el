@@ -49,15 +49,14 @@
 
 ;; frame & icon titles
 
-(defun bkalmar/buffer-file-truename-last (n &optional prefix not-abs)
-  "Return string of last N path elements of `buffer-file-truename' or nil if
-`buffer-file-truename' is nil.
+(defun bkalmar/filename-last (n filename &optional prefix not-abs)
+  "Return string of last N path elements of FILENAME or nil if FILENAME is nil.
 
 If PREFIX is non-nil, prefix the returned string with it.
 
 If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
-  (when buffer-file-truename
-    (let ((elems (split-string buffer-file-truename "/"))
+  (when filename
+    (let ((elems (split-string filename "/"))
            elems-last
            res
            pre
@@ -79,7 +78,7 @@ If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
         (concat prefix res)))))
 
 (setq frame-title-format
-      '((:eval (or (bkalmar/buffer-file-truename-last 2 "•••/" t) "%b"))
+      '((:eval (or (bkalmar/filename-last 2 buffer-file-truename "⋯/" t) "%b"))
         " (%I)"))
 
 (setq icon-title-format "%b")

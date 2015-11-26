@@ -7,19 +7,48 @@
 (defvar bkalmar/terminal-interpreter "fish"
   "The interpreter `bkalmar/terminal' uses.")
 
-(defvar bkalmar/terminal-name-fmt "*terminal∙%02d*"
-  "Format string for buffer names of `bkalmar/terminal'.
+(defvar bkalmar/terminal-name-cwd-fmt "%s"
+  "Format string for buffer names of `bkalmar/terminal' using the CWD.
 
-Must have one \"%d\" format specifier for the number of the terminal.")
+Must have one \"%s\" format specifier for the CWD.")
 
-(defun bkalmar/terminal-rename-uniquely ()
-  "Rename the current buffer to a unique name using
-`bkalmar/terminal-name-fmt'."
-  (rename-buffer
-   (do* ((n 1 (1+ n))
-         (name (format bkalmar/terminal-name-fmt n)
-               (format bkalmar/terminal-name-fmt n)))
-       ((null (get-buffer name)) name))))
+(defvar bkalmar/terminal-name-no-cwd "*terminal*"
+  "Buffer name of `bkalmar/terminal' not using the CWD.")
+
+(defun bkalmar/current-cwd ()
+  "Get the current buffer's process' CWD, or nil if not accessible."
+  (let* ((pid (process-id (get-buffer-process (current-buffer))))
+         (cwd-filename (format "/proc/%s/cwd" pid))
+         (cwd (file-truename cwd-filename)))
+    (if (equal cwd-filename cwd)
+        ;; `file-truename' returns the string unchanged if not a symlink
+        nil
+      cwd)))
+
+(defun bkalmar/terminal-rename-cwd ()
+  "Rename the current terminal buffer to contain the CWD using
+`bkalmar/terminal-name-cwd-fmt' if it is accessible, otherwise to
+`bkalmar/terminal-name-no-cwd'."
+  (let ((cwd (bkalmar/filename-last
+              1 (abbreviate-file-name (bkalmar/current-cwd)) "⋮/" t)))
+    (rename-buffer
+     (if (null cwd)
+         bkalmar/terminal-name-no-cwd
+       (format bkalmar/terminal-name-cwd-fmt cwd))
+     t)))
+
+(defadvice term-send-raw (after bkalmar/term-send-raw-rename)
+  "Update buffer name after newline."
+  (when (= last-command-event ?)
+    ;; TODO: This function is called too quickly, before the CWD is changed in
+    ;; the shell process itself.  Maybe call aynchronous (?) sleep for 0.1 s.
+    (bkalmar/terminal-rename-cwd)))
+(ad-activate 'term-send-raw)
+
+(defadvice term-send-input (after bkalmar/term-send-input-rename)
+  "Update buffer name after newline."
+  (bkalmar/terminal-rename-cwd))
+(ad-activate 'term-send-input)
 
 (defun bkalmar/terminal-set-keybindings ()
   "Set local keybindings needed in a terminal."
@@ -58,7 +87,7 @@ Must have one \"%d\" format specifier for the number of the terminal.")
 interpreter `bkalmar/terminal-interpreter'."
   (interactive)
   (ansi-term bkalmar/terminal-interpreter)
-  (bkalmar/terminal-rename-uniquely)
+  (bkalmar/terminal-rename-cwd)
   (bkalmar/terminal-set-keybindings))
 
 (defun bkalmar/terminal-close ()
