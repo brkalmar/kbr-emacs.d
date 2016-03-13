@@ -7,7 +7,7 @@
 (defvar bkalmar/terminal-interpreter "fish"
   "The interpreter `bkalmar/terminal' uses.")
 
-(defvar bkalmar/terminal-name-cwd-fmt "%s"
+(defvar bkalmar/terminal-name-cwd-fmt "▸%s◂"
   "Format string for buffer names of `bkalmar/terminal' using the CWD.
 
 Must have one \"%s\" format specifier for the CWD.")
@@ -30,7 +30,7 @@ Must have one \"%s\" format specifier for the CWD.")
 `bkalmar/terminal-name-cwd-fmt' if it is accessible, otherwise to
 `bkalmar/terminal-name-no-cwd'."
   (let ((cwd (bkalmar/filename-last
-              1 (abbreviate-file-name (bkalmar/current-cwd)) "⋮")))
+              1 (abbreviate-file-name (bkalmar/current-cwd)))))
     (rename-buffer
      (if (null cwd)
          bkalmar/terminal-name-no-cwd
