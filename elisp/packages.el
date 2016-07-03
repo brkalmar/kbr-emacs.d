@@ -25,6 +25,7 @@
 (customize-set-variable
  'package-pinned-packages
  '((auctex                . "gnu")
+   (csharp-mode           . "melpa")
    (company               . "melpa")
    (company-auctex        . "melpa")
    (company-c-headers     . "melpa")
