@@ -18,3 +18,9 @@
 
 (add-hook 'prog-mode-hook 'glasses-mode)
 (add-hook 'prog-mode-hook 'subword-mode)
+
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (progn
+              (push '("->" . ?→) prettify-symbols-alist)
+              (prettify-symbols-mode))))
