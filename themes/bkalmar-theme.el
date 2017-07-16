@@ -1,5 +1,5 @@
 ;; `bkalmar` emacs custom theme, based on `dark-emacs` by Suvayu Ali.
-;; 
+;;
 ;; Copyright 2012  Suvayu Ali <https://github.com/suvayu>
 ;; Copyright 2014  Bence Kalmar <bkalmar1996@gmail.com>
 ;;
@@ -43,6 +43,25 @@ notably `org`.")
  '(linum
    ((t . (:box nil :height 0.95 :inherit fixed-pitch :inverse-video nil
                :overline nil :slant normal :strike-through nil :underline nil
-               :weight normal)))))
+               :weight normal))))
+ ;;; whitespace
+ '(whitespace-space ((t . (:background nil :foreground "#6a6a6a"))))
+ '(whitespace-hspace
+   ((t . (:background nil :foreground nil :inherit whitespace-space))))
+ '(whitespace-tab ((t . (:background nil :inherit whitespace-space))))
+ '(whitespace-newline ((t . (:foreground nil :inherit whitespace-space))))
+ '(whitespace-trailing
+   ((t . (:background "#af7373" :inherit whitespace-space))))
+ '(whitespace-line
+   ((t . (:background "#5a445a" :foreground nil :slant italic))))
+ '(whitespace-space-before-tab
+   ((t . (:background nil :foreground nil :inherit whitespace-space))))
+ '(whitespace-space-after-tab
+   ((t . (:background nil :foreground nil
+                      :inherit whitespace-space-before-tab))))
+ '(whitespace-indentation
+   ((t . (:background nil :foreground nil :inherit whitespace-space))))
+ '(whitespace-empty ((t . (:background nil :inherit whitespace-trailing))))
+ )
 
 (provide-theme 'bkalmar)
