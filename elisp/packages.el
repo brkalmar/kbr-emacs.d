@@ -38,6 +38,7 @@
    (fish-mode             . "melpa")
    (form-feed             . "melpa")
    (git-commit            . "melpa")
+   (groovy-mode           . "melpa")
    (haskell-mode          . "melpa")
    (json-mode             . "melpa")
    (lua-mode              . "melpa")
