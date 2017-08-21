@@ -7,6 +7,8 @@
 (add-hook 'prog-mode-hook 'linum-mode t)
 (add-hook 'text-mode-hook 'linum-mode t)
 
+(add-hook 'prog-mode-hook 'whitespace-mode t)
+
 (add-hook 'prog-mode-hook 'form-feed-mode t)
 (add-hook 'text-mode-hook 'form-feed-mode t)
 
@@ -18,3 +20,9 @@
 
 (add-hook 'prog-mode-hook 'glasses-mode)
 (add-hook 'prog-mode-hook 'subword-mode)
+
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (progn
+              (push '("->" . ?→) prettify-symbols-alist)
+              (prettify-symbols-mode))))

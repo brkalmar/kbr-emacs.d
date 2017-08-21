@@ -43,6 +43,7 @@
    (json-mode             . "melpa")
    (lua-mode              . "melpa")
    (markdown-mode         . "melpa")
+   (multiple-cursors      . "melpa")
    (nhexl-mode            . "gnu")
    (org                   . "melpa")
    (palette               . "melpa")
