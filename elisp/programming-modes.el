@@ -7,6 +7,8 @@
 (add-hook 'prog-mode-hook 'linum-mode t)
 (add-hook 'text-mode-hook 'linum-mode t)
 
+(add-hook 'prog-mode-hook 'eldoc-mode)
+
 (add-hook 'prog-mode-hook 'whitespace-mode t)
 
 (add-hook 'prog-mode-hook 'form-feed-mode t)
