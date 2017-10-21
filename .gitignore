@@ -3,6 +3,7 @@
 
 # Config/history/etc. files
 /config/
+/irony/
 
 # Packages
 /packages/elpa/

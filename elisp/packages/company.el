@@ -9,6 +9,11 @@
 
 ;;; backends
 
+(add-to-list 'company-backends 'company-nxml)
+(add-to-list 'company-backends 'company-css)
+(add-to-list 'company-backends 'company-clang)
+(add-to-list 'company-backends 'company-files)
+
 (require 'company-auctex)
 (company-auctex-init)
 
@@ -18,14 +23,19 @@
 (require 'company-ghci)
 (add-to-list 'company-backends 'company-ghci)
 
+(require 'company-irony)
+(add-to-list 'company-backends 'company-irony)
+
 (require 'company-jedi)
 (add-to-list 'company-backends 'company-jedi)
 
 (require 'company-math)
-(add-to-list 'company-backends 'company-math)
+(add-to-list 'company-backends 'company-latex-commands)
+(add-to-list 'company-backends 'company-math-symbols-latex)
+(add-to-list 'company-backends 'company-math-symbols-unicode)
 
 (require 'company-web-html)
 (add-to-list 'company-backends 'company-web-html)
 
 ;; enable
-(global-company-mode +1)
+(add-hook 'after-init-hook 'global-company-mode)
