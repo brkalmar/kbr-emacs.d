@@ -28,3 +28,7 @@
             (progn
               (push '("->" . ?→) prettify-symbols-alist)
               (prettify-symbols-mode))))
+
+;; keybindings
+
+(define-key prog-mode-map (kbd "<C-tab>") 'company-complete-common)
