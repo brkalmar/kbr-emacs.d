@@ -59,6 +59,7 @@
    (rust-mode             . "melpa")
    (scala-mode2           . "melpa")
    (smart-tabs-mode       . "melpa")
+   (toml-mode             . "melpa")
    (tt-mode               . "melpa")
    (web-mode              . "melpa")
    (yaml-mode             . "melpa")
