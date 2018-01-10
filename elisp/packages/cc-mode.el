@@ -4,5 +4,4 @@
 
 (add-to-list 'c-default-style '(c-mode . "k&r"))
 
-(add-hook 'c-mode-hook
-          (lambda () (setq indent-tabs-mode t) (setq tab-width 4)) t)
+(add-hook 'c-mode-hook (lambda () (setq indent-tabs-mode t)) t)
