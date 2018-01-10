@@ -41,6 +41,7 @@
    (flycheck-irony        . "melpa")
    (flycheck-rust         . "melpa")
    (form-feed             . "melpa")
+   (forth-mode            . "melpa")
    (git-commit            . "melpa")
    (groovy-mode           . "melpa")
    (haskell-mode          . "melpa")
