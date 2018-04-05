@@ -4,6 +4,7 @@
 # Config/history/etc. files
 /config/
 /irony/
+/.mc-lists.el
 
 # Packages
 /packages/elpa/
