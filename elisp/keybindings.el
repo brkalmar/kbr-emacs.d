@@ -1,13 +1,15 @@
 ;; Custom keybindings.
 ;; `C-c [A-Za-z]' is reserved for users.
-;;
-;; 2015  Bence Kalmar
+
+(require 'flycheck)
 
 (global-set-key (kbd "C-c a") 'auto-fill-mode)
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c C") 'uncomment-region)
 (global-set-key (kbd "C-c e") 'bkalmar/terminal)
-(global-set-key (kbd "C-c f") 'toggle-frame-maximized)
+(define-key flycheck-command-map "f" 'flycheck-first-error)
+(customize-set-variable 'flycheck-keymap-prefix (kbd "C-c f"))
+(global-set-key (kbd "C-c F") 'toggle-frame-maximized)
 (global-set-key (kbd "C-c h") 'bkalmar/enable-themes)
 (global-set-key (kbd "C-c H") 'bkalmar/disable-themes)
 (global-set-key (kbd "C-c i") 'bkalmar/insert-copyright-comment)
