@@ -58,7 +58,7 @@
    (racer                 . "melpa")
    (rainbow-delimiters    . "melpa")
    (rust-mode             . "melpa")
-   (scala-mode2           . "melpa")
+   (scala-mode            . "melpa")
    (smart-tabs-mode       . "melpa")
    (toml-mode             . "melpa")
    (tt-mode               . "melpa")
