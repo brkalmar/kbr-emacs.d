@@ -2,6 +2,8 @@
 ;;
 ;; 2015  Bence Kalmar
 
+(require 'f)
+
 (defun bkalmar/init-visuals ()
   "Toggle fullscreen; disappear scrollbar."
   (interactive)
@@ -49,36 +51,20 @@
 
 ;; frame & icon titles
 
-(defun bkalmar/filename-last (n filename &optional prefix not-abs)
-  "Return string of last N path elements of FILENAME or nil if FILENAME is nil.
+(defun bkalmar/filename-reverse (filename &optional sep)
+  "Return string of FILENAME with its elements in reverse order, or nil if
+FILENAME is nil.
 
-If PREFIX is non-nil, prefix the returned string with it.
-
-If NOT-ABS is non-nil, do not prefix the string if it's an absolute path."
+If SEP is non-nil, it is used to separate the elements instead of the default
+path separator."
   (when filename
-    (let ((elems (split-string filename "/"))
-           elems-last
-           res
-           pre
-           post
-           is-full)
-      ;; starts with a "/"
-      (when (eq (nth 0 elems) "")
-        (setq pre "/")
-        (pop elems))
-      ;; ends with a "/"
-      (when (eq (car (last elems)) "")
-        (setq post "/")
-        (nbutlast elems))
-      (setq elems-last (last elems n))
-      (setq is-full (= (length elems) (length elems-last)))
-      (setq res (concat (if is-full pre) (mapconcat 'identity elems-last "/") post))
-      (if (and not-abs is-full)
-          res
-        (concat prefix res)))))
+    (let ((separator (if (null sep) (f-path-separator) sep)))
+      (mapconcat 'identity
+                 (reverse (split-string filename (f-path-separator)))
+                 separator))))
 
 (setq frame-title-format
-      '((:eval (or (bkalmar/filename-last 2 buffer-file-truename "⋯/" t) "%b"))
+      '((:eval (or (bkalmar/filename-reverse buffer-file-truename "\\") "%b"))
         " (%I)"))
 
 (setq icon-title-format "%b")
