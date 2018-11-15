@@ -30,7 +30,6 @@
    (company-c-headers     . "melpa")
    (company-ghci          . "melpa")
    (company-irony         . "melpa")
-   (company-jedi          . "melpa")
    (company-math          . "melpa")
    (company-web           . "melpa")
    (csharp-mode           . "melpa")

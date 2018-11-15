@@ -26,9 +26,6 @@
 (require 'company-irony)
 (add-to-list 'company-backends 'company-irony)
 
-(require 'company-jedi)
-(add-to-list 'company-backends 'company-jedi)
-
 (require 'company-math)
 (add-to-list 'company-backends 'company-latex-commands)
 (add-to-list 'company-backends 'company-math-symbols-latex)
