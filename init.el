@@ -52,8 +52,6 @@ Should be set in OS-specific files.")
 
 (load-file (concat bkalmar/emacs-elisp-directory "themes.el"))
 
-(load-file (concat bkalmar/emacs-elisp-directory "prose-like-modes.el"))
-
 (load-file (concat bkalmar/emacs-elisp-directory "programming-modes.el"))
 
 (load-file (concat bkalmar/emacs-elisp-directory "visuals.el"))
