@@ -1,5 +1,5 @@
-(require 'map)
 (require 'smart-tabs-mode)
+(require 'map)
 
 (defvar bkalmar/smart-tabs-languages
   '(c c++)
