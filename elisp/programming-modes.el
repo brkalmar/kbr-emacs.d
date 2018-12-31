@@ -2,6 +2,8 @@
 ;;
 ;; 2015  Bence Kalmar
 
+(require 'zenburn-theme)
+
 ;; NOTE: fci-mode temporarily removed because of incompatibility with web-mode
 
 (add-hook 'prog-mode-hook 'linum-mode t)
@@ -34,6 +36,27 @@
               (push '("=>" . ?⇒) prettify-symbols-alist)
               (push '(">=" . ?≥) prettify-symbols-alist)
               (prettify-symbols-mode))))
+
+;;; Highlight uppercase comment keywords TODO/NOTE/etc.
+(defface bkalmar/comment-uppercase-keyword-face
+  '((t . (:underline t)))
+  "Common face for all uppercase keywords in comments.")
+(zenburn-with-color-variables
+  (defface bkalmar/comment-todo-face
+    `((t . (:inherit bkalmar/comment-uppercase-keyword-face
+                     :foreground ,zenburn-red+2
+                     :weight bold)))
+    "Highlights TODO in comments.")
+  (defface bkalmar/comment-note-face
+    `((t . (:inherit bkalmar/comment-uppercase-keyword-face
+                     :foreground ,zenburn-yellow)))
+    "Highlights NOTE in comments."))
+(add-hook
+ 'prog-mode-hook
+ (lambda () (font-lock-add-keywords
+        nil
+        '(("\\<\\(TODO\\):" . (1 'bkalmar/comment-todo-face prepend))
+          ("\\<\\(NOTE\\):" . (1 'bkalmar/comment-note-face prepend))))))
 
 ;; keybindings
 
