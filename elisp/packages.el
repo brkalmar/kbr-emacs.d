@@ -33,6 +33,7 @@
    (company-math          . "melpa")
    (company-web           . "melpa")
    (csharp-mode           . "melpa")
+   (diff-hl               . "gnu")
    (f                     . "melpa")
    (fill-column-indicator . "melpa")
    (fish-mode             . "melpa")
