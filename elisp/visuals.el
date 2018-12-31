@@ -35,8 +35,8 @@
 ;; frame resize
 (customize-set-variable 'frame-resize-pixelwise t)
 
-;; half-width fringes
-(fringe-mode 4)
+;; default fringes on both sides
+(fringe-mode nil)
 
 ;; selections
 (transient-mark-mode 1)

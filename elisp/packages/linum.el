@@ -1,4 +1,10 @@
 (require 'linum)
+(require 'zenburn-theme)
+
+(zenburn-with-color-variables
+  (set-face-attribute
+   'linum nil
+   :background zenburn-bg :foreground zenburn-fg :height 0.9 :width 'condensed))
 
 (defvar bkalmar/linum-fmt-str "%01d"
   "Format string used by `bkalmar/linum-format'.")
