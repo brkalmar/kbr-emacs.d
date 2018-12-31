@@ -26,8 +26,13 @@
 (add-hook 'prog-mode-hook
           (lambda ()
             (progn
+              (push '("!=" . ?≠) prettify-symbols-alist)
               (push '("->" . ?→) prettify-symbols-alist)
+              (push '("::" . ?∷) prettify-symbols-alist)
+              (push '("<=" . ?≤) prettify-symbols-alist)
+              (push '("==" . ?═) prettify-symbols-alist)
               (push '("=>" . ?⇒) prettify-symbols-alist)
+              (push '(">=" . ?≥) prettify-symbols-alist)
               (prettify-symbols-mode))))
 
 ;; keybindings
