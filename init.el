@@ -75,3 +75,8 @@ Should be set in OS-specific files.")
 
 ;; locale
 (setq system-time-locale "C")
+
+;; emacs customize
+;;; NOTE: This is not loaded on purpose; all customization is done manually.
+(customize-set-variable 'custom-file
+                        (concat bkalmar/emacs-config-directory "custom.el"))
