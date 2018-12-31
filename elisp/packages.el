@@ -44,6 +44,7 @@
    (git-commit            . "melpa")
    (groovy-mode           . "melpa")
    (haskell-mode          . "melpa")
+   (hlinum                . "melpa")
    (irony                 . "melpa")
    (json-mode             . "melpa")
    (lua-mode              . "melpa")
