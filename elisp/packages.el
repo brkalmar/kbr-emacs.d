@@ -63,7 +63,8 @@
    (tt-mode               . "melpa")
    (web-mode              . "melpa")
    (yaml-mode             . "melpa")
-   (zenburn-theme         . "melpa")))
+   (zenburn-theme         . "melpa")
+   (zig-mode              . "melpa")))
 
 (defun bkalmar/packages/check-install ()
   "Install each package in `package-pinned-packages' not already installed."
