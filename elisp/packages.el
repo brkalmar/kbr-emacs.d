@@ -10,6 +10,8 @@
 
 (customize-set-variable 'package-user-dir
                         (concat user-emacs-directory "packages/elpa/"))
+(customize-set-variable 'package-gnupghome-dir
+                        (concat package-user-dir "gnupg/"))
 (customize-set-variable 'package-enable-at-startup nil)
 (customize-set-variable 'package-load-list '(all))
 
