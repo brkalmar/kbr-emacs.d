@@ -47,6 +47,10 @@
                      :foreground ,zenburn-red+2
                      :weight bold)))
     "Highlights TODO in comments.")
+  (defface bkalmar/comment-later-face
+    `((t . (:inherit bkalmar/comment-uppercase-keyword-face
+                     :foreground ,zenburn-red)))
+    "Highlights LATER in comments.")
   (defface bkalmar/comment-note-face
     `((t . (:inherit bkalmar/comment-uppercase-keyword-face
                      :foreground ,zenburn-yellow)))
@@ -55,8 +59,12 @@
  'prog-mode-hook
  (lambda () (font-lock-add-keywords
         nil
-        '(("\\<\\(TODO\\):" . (1 'bkalmar/comment-todo-face prepend))
-          ("\\<\\(NOTE\\):" . (1 'bkalmar/comment-note-face prepend))))))
+        '(("\\<\\(TODO\\)\\((.*)\\)?:" .
+           (1 'bkalmar/comment-todo-face prepend))
+          ("\\<\\(LATER\\)\\((.*)\\)?:" .
+           (1 'bkalmar/comment-later-face prepend))
+          ("\\<\\(NOTE\\)\\((.*)\\)?:" .
+           (1 'bkalmar/comment-note-face prepend))))))
 
 ;; keybindings
 
