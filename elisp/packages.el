@@ -6,6 +6,11 @@
 
 (require 'package)
 
+;; NOTE: Temporary fix for bug <https://debbugs.gnu.org/34341> encountered when
+;; trying to upgrade elpa packages via TLS 1.3.  This should be removed once
+;; updated to emacs 26.3, where the bug is fixed.
+(customize-set-variable 'gnutls-algorithm-priority "normal:-vers-tls1.3")
+
 ;;; config
 
 (customize-set-variable 'package-user-dir
