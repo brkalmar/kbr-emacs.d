@@ -1,5 +1,7 @@
 (require 'python)
 
+(customize-set-variable 'python-fill-docstring-style 'pep-257-nn)
+
 (customize-set-variable 'python-shell-interpreter "ipython3")
 (customize-set-variable 'python-shell-interpreter-args
                         "-i --simple-prompt")
