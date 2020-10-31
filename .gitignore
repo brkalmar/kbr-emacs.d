@@ -5,6 +5,7 @@
 /config/
 /irony/
 /.mc-lists.el
+/transient/
 
 # Packages
 /packages/elpa/
