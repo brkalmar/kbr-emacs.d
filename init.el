@@ -80,3 +80,6 @@ Should be set in OS-specific files.")
 ;;; NOTE: This is not loaded on purpose; all customization is done manually.
 (customize-set-variable 'custom-file
                         (concat bkalmar/emacs-config-directory "custom.el"))
+
+;; enabled commands
+(put 'set-goal-column 'disabled nil)
