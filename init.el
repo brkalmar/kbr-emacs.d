@@ -3,9 +3,6 @@
 ;; 2014  Bence Kalmar
 
 
-;; This must come before configurations of installed packages.
-(package-initialize)
-
 (defvar bkalmar/userdir nil
   "Real user directory, \"~\" in GNU/Linux, not necessarily \"~\" in Windows.
 

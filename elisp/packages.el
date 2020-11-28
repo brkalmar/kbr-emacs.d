@@ -20,7 +20,9 @@
 (customize-set-variable 'package-enable-at-startup nil)
 (customize-set-variable 'package-load-list '(all))
 
-;; initialize already installed packages
+;; Initialize already installed packages.
+;;
+;; This must come before configurations of installed packages.
 (package-initialize)
 
 ;;; ELPA packages
