@@ -22,6 +22,7 @@
 (global-set-key (kbd "C-c t") 'bkalmar/temp-buffer)
 (global-set-key (kbd "C-c v") 'global-auto-revert-mode)
 (global-set-key (kbd "C-c w") 'bkalmar/wordprocessor-mode)
+(global-set-key (kbd "C-c x") 'describe-char)
 
 ;; ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
