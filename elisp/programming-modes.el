@@ -6,8 +6,8 @@
 
 ;; NOTE: fci-mode temporarily removed because of incompatibility with web-mode
 
-(add-hook 'prog-mode-hook 'linum-mode)
-(add-hook 'text-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook 'linum-relative-mode)
+(add-hook 'text-mode-hook 'linum-relative-mode)
 
 (add-hook 'prog-mode-hook 'eldoc-mode)
 

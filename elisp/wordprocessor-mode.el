@@ -31,8 +31,8 @@ default theme and some margins on both sides."
   nil " WP" nil
   (if bkalmar/wordprocessor-mode
       (progn
-        ;; disable linum mode
-        (linum-mode -1)
+        ;; disable linum-relative mode
+        (linum-relative-mode -1)
         ;; wordwrap
         (visual-line-mode +1)
         ;; adjust font size
@@ -48,8 +48,8 @@ default theme and some margins on both sides."
                             (face-attribute 'default :background))
         ;; update window
         (set-window-buffer nil (current-buffer)))
-    ;; enable linum mode
-    (linum-mode +1)
+    ;; enable linum-relative mode
+    (linum-relative-mode +1)
     ;; no wordwrap
     (visual-line-mode -1)
     ;; reset font size
@@ -63,4 +63,3 @@ default theme and some margins on both sides."
     (setq right-margin-width 0)
     ;; update window
     (set-window-buffer nil (current-buffer))))
-
