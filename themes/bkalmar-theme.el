@@ -16,52 +16,54 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+(require 'zenburn-theme)
+
 (deftheme bkalmar
   "bkalmar is a theme which customizes little, except some packages' faces, most
 notably `org`.")
 
-(custom-theme-set-variables
- 'bkalmar
- ;;; org
- '(org-todo-keyword-faces
-   `(("CONS" . (:background "#a58259"))
-     ("TODO" . (:background "#9c6363" :weight bold))
-     ("STAR" . (:background "#9a9453" :weight bold))
-     ("DONE" . (:background "#437f43"))
-     ("CANC" . (:background "#328373"))))
- '(org-priority-faces
-   `((?A . (:foreground "#f0dfaf" :weight bold))
-     (?B . (:foreground "#dc8cc3" :weight bold))
-     (?C . (:foreground "#8cd0d3")))))
-
-(custom-theme-set-faces
- 'bkalmar
- ;;; markdown
- '(markdown-pre-face ((t . (:inherit (fixed-pitch font-lock-constant-face)))))
- '(markdown-inline-code-face ((t . (:inherit markdown-pre-face))))
-  ;;; linum
- '(linum
-   ((t . (:box nil :height 0.95 :inherit fixed-pitch :inverse-video nil
-               :overline nil :slant normal :strike-through nil :underline nil
-               :weight normal))))
- ;;; whitespace
- '(whitespace-space ((t . (:background nil :foreground "#6a6a6a"))))
- '(whitespace-hspace
-   ((t . (:background nil :foreground nil :inherit whitespace-space))))
- '(whitespace-tab ((t . (:background nil :inherit whitespace-space))))
- '(whitespace-newline ((t . (:foreground nil :inherit whitespace-space))))
- '(whitespace-trailing
-   ((t . (:background "#af7373" :inherit whitespace-space))))
- '(whitespace-line
-   ((t . (:background "#5a445a" :foreground nil :slant italic))))
- '(whitespace-space-before-tab
-   ((t . (:background nil :foreground nil :inherit whitespace-space))))
- '(whitespace-space-after-tab
-   ((t . (:background nil :foreground nil
-                      :inherit whitespace-space-before-tab))))
- '(whitespace-indentation
-   ((t . (:background nil :foreground nil :inherit whitespace-space))))
- '(whitespace-empty ((t . (:background nil :inherit whitespace-trailing))))
- )
+(zenburn-with-color-variables
+  (custom-theme-set-variables
+   'bkalmar
+   ;;; org
+   '(org-todo-keyword-faces
+     `(("CONS" . (:background "#a58259"))
+       ("TODO" . (:background "#9c6363" :weight bold))
+       ("STAR" . (:background "#9a9453" :weight bold))
+       ("DONE" . (:background "#437f43"))
+       ("CANC" . (:background "#328373"))))
+   '(org-priority-faces
+     `((?A . (:foreground "#f0dfaf" :weight bold))
+       (?B . (:foreground "#dc8cc3" :weight bold))
+       (?C . (:foreground "#8cd0d3")))))
+  (custom-theme-set-faces
+   'bkalmar
+   ;;; markdown
+   '(markdown-pre-face ((t . (:inherit (fixed-pitch font-lock-constant-face)))))
+   '(markdown-inline-code-face ((t . (:inherit markdown-pre-face))))
+   ;;; line-number-mode
+   `(line-number
+     ((t . (:background ,zenburn-bg+1 :foreground ,zenburn-fg :height 0.9
+                        :width condensed :inherit fixed-pitch))))
+   `(line-number-current-line
+     ((t . (:foreground ,zenburn-yellow :weight bold :inherit line-number))))
+   ;;; whitespace
+   '(whitespace-space ((t . (:background nil :foreground "#6a6a6a"))))
+   '(whitespace-hspace
+     ((t . (:background nil :foreground nil :inherit whitespace-space))))
+   '(whitespace-tab ((t . (:background nil :inherit whitespace-space))))
+   '(whitespace-newline ((t . (:foreground nil :inherit whitespace-space))))
+   '(whitespace-trailing
+     ((t . (:background "#af7373" :inherit whitespace-space))))
+   '(whitespace-line
+     ((t . (:background "#5a445a" :foreground nil :slant italic))))
+   '(whitespace-space-before-tab
+     ((t . (:background nil :foreground nil :inherit whitespace-space))))
+   '(whitespace-space-after-tab
+     ((t . (:background nil :foreground nil
+                        :inherit whitespace-space-before-tab))))
+   '(whitespace-indentation
+     ((t . (:background nil :foreground nil :inherit whitespace-space))))
+   '(whitespace-empty ((t . (:background nil :inherit whitespace-trailing))))))
 
 (provide-theme 'bkalmar)
