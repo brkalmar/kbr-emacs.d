@@ -4,7 +4,7 @@
 
 (customize-set-variable
  'backup-directory-alist
- `(("." . ,(concat user-emacs-directory "backup/files/"))))
+ `(("." . ,(concat bkalmar/emacs-directory "backup/files/"))))
 (customize-set-variable 'backup-by-copying t)
 (customize-set-variable 'version-control t)
 (customize-set-variable 'kept-new-versions 2)
@@ -13,7 +13,7 @@
 
 (customize-set-variable
  'auto-save-list-file-prefix
- (concat user-emacs-directory "backup/auto-saves/saves-"))
+ (concat bkalmar/emacs-directory "backup/auto-saves/saves-"))
 
 (defun bkalmar/rm-old-backups (age)
   "Remove all backup files whose modification time is older than AGE, in the

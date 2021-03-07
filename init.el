@@ -3,30 +3,22 @@
 ;; 2014  Bence Kalmar
 
 
-(defvar bkalmar/userdir nil
-  "Real user directory, \"~\" in GNU/Linux, not necessarily \"~\" in Windows.
+(defvar bkalmar/home-directory (file-name-as-directory (expand-file-name "~"))
+  "User home directory \"~\".")
 
-Should be set in OS-specific files.")
+(defvar bkalmar/emacs-directory (expand-file-name user-emacs-directory)
+  "Base emacs.d directory.")
 
-(defvar bkalmar/emacs-config-directory (concat user-emacs-directory "config/")
+(defvar bkalmar/emacs-config-directory
+  (concat bkalmar/emacs-directory "config/")
   "Directory for all packages' config/history/etc. files.")
 
-(defvar bkalmar/emacs-elisp-directory (concat user-emacs-directory "elisp/")
-  "Directory for elisp files to include in `init.el`.")
+(defvar bkalmar/emacs-elisp-directory
+  (concat bkalmar/emacs-directory "elisp/")
+  "Directory for elisp files to include from `init.el`.")
+
 
 (load-file (concat bkalmar/emacs-elisp-directory "packages.el"))
-
-(cond
- ((equal system-type 'gnu/linux)
-  (load-file (concat bkalmar/emacs-elisp-directory "gnu-linux/init.el")))
- ((equal system-type 'windows-nt)
-  (load-file (concat bkalmar/emacs-elisp-directory "windows-nt/init.el")))
- (t
-  (message "Could not find appropriate config file for system type: ‘%s’"
-           system-type)))
-
-(when (string-prefix-p "/uio/" (getenv "HOME"))
-  (load-file (concat bkalmar/emacs-elisp-directory "uio/init.el")))
 
 (load-file (concat bkalmar/emacs-elisp-directory "backup.el"))
 
@@ -54,6 +46,38 @@ Should be set in OS-specific files.")
 (load-file (concat bkalmar/emacs-elisp-directory "visuals.el"))
 
 (load-file (concat bkalmar/emacs-elisp-directory "keybindings.el"))
+
+
+(defun bkalmar/auto-make-executable ()
+  "Make current buffer's file executable if begins whith a shebang."
+  (and (save-excursion
+         (save-restriction
+           (widen)
+           (goto-char (point-min))
+           (save-match-data (looking-at "^#!"))))
+       (not (file-executable-p buffer-file-name))
+       (shell-command (concat "chmod u+x "
+                              (shell-quote-argument buffer-file-name)))
+       (message "Made executable %s" buffer-file-name)))
+
+;; after buffer is saved to file
+(add-hook 'after-save-hook 'bkalmar/auto-make-executable t)
+
+(defun bkalmar/integrate-clipboard ()
+  "Integrate the window system's clipboard and return t. Return nil if it cannot
+be integrated."
+  (if (and (equal window-system 'x) (display-selections-p))
+      (progn (customize-set-variable 'x-select-enable-clipboard t)
+             (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
+             (setq interprogram-cut-function 'x-select-text)
+             t)
+    nil))
+
+;; integrate clipboard
+(bkalmar/integrate-clipboard)
+
+;;; visual
+(customize-set-variable 'visible-bell t)
 
 ;; before buffer is saved to file
 (customize-set-variable 'require-final-newline t)

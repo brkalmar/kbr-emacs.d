@@ -14,7 +14,7 @@
 ;;; config
 
 (customize-set-variable 'package-user-dir
-                        (concat user-emacs-directory "packages/elpa/"))
+                        (concat bkalmar/emacs-directory "packages/elpa/"))
 (customize-set-variable 'package-gnupghome-dir
                         (concat package-user-dir "gnupg/"))
 (customize-set-variable 'package-enable-at-startup nil)
@@ -123,7 +123,7 @@
 ;;; manually installed packages
 
 (defvar bkalmar/packages/manual
-  (concat user-emacs-directory "packages/manual/")
+  (concat bkalmar/emacs-directory "packages/manual/")
   "Directory where manually installed packages are.")
 
 ;;; Package name

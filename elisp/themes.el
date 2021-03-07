@@ -3,19 +3,19 @@
 ;; 2015  Bence Kalmar
 
 (customize-set-variable 'custom-theme-directory
-                        (concat user-emacs-directory "themes/"))
+                        (concat bkalmar/emacs-directory "themes/"))
 (load-theme 'zenburn t)
 (load-theme 'bkalmar t)
 
-(defvar bkalmar/preferred-fonts-monospace nil
-  "List of preferred monospace fonts, in descending order of preference.
+(defvar bkalmar/preferred-fonts-monospace
+  '("DejaVu Sans Mono" "Unifont" "VL Gothic" "Liberation Mono" "FreeMono"
+    "Andale Mono" "Droid Sans Mono")
+  "List of preferred monospace fonts, in descending order of preference.")
 
-Should be set in OS-specific files.")
-
-(defvar bkalmar/preferred-fonts-proportional nil
-  "List of preferred proportional fonts, in descending order of preference.
-
-Should be set in OS-specific files.")
+(defvar bkalmar/preferred-fonts-proportional
+  '("DejaVu Sans" "Arial" "VL PGothic" "Linux Biolinum O" "Droid Sans"
+    "FreeSans" "Trebuchet MS" "Lato" "Liberation Sans" "Carlito")
+  "List of preferred proportional fonts, in descending order of preference.")
 
 (defvar bkalmar/preferred-fonts-set nil
   "Keeps track of whether the preferred fonts had been set already.")

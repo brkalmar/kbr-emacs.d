@@ -40,7 +40,8 @@
 (customize-set-variable 'org-display-custom-times t)
 
 ;; capture
-(customize-set-variable 'org-directory (concat bkalmar/userdir "/documents"))
+(customize-set-variable 'org-directory
+                        (concat bkalmar/home-directory "/documents"))
 (customize-set-variable 'org-default-notes-file
                         (concat org-directory "/notes.org"))
 
