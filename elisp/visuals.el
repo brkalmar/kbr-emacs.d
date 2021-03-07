@@ -69,5 +69,14 @@ path separator."
 
 (setq icon-title-format "%b")
 
+;; themes
+
+(customize-set-variable 'custom-theme-directory
+                        (concat bkalmar/emacs-directory "themes/"))
+
+(load-theme 'zenburn t)
+(load-theme 'bkalmar t)
+
 ;; scratch
+
 (customize-set-variable 'initial-scratch-message nil)

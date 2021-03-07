@@ -30,7 +30,7 @@
 
 (load-file (concat bkalmar/emacs-elisp-directory "enabled-commands.el"))
 
-(load-file (concat bkalmar/emacs-elisp-directory "themes.el"))
+(load-file (concat bkalmar/emacs-elisp-directory "fonts.el"))
 
 (load-file (concat bkalmar/emacs-elisp-directory "programming-modes.el"))
 

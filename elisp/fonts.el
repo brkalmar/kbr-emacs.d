@@ -2,11 +2,6 @@
 ;;
 ;; 2015  Bence Kalmar
 
-(customize-set-variable 'custom-theme-directory
-                        (concat bkalmar/emacs-directory "themes/"))
-(load-theme 'zenburn t)
-(load-theme 'bkalmar t)
-
 (defvar bkalmar/preferred-fonts-monospace
   '("DejaVu Sans Mono" "Unifont" "VL Gothic" "Liberation Mono" "FreeMono"
     "Andale Mono" "Droid Sans Mono")
