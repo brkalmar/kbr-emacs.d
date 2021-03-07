@@ -16,7 +16,7 @@
 (global-set-key (kbd "C-c q") 'insert-char)
 (global-set-key (kbd "C-c r") 'replace-string)
 (global-set-key (kbd "C-c R") 'replace-regexp)
-(global-set-key (kbd "C-c t") 'bkalmar/temp-buffer)
+(global-set-key (kbd "C-c t") 'kbr/temp-buffer)
 (global-set-key (kbd "C-c v") 'global-auto-revert-mode)
 (global-set-key (kbd "C-c x") 'describe-char)
 
@@ -31,7 +31,7 @@
 
 ;; org
 (global-set-key (kbd "C-c g") 'org-agenda)
-(global-set-key (kbd "C-c n") 'bkalmar/find-org-default-notes-file)
+(global-set-key (kbd "C-c n") 'kbr/find-org-default-notes-file)
 ;; `C-c ,` as described in the manual doesn't work
 (global-set-key (kbd "C-c p") 'org-priority)
 (global-set-key (kbd "C-c u") 'org-capture)

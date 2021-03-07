@@ -1,6 +1,6 @@
 (require 'web-mode)
 
-(defun bkalmar/choose-php-or-web-mode ()
+(defun kbr/choose-php-or-web-mode ()
   "Choose & call either `php-mode' or `web-mode' based on buffer contents."
   (save-excursion
     (save-restriction
@@ -10,4 +10,4 @@
           (web-mode)
         (php-mode)))))
 
-(add-to-list 'auto-mode-alist '("\\.php$" . bkalmar/choose-php-or-web-mode) t)
+(add-to-list 'auto-mode-alist '("\\.php$" . kbr/choose-php-or-web-mode) t)

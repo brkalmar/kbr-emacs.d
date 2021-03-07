@@ -42,11 +42,11 @@
 
 ;; capture
 (customize-set-variable 'org-directory
-                        (concat bkalmar/home-directory "/documents"))
+                        (concat kbr/home-directory "/documents"))
 (customize-set-variable 'org-default-notes-file
                         (concat org-directory "/notes.org"))
 
-(defun bkalmar/find-org-default-notes-file ()
+(defun kbr/find-org-default-notes-file ()
   "Call `find-file' on `org-default-notes-file'."
   (interactive)
   (find-file org-default-notes-file))

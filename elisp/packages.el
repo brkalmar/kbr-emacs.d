@@ -14,7 +14,7 @@
 ;;; config
 
 (customize-set-variable 'package-user-dir
-                        (concat bkalmar/emacs-directory "packages/elpa/"))
+                        (concat kbr/emacs-directory "packages/elpa/"))
 (customize-set-variable 'package-gnupghome-dir
                         (concat package-user-dir "gnupg/"))
 (customize-set-variable 'package-enable-at-startup nil)
@@ -82,7 +82,7 @@
    (zenburn-theme         . "melpa")
    (zig-mode              . "melpa")))
 
-(defun bkalmar/packages/check-install ()
+(defun kbr/packages/check-install ()
   "Install each package in `package-pinned-packages' not already installed."
   (interactive)
   (let (to-install)
@@ -95,17 +95,17 @@
       (message "Installed %d new package%s" (length to-install)
                (if (= (length to-install) 1) "" "s")))))
 
-(bkalmar/packages/check-install)
+(kbr/packages/check-install)
 
-(defvar bkalmar/packages/checked-file
-  (concat bkalmar/emacs-config-directory "elpa/last-checked")
-  "Used by `bkalmar/packages/check-upgrade'.")
+(defvar kbr/packages/checked-file
+  (concat kbr/emacs-config-directory "elpa/last-checked")
+  "Used by `kbr/packages/check-upgrade'.")
 
-(defun bkalmar/packages/check-upgrade (age)
+(defun kbr/packages/check-upgrade (age)
   "Call `package-list-packages' for upgrading, after user confirmation, if
-`bkalmar/packages/checked-file' contains a time older than AGE."
+`kbr/packages/checked-file' contains a time older than AGE."
   (interactive)
-  (let ((filename (expand-file-name bkalmar/packages/checked-file)))
+  (let ((filename (expand-file-name kbr/packages/checked-file)))
     (with-temp-buffer
       (when (or (not (file-exists-p filename))
                 (progn (insert-file-contents-literally filename)
@@ -118,12 +118,12 @@
              "Check for upgradable packages? [y in 10 seconds] " 10 t)
             (package-list-packages))))))
 
-(bkalmar/packages/check-upgrade (days-to-time 7))
+(kbr/packages/check-upgrade (days-to-time 7))
 
 ;;; manually installed packages
 
-(defvar bkalmar/packages/manual
-  (concat bkalmar/emacs-directory "packages/manual/")
+(defvar kbr/packages/manual
+  (concat kbr/emacs-directory "packages/manual/")
   "Directory where manually installed packages are.")
 
 ;;; Package name
@@ -132,7 +132,7 @@
 ;; Source: http://example.com/
 ;; Note: Something about build, etc...
 ;; (add-to-list 'load-path
-;;              (concat (file-name-as-directory bkalmar/packages/manual)
+;;              (concat (file-name-as-directory kbr/packages/manual)
 ;;                      "package-name-YYYYMMDD") t)
 
 ;;; Subtitles
@@ -140,5 +140,5 @@
 ;; Updated: 2015-05-04
 ;; Source: http://lists.gnu.org/archive/html/gnu-emacs-sources/2009-05/msg00007.html
 ;; Note: NONE
-(add-to-list 'load-path (concat (file-name-as-directory bkalmar/packages/manual)
+(add-to-list 'load-path (concat (file-name-as-directory kbr/packages/manual)
                                 "subtitles-1.100") t)

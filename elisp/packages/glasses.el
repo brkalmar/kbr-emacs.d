@@ -6,8 +6,8 @@
 (customize-set-variable 'glasses-separator "")
 
 (zenburn-with-color-variables
-  (defface bkalmar/glasses-face
+  (defface kbr/glasses-face
     `((t . (:underline ,zenburn-bg+3 :weight bold)))
     "Highlights captitals in `glasses-mode'."))
 
-(customize-set-variable 'glasses-face 'bkalmar/glasses-face)
+(customize-set-variable 'glasses-face 'kbr/glasses-face)

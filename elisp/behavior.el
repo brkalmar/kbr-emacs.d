@@ -4,7 +4,7 @@
 
 ;;; after buffer is saved to file
 
-(defun bkalmar/auto-make-executable ()
+(defun kbr/auto-make-executable ()
   "Make current buffer's file executable if begins whith a shebang."
   (and (save-excursion
          (save-restriction
@@ -16,11 +16,11 @@
                               (shell-quote-argument buffer-file-name)))
        (message "Made executable %s" buffer-file-name)))
 
-(add-hook 'after-save-hook 'bkalmar/auto-make-executable t)
+(add-hook 'after-save-hook 'kbr/auto-make-executable t)
 
 ;;; integrate clipboard
 
-(defun bkalmar/integrate-clipboard ()
+(defun kbr/integrate-clipboard ()
   "Integrate the window system's clipboard and return t. Return nil if it cannot
 be integrated."
   (if (and (equal window-system 'x) (display-selections-p))
@@ -30,7 +30,7 @@ be integrated."
              t)
     nil))
 
-(bkalmar/integrate-clipboard)
+(kbr/integrate-clipboard)
 
 ;; editing
 (customize-set-variable 'indent-tabs-mode nil)

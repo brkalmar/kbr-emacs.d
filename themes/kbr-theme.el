@@ -1,4 +1,4 @@
-;; `bkalmar` emacs custom theme, based on `dark-emacs` by Suvayu Ali.
+;; `kbr` emacs custom theme, based on `dark-emacs` by Suvayu Ali.
 ;;
 ;; Copyright 2012  Suvayu Ali <https://github.com/suvayu>
 ;; Copyright 2014  Bence Kalmar <bkalmar1996@gmail.com>
@@ -18,13 +18,13 @@
 
 (require 'zenburn-theme)
 
-(deftheme bkalmar
-  "bkalmar is a theme which customizes little, except some packages' faces, most
+(deftheme kbr
+  "kbr is a theme which customizes little, except some packages' faces, most
 notably `org`.")
 
 (zenburn-with-color-variables
   (custom-theme-set-variables
-   'bkalmar
+   'kbr
    ;;; org
    '(org-todo-keyword-faces
      `(("CONS" . (:background "#a58259"))
@@ -37,7 +37,7 @@ notably `org`.")
        (?B . (:foreground "#dc8cc3" :weight bold))
        (?C . (:foreground "#8cd0d3")))))
   (custom-theme-set-faces
-   'bkalmar
+   'kbr
    ;;; markdown
    '(markdown-pre-face ((t . (:inherit (fixed-pitch font-lock-constant-face)))))
    '(markdown-inline-code-face ((t . (:inherit markdown-pre-face))))
@@ -66,4 +66,4 @@ notably `org`.")
      ((t . (:background nil :foreground nil :inherit whitespace-space))))
    '(whitespace-empty ((t . (:background nil :inherit whitespace-trailing))))))
 
-(provide-theme 'bkalmar)
+(provide-theme 'kbr)

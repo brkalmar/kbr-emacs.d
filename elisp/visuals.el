@@ -2,7 +2,7 @@
 
 (require 'f)
 
-(defun bkalmar/init-visuals ()
+(defun kbr/init-visuals ()
   "Toggle fullscreen; disappear scrollbar."
   (interactive)
   (toggle-frame-maximized)
@@ -14,14 +14,14 @@
   ;; temporary fix for Debian
   (set-cursor-color "#ffcc00"))
 
-(bkalmar/init-visuals)
+(kbr/init-visuals)
 
-(defun bkalmar/after-make-frame (new-frame)
-  "Call `bkalmar/init-visuals' on `new-frame'."
+(defun kbr/after-make-frame (new-frame)
+  "Call `kbr/init-visuals' on `new-frame'."
   (select-frame new-frame)
-  (bkalmar/init-visuals))
+  (kbr/init-visuals))
 
-(add-hook 'after-make-frame-functions 'bkalmar/after-make-frame t)
+(add-hook 'after-make-frame-functions 'kbr/after-make-frame t)
 
 (customize-set-variable 'inhibit-startup-screen t)
 (customize-set-variable 'visible-bell t)
@@ -53,7 +53,7 @@
 
 ;;; frame & icon titles
 
-(defun bkalmar/filename-reverse (filename &optional sep)
+(defun kbr/filename-reverse (filename &optional sep)
   "Return string of FILENAME with its elements in reverse order, or nil if
 FILENAME is nil.
 
@@ -66,7 +66,7 @@ path separator."
                  separator))))
 
 (setq frame-title-format
-      '((:eval (or (bkalmar/filename-reverse buffer-file-truename "\\") "%b"))
+      '((:eval (or (kbr/filename-reverse buffer-file-truename "\\") "%b"))
         " (%I)"))
 
 (setq icon-title-format "%b")
@@ -74,7 +74,7 @@ path separator."
 ;;; themes
 
 (customize-set-variable 'custom-theme-directory
-                        (concat bkalmar/emacs-directory "themes/"))
+                        (concat kbr/emacs-directory "themes/"))
 
 (load-theme 'zenburn t)
-(load-theme 'bkalmar t)
+(load-theme 'kbr t)

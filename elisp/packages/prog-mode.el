@@ -39,21 +39,21 @@
 
 ;;; highlight uppercase comment keywords TODO/NOTE/etc
 
-(defface bkalmar/comment-uppercase-keyword-face
+(defface kbr/comment-uppercase-keyword-face
   '((t . (:underline t)))
   "Common face for all uppercase keywords in comments.")
 (zenburn-with-color-variables
-  (defface bkalmar/comment-todo-face
-    `((t . (:inherit bkalmar/comment-uppercase-keyword-face
+  (defface kbr/comment-todo-face
+    `((t . (:inherit kbr/comment-uppercase-keyword-face
                      :foreground ,zenburn-red+2
                      :weight bold)))
     "Highlights TODO in comments.")
-  (defface bkalmar/comment-later-face
-    `((t . (:inherit bkalmar/comment-uppercase-keyword-face
+  (defface kbr/comment-later-face
+    `((t . (:inherit kbr/comment-uppercase-keyword-face
                      :foreground ,zenburn-red)))
     "Highlights LATER in comments.")
-  (defface bkalmar/comment-note-face
-    `((t . (:inherit bkalmar/comment-uppercase-keyword-face
+  (defface kbr/comment-note-face
+    `((t . (:inherit kbr/comment-uppercase-keyword-face
                      :foreground ,zenburn-yellow)))
     "Highlights NOTE in comments."))
 
@@ -62,11 +62,11 @@
  (lambda () (font-lock-add-keywords
         nil
         '(("\\<\\(TODO\\)\\((.*)\\)?:" .
-           (1 'bkalmar/comment-todo-face prepend))
+           (1 'kbr/comment-todo-face prepend))
           ("\\<\\(LATER\\)\\((.*)\\)?:" .
-           (1 'bkalmar/comment-later-face prepend))
+           (1 'kbr/comment-later-face prepend))
           ("\\<\\(NOTE\\)\\((.*)\\)?:" .
-           (1 'bkalmar/comment-note-face prepend))))))
+           (1 'kbr/comment-note-face prepend))))))
 
 ;; keybindings
 
