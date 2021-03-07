@@ -10,8 +10,6 @@
 (define-key flycheck-command-map "f" 'flycheck-first-error)
 (customize-set-variable 'flycheck-keymap-prefix (kbd "C-c f"))
 (global-set-key (kbd "C-c F") 'toggle-frame-maximized)
-(global-set-key (kbd "C-c h") 'bkalmar/enable-themes)
-(global-set-key (kbd "C-c H") 'bkalmar/disable-themes)
 (global-set-key (kbd "C-c l") 'fill-region)
 (global-set-key (kbd "C-c L") 'fill-region-as-paragraph)
 (global-set-key (kbd "C-c m") 'normal-mode)
@@ -20,7 +18,6 @@
 (global-set-key (kbd "C-c R") 'replace-regexp)
 (global-set-key (kbd "C-c t") 'bkalmar/temp-buffer)
 (global-set-key (kbd "C-c v") 'global-auto-revert-mode)
-(global-set-key (kbd "C-c w") 'bkalmar/wordprocessor-mode)
 (global-set-key (kbd "C-c x") 'describe-char)
 
 ;; ibuffer
