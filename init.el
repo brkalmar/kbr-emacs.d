@@ -20,18 +20,17 @@
 
 (load-file (concat bkalmar/emacs-elisp-directory "packages.el"))
 
-(load-file (concat bkalmar/emacs-elisp-directory "backup.el"))
-
-(load-file (concat bkalmar/emacs-elisp-directory "convenience.el"))
-
-(load-file (concat bkalmar/emacs-elisp-directory "terminal.el"))
-
-;; Packages & modes
 (require 'f)
 (dolist (file (f-entries (concat bkalmar/emacs-elisp-directory "packages/")))
   (load-file file))
 
+(load-file (concat bkalmar/emacs-elisp-directory "backup.el"))
+
+(load-file (concat bkalmar/emacs-elisp-directory "convenience.el"))
+
 (load-file (concat bkalmar/emacs-elisp-directory "enabled-commands.el"))
+
+(load-file (concat bkalmar/emacs-elisp-directory "terminal.el"))
 
 (load-file (concat bkalmar/emacs-elisp-directory "themes.el"))
 
