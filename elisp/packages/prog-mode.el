@@ -38,6 +38,9 @@
          (push '(">=" . (?  (Br . Bl) ?  (Bc . Bc) ?≥)) prettify-symbols-alist)
          (prettify-symbols-mode))))
 
+;; comments
+(customize-set-variable 'comment-multi-line t)
+
 ;;; Highlight uppercase comment keywords TODO/NOTE/etc.
 (defface bkalmar/comment-uppercase-keyword-face
   '((t . (:underline t)))

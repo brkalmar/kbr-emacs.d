@@ -26,6 +26,7 @@
 (add-hook 'after-make-frame-functions 'bkalmar/after-make-frame t)
 
 (customize-set-variable 'inhibit-startup-screen t)
+(customize-set-variable 'visible-bell t)
 (tool-bar-mode -1)
 (show-paren-mode 1)
 (blink-cursor-mode -1)
