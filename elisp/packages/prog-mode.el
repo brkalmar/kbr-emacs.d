@@ -2,6 +2,7 @@
 ;;
 ;; 2015  Bence Kalmar
 
+(require 'prog-mode)
 (require 'zenburn-theme)
 
 ;; NOTE: fci-mode temporarily removed because of incompatibility with web-mode

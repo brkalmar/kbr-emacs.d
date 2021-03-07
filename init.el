@@ -32,8 +32,6 @@
 
 (load-file (concat bkalmar/emacs-elisp-directory "fonts.el"))
 
-(load-file (concat bkalmar/emacs-elisp-directory "programming-modes.el"))
-
 (load-file (concat bkalmar/emacs-elisp-directory "visuals.el"))
 
 (load-file (concat bkalmar/emacs-elisp-directory "keybindings.el"))
