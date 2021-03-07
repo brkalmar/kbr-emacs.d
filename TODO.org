@@ -1,2 +1,0 @@
-* `palette`
-** TODO do not maximize the palette frame when it's opened
