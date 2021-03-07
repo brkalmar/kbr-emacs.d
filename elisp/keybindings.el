@@ -6,7 +6,6 @@
 (global-set-key (kbd "C-c a") 'auto-fill-mode)
 (global-set-key (kbd "C-c c") 'comment-region)
 (global-set-key (kbd "C-c C") 'uncomment-region)
-(global-set-key (kbd "C-c e") 'bkalmar/terminal)
 (define-key flycheck-command-map "f" 'flycheck-first-error)
 (customize-set-variable 'flycheck-keymap-prefix (kbd "C-c f"))
 (global-set-key (kbd "C-c F") 'toggle-frame-maximized)
