@@ -24,8 +24,6 @@
 
 (load-file (concat bkalmar/emacs-elisp-directory "convenience.el"))
 
-(load-file (concat bkalmar/emacs-elisp-directory "font-info.el"))
-
 (load-file (concat bkalmar/emacs-elisp-directory "terminal.el"))
 
 ;; Packages & modes
