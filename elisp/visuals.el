@@ -1,6 +1,4 @@
-;; Visual improvements
-;;
-;; 2015  Bence Kalmar
+;;; visual improvements
 
 (require 'f)
 
@@ -50,7 +48,10 @@
 (line-number-mode -1)
 (column-number-mode 1)
 
-;; frame & icon titles
+;; scratch
+(customize-set-variable 'initial-scratch-message nil)
+
+;;; frame & icon titles
 
 (defun bkalmar/filename-reverse (filename &optional sep)
   "Return string of FILENAME with its elements in reverse order, or nil if
@@ -70,14 +71,10 @@ path separator."
 
 (setq icon-title-format "%b")
 
-;; themes
+;;; themes
 
 (customize-set-variable 'custom-theme-directory
                         (concat bkalmar/emacs-directory "themes/"))
 
 (load-theme 'zenburn t)
 (load-theme 'bkalmar t)
-
-;; scratch
-
-(customize-set-variable 'initial-scratch-message nil)

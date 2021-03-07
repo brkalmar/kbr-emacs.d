@@ -1,8 +1,8 @@
-;; Add additional package archives.
-;; Check if neccessary packages are installed, install them if they aren't.
-;; Upgrade old packages.
+;; Add package archives.
 ;;
-;; Bence Kalmar
+;; Check if neccessary packages are installed, install them if they aren't.
+;;
+;; Upgrade old packages.
 
 (require 'package)
 
@@ -22,7 +22,7 @@
 
 ;; Initialize already installed packages.
 ;;
-;; This must come before configurations of installed packages.
+;; NOTE: This must come before configurations of installed packages.
 (package-initialize)
 
 ;;; ELPA packages

@@ -1,6 +1,4 @@
-;; Backup & autosave.
-;;
-;; 2015  Bence Kalmar
+;;; backup & autosave
 
 (customize-set-variable
  'backup-directory-alist

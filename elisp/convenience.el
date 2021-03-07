@@ -1,6 +1,4 @@
-;; Convenience commands.
-;;
-;; 2015  Bence Kalmar
+;;; convenience functions
 
 (defun bkalmar/temp-buffer ()
   "Create & switch to new temporary buffer."

@@ -2,10 +2,10 @@
 
 (customize-set-variable 'calendar-date-style 'iso)
 
-;; start week with Monday
+;; start week on Monday
 (customize-set-variable 'calendar-week-start-day 1)
 
-;; ISO week numbers
+;;; ISO week numbers
 
 (defface bkalmar/calendar-iso-week
   '((t . (:height 0.9 :inherit font-lock-builtin-face)))

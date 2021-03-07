@@ -1,7 +1,3 @@
-;; Programming mode customizations
-;;
-;; 2015  Bence Kalmar
-
 (require 'prog-mode)
 (require 'zenburn-theme)
 
@@ -41,7 +37,8 @@
 ;; comments
 (customize-set-variable 'comment-multi-line t)
 
-;;; Highlight uppercase comment keywords TODO/NOTE/etc.
+;;; highlight uppercase comment keywords TODO/NOTE/etc
+
 (defface bkalmar/comment-uppercase-keyword-face
   '((t . (:underline t)))
   "Common face for all uppercase keywords in comments.")
@@ -59,6 +56,7 @@
     `((t . (:inherit bkalmar/comment-uppercase-keyword-face
                      :foreground ,zenburn-yellow)))
     "Highlights NOTE in comments."))
+
 (add-hook
  'prog-mode-hook
  (lambda () (font-lock-add-keywords

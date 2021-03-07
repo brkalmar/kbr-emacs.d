@@ -1,4 +1,5 @@
-;; Custom keybindings.
+;;; global keybindings
+
 ;; `C-c [A-Za-z]' is reserved for users.
 
 (require 'flycheck)

@@ -1,6 +1,4 @@
-;; Themes
-;;
-;; 2015  Bence Kalmar
+;;; fonts
 
 (defvar bkalmar/preferred-fonts-monospace
   '("DejaVu Sans Mono" "Unifont" "VL Gothic" "Liberation Mono" "FreeMono"

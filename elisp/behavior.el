@@ -1,8 +1,8 @@
-;; before buffer is saved to file
+;;; before buffer is saved to file
 
 (customize-set-variable 'require-final-newline t)
 
-;; after buffer is saved to file
+;;; after buffer is saved to file
 
 (defun bkalmar/auto-make-executable ()
   "Make current buffer's file executable if begins whith a shebang."
@@ -18,7 +18,7 @@
 
 (add-hook 'after-save-hook 'bkalmar/auto-make-executable t)
 
-;; integrate clipboard
+;;; integrate clipboard
 
 (defun bkalmar/integrate-clipboard ()
   "Integrate the window system's clipboard and return t. Return nil if it cannot
@@ -33,7 +33,6 @@ be integrated."
 (bkalmar/integrate-clipboard)
 
 ;; editing
-
 (customize-set-variable 'indent-tabs-mode nil)
 (customize-set-variable 'read-quoted-char-radix 10)
 

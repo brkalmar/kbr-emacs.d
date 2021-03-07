@@ -1,4 +1,5 @@
 (require 'org)
+(require 'org-agenda)
 
 (customize-set-variable 'org-startup-folded 'content)
 (customize-set-variable 'org-startup-indented t)
@@ -54,7 +55,6 @@
 (customize-set-variable 'org-archive-location "%s.archive.org::")
 
 ;; agenda
-(require 'org-agenda)
 (add-to-list 'org-agenda-files org-default-notes-file)
 (customize-set-variable 'org-agenda-span 14)
 (customize-set-variable 'org-agenda-start-on-weekday nil)

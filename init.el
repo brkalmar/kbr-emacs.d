@@ -1,8 +1,3 @@
-;; Custom startup file.
-;;
-;; 2014  Bence Kalmar
-
-
 (defvar bkalmar/home-directory (file-name-as-directory (expand-file-name "~"))
   "User home directory \"~\".")
 
@@ -17,12 +12,15 @@
   (concat bkalmar/emacs-directory "elisp/")
   "Directory for elisp files to include from `init.el`.")
 
+;;; packages
 
 (load-file (concat bkalmar/emacs-elisp-directory "packages.el"))
 
 (require 'f)
 (dolist (file (f-entries (concat bkalmar/emacs-elisp-directory "packages/")))
   (load-file file))
+
+;;; further configuration
 
 (load-file (concat bkalmar/emacs-elisp-directory "backup.el"))
 
@@ -38,7 +36,8 @@
 
 (load-file (concat bkalmar/emacs-elisp-directory "keybindings.el"))
 
-;; emacs customize
-;;; NOTE: This is not loaded on purpose; all customization is done manually.
+;;; emacs customize system
+
+;; NOTE: This is not loaded on purpose; all customization is done manually.
 (customize-set-variable 'custom-file
                         (concat bkalmar/emacs-config-directory "custom.el"))
