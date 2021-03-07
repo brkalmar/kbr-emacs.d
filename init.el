@@ -22,8 +22,6 @@
 
 (load-file (concat bkalmar/emacs-elisp-directory "backup.el"))
 
-(load-file (concat bkalmar/emacs-elisp-directory "copyright-comment.el"))
-
 (load-file (concat bkalmar/emacs-elisp-directory "convenience.el"))
 
 (load-file (concat bkalmar/emacs-elisp-directory "font-info.el"))

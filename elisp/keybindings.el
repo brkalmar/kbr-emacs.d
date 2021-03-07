@@ -12,7 +12,6 @@
 (global-set-key (kbd "C-c F") 'toggle-frame-maximized)
 (global-set-key (kbd "C-c h") 'bkalmar/enable-themes)
 (global-set-key (kbd "C-c H") 'bkalmar/disable-themes)
-(global-set-key (kbd "C-c i") 'bkalmar/insert-copyright-comment)
 (global-set-key (kbd "C-c l") 'fill-region)
 (global-set-key (kbd "C-c L") 'fill-region-as-paragraph)
 (global-set-key (kbd "C-c m") 'normal-mode)

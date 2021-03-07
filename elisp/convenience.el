@@ -55,3 +55,17 @@
         (when (not (= (char-before) ?\n))
           (insert ?\n))
         (insert (format "\n#endif /* %s */\n" preprocessor-id))))))
+
+(defun bkalmar/random-string (n &optional chars)
+  "Get a string of N random characters from `random'.
+
+If CHARS is non-nil, it must be a string containing characters to choose from.
+Otherwise choose from all characters in the allowable range."
+  (random t)
+  (let ((res (make-string n 0)))
+    (dotimes (i n res)
+      (aset
+       res i
+       (if (null chars)
+           (random (1+ (max-char)))
+         (aref chars (random (length chars))))))))
